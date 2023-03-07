@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.group04api.model;
+package com.group05.abstractbusiness.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

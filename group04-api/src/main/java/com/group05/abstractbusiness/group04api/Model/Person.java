@@ -2,6 +2,7 @@ package com.group05.abstractbusiness.group04api.Model;
 
 import java.util.Objects;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.domain.Sort;
 
 import jakarta.persistence.Column;
@@ -10,13 +11,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity                                                     // Anotação de entidade
 @Table(name = "person")                                     // Nome da tabela referida
 public class Person {
     @Id                                                     // Anotação do atributo PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Padrão definido pelo BD
-    @Column(name = "id")
+    @Column(name = "id", unique = true)
     private long id;                                        // id
     
     @Column(name = "name",nullable = false)                 // Garantido que o atributo não pode ser null

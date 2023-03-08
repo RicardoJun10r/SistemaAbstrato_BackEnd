@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.group04api;
+package com.group05.abstractbusiness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

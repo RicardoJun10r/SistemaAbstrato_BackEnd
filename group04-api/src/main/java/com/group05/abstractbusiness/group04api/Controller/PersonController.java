@@ -32,4 +32,10 @@ public class PersonController {
         Person person = this.personService.findbyId(id);
         return ResponseEntity.ok().body(person);
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Person>> findByName(@PathVariable String name){
+        List<Person> person = this.personService.findbyName(name);
+        return ResponseEntity.ok().body(person);
+    }
 }

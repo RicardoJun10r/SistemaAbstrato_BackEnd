@@ -14,5 +14,4 @@ public interface PersonRepository extends JpaRepository<Person, Long>{
     //Função para fazer busca de pessoa pelo nome
     @Query("SELECT p FROM Person p WHERE translate(lower(p.name), 'áàãâéêíóôõúüç','aaaaeeiooouuc') LIKE %:name%")       //Deixa tudo em minusculo e sem acento
     public List<Person> findByName(@Param("name") String name);
-    
 }

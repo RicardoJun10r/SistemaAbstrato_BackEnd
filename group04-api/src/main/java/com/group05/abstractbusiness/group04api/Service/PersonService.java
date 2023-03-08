@@ -24,6 +24,15 @@ public class PersonService {
             );
     }
 
+    public List<Person> findbyName(String name){
+        List<Person> person = this.personRepository.findByName(name);
+        if (person.isEmpty()){
+            throw new RuntimeException("Pessoa não encontrada " + name + " " + Person.class.getClass());
+        }else{
+            return person;
+        }
+    }
+
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public Person CreatePerson(Person person) {
         person.setId(0);

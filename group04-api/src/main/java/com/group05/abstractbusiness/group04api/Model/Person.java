@@ -2,38 +2,51 @@ package com.group05.abstractbusiness.group04api.Model;
 
 import java.util.Objects;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.domain.Sort;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
-@Entity
+@Entity                                                     // Anotação de entidade
+@Table(name = "person")                                     // Nome da tabela referida
 public class Person {
+    @Id                                                     // Anotação do atributo PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     // Padrão definido pelo BD
+    @Column(name = "id", unique = true)
+    private long id;                                        // id
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
-
-    @Column(nullable = false)
-    private String Name; 
+    @Column(name = "name",nullable = false)                 // Garantido que o atributo não pode ser null
+    private String name;                                    // name 
 
 
-
-    public long getId() {
-        return this.Id;
+    public Person() {
     }
 
-    public void setId(long Id) {
-        this.Id = Id;
+    public Person(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
-        return this.Name;
+        return this.name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -44,12 +57,12 @@ public class Person {
             return false;
         }
         Person person = (Person) o;
-        return Id == person.Id && Objects.equals(Name, person.Name);
+        return id == person.id && Objects.equals(name, person.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 
 }

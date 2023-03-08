@@ -5,7 +5,7 @@
             "name": "Spring Boot-Group04ApiApplication<group04-api>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.group05.abstractbusiness.group04api.Group04ApiApplication",
+            "mainClass": "com.group05.abstractbusiness.Group04ApiApplication",
             "projectName": "group04-api",
             "args": "",
             "envFile": "${workspaceFolder}/.env"

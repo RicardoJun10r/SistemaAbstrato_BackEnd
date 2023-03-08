@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.group04api.Controller;
+package com.group05.abstractbusiness.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import com.group05.abstractbusiness.group04api.Repository.PersonRepository;
-import com.group05.abstractbusiness.group04api.Service.PersonService;
-import com.group05.abstractbusiness.group04api.Model.Person;
+
+import com.group05.abstractbusiness.model.Person;
+import com.group05.abstractbusiness.repository.PersonRepository;
+import com.group05.abstractbusiness.service.PersonService;
 
 @RestController
 @RequestMapping("/person")

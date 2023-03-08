@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.group04api.Service;
+package com.group05.abstractbusiness.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +8,8 @@ import java.util.*;
 
 import javax.management.RuntimeErrorException;
 
-import com.group05.abstractbusiness.group04api.Model.Person;
-import com.group05.abstractbusiness.group04api.Repository.PersonRepository;
+import com.group05.abstractbusiness.model.Person;
+import com.group05.abstractbusiness.repository.PersonRepository;
 
 @Service
 public class PersonService {

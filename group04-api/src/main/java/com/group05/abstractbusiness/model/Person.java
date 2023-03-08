@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.group04api.Model;
+package com.group05.abstractbusiness.model;
 
 import java.util.Objects;
 

@@ -1,35 +1,62 @@
 package com.group05.abstractbusiness.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity                                                     // Anotação de entidade
 @Table(name = "person")                                     // Nome da tabela referida
 public class Person {
+    // id
+    @Column(name = "id", unique = true)
     @Id                                                     // Anotação do atributo PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Padrão definido pelo BD
-    @Column(name = "id", unique = true)
-    private long id;                                        // id
+    @NotEmpty
+    @NotNull
+    private long id;                                        
     
+    // name 
     @Column(name = "name",nullable = false)                 // Garantido que o atributo não pode ser null
-    private String name;                                    // name 
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 255)
+    private String name;                                    
+    
+    //registerDate
+    @Column(name = "register_date", nullable = false)
+    @NotEmpty
+    @NotNull
+    @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
+    @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
+    private Timestamp registerDate;
 
 
-    public Person() {
+    @PrePersist                                            // Anotação para que o metodo seja executado antes da prescrição no BD, para salvar a registerDate sempre com o horario atual
+    protected void onCreate() {
+        this.registerDate = new Timestamp(System.currentTimeMillis());
     }
 
-    public Person(long id, String name) {
-        this.id = id;
+    public Person() {  
+    }
+
+    public Person(String name) {
         this.name = name;
     }
 

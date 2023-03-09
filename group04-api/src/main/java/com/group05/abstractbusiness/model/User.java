@@ -41,7 +41,8 @@ public class User extends Person{
 
 
 
-    public User( String login, String password, int permission) {
+    public User(String name ,String login, String password, int permission) {
+        super(name);
         this.login = login;
         this.password = password;
         this.permission = permission;

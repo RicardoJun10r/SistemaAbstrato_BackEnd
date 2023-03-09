@@ -40,7 +40,6 @@ public class Person {
     //registerDate
     @Column(name = "register_date", nullable = false)
     @NotEmpty
-    @NotNull
     @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
     @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
     private Timestamp registerDate;

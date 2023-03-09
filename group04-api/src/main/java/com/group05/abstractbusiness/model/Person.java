@@ -4,8 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -25,7 +24,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "person")                                     // Nome da tabela referida
 public class Person {
     // id
-    @Column(name = "id", unique = true)
+    @Column(name = "id", unique = true)                  
     @Id                                                     // Anotação do atributo PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Padrão definido pelo BD
     @NotEmpty
@@ -53,25 +52,31 @@ public class Person {
         this.registerDate = new Timestamp(System.currentTimeMillis());
     }
 
+    //Construtor vazio
     public Person() {  
     }
 
+    //Construtor Padrão
     public Person(String name) {
         this.name = name;
     }
 
+    //Retorna Id de Pessoa
     public long getId() {
         return this.id;
     }
 
+    //Seta Id de Pessoa
     public void setId(long id) {
         this.id = id;
     }
 
+    //Retorna nome de Pessoa
     public String getName() {
         return this.name;
     }
 
+    //Seta nome de Pessoa
     public void setName(String name) {
         this.name = name;
     }

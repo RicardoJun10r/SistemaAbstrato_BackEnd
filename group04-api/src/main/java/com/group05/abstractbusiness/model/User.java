@@ -41,6 +41,13 @@ public class User extends Person{
 
 
 
+    public User( String login, String password, int permission) {
+        this.login = login;
+        this.password = password;
+        this.permission = permission;
+    }
+
+
     public Long getUserId() {
         return this.userId;
     }

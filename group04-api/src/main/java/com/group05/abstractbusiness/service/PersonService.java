@@ -6,8 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-import javax.management.RuntimeErrorException;
-
 import com.group05.abstractbusiness.model.Person;
 import com.group05.abstractbusiness.repository.PersonRepository;
 

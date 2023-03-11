@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 

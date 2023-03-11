@@ -8,23 +8,28 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "physicalPd_tb")
+@Table(name = "fisicoPd_tb")
 @Getter
 @Setter
-public class PhysicalProduct extends Produto {
+public class ProdutoFisico extends Produto {
 
     @Column(name = "quantidade")
     private Integer quantidade;
 
-    public PhysicalProduct(PhysicalProduct product){
+    @Column(name = "tipo")
+    private final String TIPO = "FISI";
+
+    public ProdutoFisico(ProdutoFisico product){
         super(product.getID(), product.getNome(), product.getDescricao(), product.getStatus(), product.getCusto(), product.getPreco());
         this.quantidade = product.quantidade;
     }
 
-    public PhysicalProduct(UUID iD, String nome, String descricao, Boolean status,
+    public ProdutoFisico(UUID iD, String nome, String descricao, Boolean status,
             Double custo, Double preco, Integer quantidade) {
         super(iD, nome, descricao, status, custo, preco);
         this.quantidade = quantidade;
     }
+
+    public ProdutoFisico(){}
 
 }

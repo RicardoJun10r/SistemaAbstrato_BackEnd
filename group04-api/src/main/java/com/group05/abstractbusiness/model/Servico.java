@@ -13,8 +13,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Produto {
-
+public abstract class Servico {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
@@ -35,7 +34,7 @@ public abstract class Produto {
     @Column(name = "preco")
     private Double preco;
 
-    public Produto(UUID ID, String nome, String descricao, Boolean status, Double custo,
+    public Servico(UUID ID, String nome, String descricao, Boolean status, Double custo,
             Double preco) {
         this.ID = ID;
         this.nome = nome;
@@ -45,5 +44,5 @@ public abstract class Produto {
         this.preco = preco;
     }
 
-    public Produto(){}
+    public Servico(){}
 }

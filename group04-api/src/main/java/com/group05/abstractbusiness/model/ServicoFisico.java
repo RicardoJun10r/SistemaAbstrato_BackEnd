@@ -16,18 +16,23 @@ public class ServicoFisico extends Servico {
     @Column(name = "quantidade")
     private Integer quantidade;
 
+    @Column(name = "endereco")
+    private String endereco;
+
     @Column(name = "tipo")
     private final String TIPO = "FISI";
 
     public ServicoFisico(ServicoFisico product){
         super(product.getID(), product.getNome(), product.getDescricao(), product.getStatus(), product.getCusto(), product.getPreco());
         this.quantidade = product.quantidade;
+        this.endereco = product.endereco;
     }
 
     public ServicoFisico(UUID iD, String nome, String descricao, Boolean status,
-            Double custo, Double preco, Integer quantidade) {
+            Double custo, Double preco, Integer quantidade, String endereco) {
         super(iD, nome, descricao, status, custo, preco);
         this.quantidade = quantidade;
+        this.endereco = endereco;
     }
 
     public ServicoFisico(){}

@@ -17,18 +17,23 @@ public class ProdutoIntelectual extends Produto {
     @Column(name = "autor")
     private String autor;
 
+    @Column(name = "copyright")
+    private Boolean copyright;
+
     @Column(name = "tipo")
     private final String TIPO = "INTE";
 
     public ProdutoIntelectual(ProdutoIntelectual product){
         super(product.getID(), product.getNome(), product.getDescricao(), product.getStatus(), product.getCusto(), product.getPreco());
         this.autor = product.autor;
+        this.copyright = product.copyright;
     }
 
     public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status,
-            Double custo, Double preco, String autor) {
+            Double custo, Double preco, String autor, Boolean copyright) {
         super(iD, nome, descricao, status, custo, preco);
         this.autor = autor;
+        this.copyright = copyright;
     }
 
     public ProdutoIntelectual(){}

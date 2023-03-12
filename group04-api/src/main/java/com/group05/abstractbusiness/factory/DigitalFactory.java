@@ -1,20 +1,75 @@
 package com.group05.abstractbusiness.factory;
 
+import java.util.UUID;
+
+import org.springframework.stereotype.Component;
+
 import com.group05.abstractbusiness.model.Produto;
 import com.group05.abstractbusiness.model.ProdutoDigital;
 import com.group05.abstractbusiness.model.Servico;
 import com.group05.abstractbusiness.model.ServicoDigital;
 
+/**
+ *  FACTORY de produtos DIGITAIS
+ */
+@Component
 public class DigitalFactory implements AbstractFactoryProdutoServico {
+
+    private UUID ID;
+
+    private String nome;
+
+    private String descricao;
+
+    private Boolean status;
+
+    private Double custo;
+
+    private Double preco;
+
+    private String autor;
+    
+    private Boolean copyright;
+
+    // CONSTRUTOR DE SERVICO DIGITAL
+    public DigitalFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+            String autor) {
+        this.ID = iD;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.status = status;
+        this.custo = custo;
+        this.preco = preco;
+        this.autor = autor;
+    }
+
+    // CONSTRUTOR DE PRODUTO DIGITAL
+    public DigitalFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+            String autor, Boolean copyright) {
+        this.ID = iD;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.status = status;
+        this.custo = custo;
+        this.preco = preco;
+        this.autor = autor;
+        this.copyright = copyright;
+    }
 
     @Override
     public Produto criarProduto() {
-        return new ProdutoDigital();
+        return new ProdutoDigital(  
+            this.ID, this.nome, this.descricao, 
+            this.status, this.custo, this.preco, 
+            this.autor, this.copyright);
     }
 
     @Override
     public Servico criarServico() {
-        return new ServicoDigital();
+        return new ServicoDigital(
+            this.ID, this.nome, this.descricao, 
+            this.status, this.custo, this.preco, 
+            this.autor);
     }
     
 }

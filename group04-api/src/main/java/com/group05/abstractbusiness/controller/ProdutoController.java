@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,61 +18,85 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.group05.abstractbusiness.factory.AbstractFactoryProdutoServico;
+import com.group05.abstractbusiness.factory.DigitalFactory;
+import com.group05.abstractbusiness.factory.FisicoFactory;
+import com.group05.abstractbusiness.factory.IntelectualFactory;
 import com.group05.abstractbusiness.model.ProdutoDigital;
 import com.group05.abstractbusiness.model.ProdutoFisico;
+import com.group05.abstractbusiness.model.ProdutoIntelectual;
+import com.group05.abstractbusiness.model.Servico;
+import com.group05.abstractbusiness.model.ServicoDigital;
+import com.group05.abstractbusiness.model.ServicoFisico;
+import com.group05.abstractbusiness.model.ServicoIntelectual;
+import com.group05.abstractbusiness.model.Mercadoria;
 import com.group05.abstractbusiness.model.Produto;
 import com.group05.abstractbusiness.service.ProdutoDigitalService;
 import com.group05.abstractbusiness.service.ProdutoFisicoService;
+import com.group05.abstractbusiness.service.ProdutoIntelectualService;
+import com.group05.abstractbusiness.service.ServicoDigitalService;
+import com.group05.abstractbusiness.service.ServicoFisicoService;
+import com.group05.abstractbusiness.service.ServicoIntelectualService;
 
 
 /**
- *  AJEITAR
- *  REFATORAR TODO ESSE CONTROLLER PARA IMPLEMENTAR O PADRÃO DE PROJETO ABSTRACT FACTORY
+ *  ----------- AJEITAR ----------- 
+ *  REFATORAR ESSE CONTROLLER PARA IMPLEMENTAR O PADRÃO DE PROJETO ABSTRACT FACTORY
  */
 @RestController
-@RequestMapping("/api/produto")
+@RequestMapping("/api")
 public class ProdutoController {
     
     @Autowired
-    private ProdutoFisicoService physicalProductService;
+    private ProdutoFisicoService produtoFisicoService;
 
     @Autowired
-    private ProdutoDigitalService digitalProductService;
+    private ProdutoDigitalService produtoDigitalService;
+
+    @Autowired
+    private ProdutoIntelectualService produtoIntelectualService;
+
+    @Autowired
+    private ServicoFisicoService serviceFisicoService;
+
+    @Autowired
+    private ServicoDigitalService servicoDigitalService;
+
+    @Autowired
+    private ServicoIntelectualService servicoIntelectualService;
 
     private AbstractFactoryProdutoServico fabrica;
 
-    @PostMapping("/fisico")
-    public ProdutoFisico addFisico(@RequestBody ProdutoFisico physicalProduct){
-        Produto produtoFisico = new ProdutoFisico(physicalProduct);
-        return physicalProductService.adicionar((ProdutoFisico) produtoFisico);
+    @PostMapping("/{tipo}")
+    public ResponseEntity<Mercadoria> criarFisico(@PathVariable String tipo, @RequestBody FisicoFactory fisicoFactory){
+        if(tipo.equals("produto")){
+            return new ResponseEntity<Mercadoria>(produtoFisicoService.adicionar((ProdutoFisico) fisicoFactory.criarProduto()), HttpStatus.CREATED);
+        } else if(tipo.equals("servico")){
+            return new ResponseEntity<Mercadoria>(serviceFisicoService.adicionar((ServicoFisico) fisicoFactory.criarServico()), HttpStatus.CREATED);
+        }  else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/fisico/search/{id}")
-    public Optional<ProdutoFisico> buscarFisico(@PathVariable UUID id){
-        return physicalProductService.buscar(id);
+    @PostMapping("/{tipo}")
+    public ResponseEntity<Mercadoria> criarDigital(@PathVariable String tipo, @RequestBody DigitalFactory produto){
+        if(tipo.equals("produto")){
+            return new ResponseEntity<Mercadoria>(produtoDigitalService.adicionar((ProdutoDigital) produto.criarProduto()), HttpStatus.CREATED);
+        } else if(tipo.equals("servico")){
+            return new ResponseEntity<Mercadoria>(servicoDigitalService.adicionar((ServicoDigital) produto.criarServico()), HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping("/fisico/listar")
-    public List<ProdutoFisico> listarFisico(){
-        List<ProdutoFisico> lista = physicalProductService.listar();
-        return lista;
-    }
-
-    @PostMapping("/digital")
-    public ProdutoDigital addDigital(@RequestBody ProdutoDigital digitalProduct){
-        Produto produto = new ProdutoDigital(digitalProduct);
-        return digitalProductService.adicionar((ProdutoDigital) produto);
-    }
-
-    @GetMapping("/digital/search/{id}")
-    public Optional<ProdutoDigital> buscarDigital(@PathVariable UUID id){
-        return digitalProductService.buscar(id);
-    }
-
-    @GetMapping("/digital/listar")
-    public List<ProdutoDigital> listarDigital(){
-        List<ProdutoDigital> lista = digitalProductService.listar();
-        return lista;
+    @PostMapping("/{tipo}")
+    public ResponseEntity<Mercadoria> criarIntelectual(@PathVariable String tipo, @RequestBody IntelectualFactory produto){
+        if(tipo.equals("produto")){
+            return new ResponseEntity<Mercadoria>(produtoIntelectualService.adicionar((ProdutoIntelectual) produto.criarProduto()), HttpStatus.CREATED);
+        } else if(tipo.equals("servico")){
+            return new ResponseEntity<Mercadoria>(servicoIntelectualService.adicionar((ServicoIntelectual) produto.criarServico()), HttpStatus.CREATED);
+        }  else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

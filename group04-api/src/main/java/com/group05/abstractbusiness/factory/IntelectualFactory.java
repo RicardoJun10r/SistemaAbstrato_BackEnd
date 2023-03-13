@@ -9,10 +9,15 @@ import com.group05.abstractbusiness.model.ProdutoIntelectual;
 import com.group05.abstractbusiness.model.Servico;
 import com.group05.abstractbusiness.model.ServicoIntelectual;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *  FACTORY de produtos INTELECTUAIS
  */
 @Component
+@Getter
+@Setter
 public class IntelectualFactory implements AbstractFactoryProdutoServico {
 
     private UUID ID; 
@@ -30,6 +35,8 @@ public class IntelectualFactory implements AbstractFactoryProdutoServico {
     private String autor;
 
     private Boolean copyright;
+
+    public IntelectualFactory(){}
 
     // CONSTRUTOR DE SERVICO FISICO
     public IntelectualFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
@@ -58,12 +65,10 @@ public class IntelectualFactory implements AbstractFactoryProdutoServico {
 
     @Override
     public Produto criarProduto() {
-
         return new ProdutoIntelectual(
             this.ID, this.nome, this.descricao,
             this.status, this.custo, this.preco,
             this.autor, this.copyright);
-
     }
 
     @Override

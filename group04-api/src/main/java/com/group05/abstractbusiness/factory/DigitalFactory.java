@@ -9,10 +9,15 @@ import com.group05.abstractbusiness.model.ProdutoDigital;
 import com.group05.abstractbusiness.model.Servico;
 import com.group05.abstractbusiness.model.ServicoDigital;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *  FACTORY de produtos DIGITAIS
  */
 @Component
+@Getter
+@Setter
 public class DigitalFactory implements AbstractFactoryProdutoServico {
 
     private UUID ID;
@@ -30,6 +35,8 @@ public class DigitalFactory implements AbstractFactoryProdutoServico {
     private String autor;
     
     private Boolean copyright;
+
+    public DigitalFactory(){}
 
     // CONSTRUTOR DE SERVICO DIGITAL
     public DigitalFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,

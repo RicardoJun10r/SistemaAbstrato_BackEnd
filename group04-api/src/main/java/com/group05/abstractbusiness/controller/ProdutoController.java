@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -66,18 +67,21 @@ public class ProdutoController {
 
     private AbstractFactoryProdutoServico fabrica;
 
-    @PostMapping("/{tipo}")
+    //#region CRIAR PRODUTOS OU SERVIÇOS
+
+    @PostMapping("/fisico/{tipo}")
     public ResponseEntity<Mercadoria> criarFisico(@PathVariable String tipo, @RequestBody FisicoFactory fisicoFactory){
+        ModelMapper mapper = new ModelMapper();
         if(tipo.equals("produto")){
-            return new ResponseEntity<Mercadoria>(produtoFisicoService.adicionar((ProdutoFisico) fisicoFactory.criarProduto()), HttpStatus.CREATED);
+            return new ResponseEntity<Mercadoria>(produtoFisicoService.adicionar(mapper.map(fisicoFactory.criarProduto(), ProdutoFisico.class)), HttpStatus.CREATED);
         } else if(tipo.equals("servico")){
-            return new ResponseEntity<Mercadoria>(serviceFisicoService.adicionar((ServicoFisico) fisicoFactory.criarServico()), HttpStatus.CREATED);
+            return new ResponseEntity<Mercadoria>(serviceFisicoService.adicionar(mapper.map(fisicoFactory.criarServico(), ServicoFisico.class)), HttpStatus.CREATED);
         }  else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
-    @PostMapping("/{tipo}")
+    @PostMapping("/digital/{tipo}")
     public ResponseEntity<Mercadoria> criarDigital(@PathVariable String tipo, @RequestBody DigitalFactory produto){
         if(tipo.equals("produto")){
             return new ResponseEntity<Mercadoria>(produtoDigitalService.adicionar((ProdutoDigital) produto.criarProduto()), HttpStatus.CREATED);
@@ -88,7 +92,7 @@ public class ProdutoController {
         }
     }
 
-    @PostMapping("/{tipo}")
+    @PostMapping("/intelectual/{tipo}")
     public ResponseEntity<Mercadoria> criarIntelectual(@PathVariable String tipo, @RequestBody IntelectualFactory produto){
         if(tipo.equals("produto")){
             return new ResponseEntity<Mercadoria>(produtoIntelectualService.adicionar((ProdutoIntelectual) produto.criarProduto()), HttpStatus.CREATED);
@@ -98,5 +102,7 @@ public class ProdutoController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
+    //#endregion
 
 }

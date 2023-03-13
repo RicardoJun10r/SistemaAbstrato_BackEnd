@@ -9,10 +9,15 @@ import com.group05.abstractbusiness.model.ProdutoFisico;
 import com.group05.abstractbusiness.model.Servico;
 import com.group05.abstractbusiness.model.ServicoFisico;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *  FACTORY de produtos FISICO
  */
 @Component
+@Getter
+@Setter
 public class FisicoFactory implements AbstractFactoryProdutoServico {
 
     private UUID ID;
@@ -31,6 +36,7 @@ public class FisicoFactory implements AbstractFactoryProdutoServico {
 
     private String endereco;
 
+    public FisicoFactory(){}
 
     // CONSTRUTOR DE PRODUTO FISICO
     public FisicoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,

@@ -15,10 +15,17 @@ TECNOLOGIAS UTILIZADAS
 *Back End*
 
 -Spring Boot
+
   -Spring Start Web
+
   -Spring Start Test
+
   -Spring Start Validation
+
   -Spring Start JPA Data
+
   -DevTools
+
   -Lombok
+  
   -Model Map

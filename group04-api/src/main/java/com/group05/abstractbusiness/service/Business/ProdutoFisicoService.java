@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service;
+package com.group05.abstractbusiness.service.Business;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.group05.abstractbusiness.model.ProdutoFisico;
+import com.group05.abstractbusiness.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.repository.ProdutoFisicoRepository;
 
 @Service

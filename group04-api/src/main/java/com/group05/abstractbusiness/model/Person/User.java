@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model;
+package com.group05.abstractbusiness.model.Person;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;

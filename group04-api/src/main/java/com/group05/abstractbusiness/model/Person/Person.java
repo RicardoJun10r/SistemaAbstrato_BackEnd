@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model;
+package com.group05.abstractbusiness.model.Person;
 
 import java.sql.Timestamp;
 import java.util.Objects;

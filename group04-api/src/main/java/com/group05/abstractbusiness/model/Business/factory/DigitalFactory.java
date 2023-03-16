@@ -1,13 +1,13 @@
-package com.group05.abstractbusiness.factory;
+package com.group05.abstractbusiness.model.Business.factory;
 
 import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
-import com.group05.abstractbusiness.model.Produto;
-import com.group05.abstractbusiness.model.ProdutoDigital;
-import com.group05.abstractbusiness.model.Servico;
-import com.group05.abstractbusiness.model.ServicoDigital;
+import com.group05.abstractbusiness.model.Business.Produto;
+import com.group05.abstractbusiness.model.Business.ProdutoDigital;
+import com.group05.abstractbusiness.model.Business.Servico;
+import com.group05.abstractbusiness.model.Business.ServicoDigital;
 
 import lombok.Getter;
 import lombok.Setter;

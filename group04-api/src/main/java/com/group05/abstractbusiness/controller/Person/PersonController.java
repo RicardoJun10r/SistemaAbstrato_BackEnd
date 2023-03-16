@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.controller;
+package com.group05.abstractbusiness.controller.Person;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.model.Person;
+import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.repository.PersonRepository;
-import com.group05.abstractbusiness.service.PersonService;
+import com.group05.abstractbusiness.service.Person.PersonService;
 
 @RestController
 @RequestMapping("/person")

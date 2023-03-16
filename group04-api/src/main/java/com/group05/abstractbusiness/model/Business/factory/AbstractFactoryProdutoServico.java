@@ -1,9 +1,9 @@
-package com.group05.abstractbusiness.factory;
+package com.group05.abstractbusiness.model.Business.factory;
 
 import org.springframework.stereotype.Component;
 
-import com.group05.abstractbusiness.model.Produto;
-import com.group05.abstractbusiness.model.Servico;
+import com.group05.abstractbusiness.model.Business.Produto;
+import com.group05.abstractbusiness.model.Business.Servico;
 
 @Component
 public interface AbstractFactoryProdutoServico{

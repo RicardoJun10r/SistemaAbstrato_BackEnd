@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.controller;
+package com.group05.abstractbusiness.controller.Business;
 
 import java.net.URI;
 import java.util.Optional;
@@ -18,25 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.group05.abstractbusiness.factory.AbstractFactoryProdutoServico;
-import com.group05.abstractbusiness.factory.DigitalFactory;
-import com.group05.abstractbusiness.factory.FisicoFactory;
-import com.group05.abstractbusiness.factory.IntelectualFactory;
-import com.group05.abstractbusiness.model.ProdutoDigital;
-import com.group05.abstractbusiness.model.ProdutoFisico;
-import com.group05.abstractbusiness.model.ProdutoIntelectual;
-import com.group05.abstractbusiness.model.Servico;
-import com.group05.abstractbusiness.model.ServicoDigital;
-import com.group05.abstractbusiness.model.ServicoFisico;
-import com.group05.abstractbusiness.model.ServicoIntelectual;
-import com.group05.abstractbusiness.model.Mercadoria;
-import com.group05.abstractbusiness.model.Produto;
-import com.group05.abstractbusiness.service.ProdutoDigitalService;
-import com.group05.abstractbusiness.service.ProdutoFisicoService;
-import com.group05.abstractbusiness.service.ProdutoIntelectualService;
-import com.group05.abstractbusiness.service.ServicoDigitalService;
-import com.group05.abstractbusiness.service.ServicoFisicoService;
-import com.group05.abstractbusiness.service.ServicoIntelectualService;
+import com.group05.abstractbusiness.model.Business.Mercadoria;
+import com.group05.abstractbusiness.model.Business.Produto;
+import com.group05.abstractbusiness.model.Business.ProdutoDigital;
+import com.group05.abstractbusiness.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
+import com.group05.abstractbusiness.model.Business.Servico;
+import com.group05.abstractbusiness.model.Business.ServicoDigital;
+import com.group05.abstractbusiness.model.Business.ServicoFisico;
+import com.group05.abstractbusiness.model.Business.ServicoIntelectual;
+import com.group05.abstractbusiness.model.Business.factory.AbstractFactoryProdutoServico;
+import com.group05.abstractbusiness.model.Business.factory.DigitalFactory;
+import com.group05.abstractbusiness.model.Business.factory.FisicoFactory;
+import com.group05.abstractbusiness.model.Business.factory.IntelectualFactory;
+import com.group05.abstractbusiness.service.Business.ProdutoDigitalService;
+import com.group05.abstractbusiness.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.service.Business.ProdutoIntelectualService;
+import com.group05.abstractbusiness.service.Business.ServicoDigitalService;
+import com.group05.abstractbusiness.service.Business.ServicoFisicoService;
+import com.group05.abstractbusiness.service.Business.ServicoIntelectualService;
 
 
 /**

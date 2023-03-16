@@ -1,12 +1,14 @@
-package com.group05.abstractbusiness.service;
+package com.group05.abstractbusiness.service.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
-import com.group05.abstractbusiness.model.Person;
+import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.repository.PersonRepository;
 
 @Service
@@ -17,9 +19,7 @@ public class PersonService {
 
     public Person findbyId(Long id){
         Optional<Person> person = this.personRepository.findById(id);
-        return person.orElseThrow( ()-> new RuntimeException(
-            "Pessoa não econtrada" + id + "Tipo: " + Person.class.getName())
-            );
+        return person.orElseThrow( ()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pesso não econtrada pelo  id ->" + id));
     }
 
     public List<Person> findbyName(String name){
@@ -42,7 +42,7 @@ public class PersonService {
         Person newObj = findbyId(person.getId());
         newObj.setName(person.getName());
         return this.personRepository.save(newObj);
-    }
+    } 
 
     public void DeletePerson(Long id){
         try {

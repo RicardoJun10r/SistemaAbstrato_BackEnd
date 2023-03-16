@@ -8,6 +8,7 @@ TECNOLOGIAS UTILIZADAS
 *BD*
 
 -Postgres(Rodando em container)
+
 -Docker
 
 

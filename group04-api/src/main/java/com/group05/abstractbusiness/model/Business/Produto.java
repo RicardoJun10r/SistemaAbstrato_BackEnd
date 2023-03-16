@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model;
+package com.group05.abstractbusiness.model.Business;
 
 import java.util.UUID;
 
@@ -9,12 +9,12 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Servico extends Mercadoria {
+public abstract class Produto extends Mercadoria {
 
-    public Servico(UUID ID, String nome, String descricao, Boolean status, Double custo,
+    public Produto(UUID ID, String nome, String descricao, Boolean status, Double custo,
             Double preco) {
         super(ID, nome, descricao, status, custo, preco);
     }
 
-    public Servico(){}
+    public Produto(){}
 }

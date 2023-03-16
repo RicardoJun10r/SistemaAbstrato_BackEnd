@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model;
+package com.group05.abstractbusiness.model.Person;
 
 public class Customer extends Person{
     //id

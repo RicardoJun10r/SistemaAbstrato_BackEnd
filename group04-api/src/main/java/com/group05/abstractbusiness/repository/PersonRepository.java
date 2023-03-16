@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.group05.abstractbusiness.model.Person;
+import com.group05.abstractbusiness.model.Person.Person;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long>{

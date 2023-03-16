@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model;
+package com.group05.abstractbusiness.model.Business;
 
 import java.util.UUID;
 
@@ -9,26 +9,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "digitalSer_tb")
+@Table(name = "intelectualSer_tb")
 @Getter
 @Setter
-public class ServicoDigital extends Servico {
+public class ServicoIntelectual extends Servico {
     @Column(name = "autor")
     private String autor;
 
     @Column(name = "tipo")
-    private final String TIPO = "DIGI";
+    private final String TIPO = "INTE";
 
-    public ServicoDigital(ServicoDigital product){
+    public ServicoIntelectual(ServicoIntelectual product){
         super(product.getID(), product.getNome(), product.getDescricao(), product.getStatus(), product.getCusto(), product.getPreco());
         this.autor = product.autor;
     }
 
-    public ServicoDigital(UUID iD, String nome, String descricao, Boolean status,
+    public ServicoIntelectual(UUID iD, String nome, String descricao, Boolean status,
             Double custo, Double preco, String autor) {
         super(iD, nome, descricao, status, custo, preco);
         this.autor = autor;
     }
 
-    public ServicoDigital(){}
+    public ServicoIntelectual(){}
 }

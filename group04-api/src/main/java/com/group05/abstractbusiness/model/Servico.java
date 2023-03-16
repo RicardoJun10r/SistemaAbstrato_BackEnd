@@ -9,12 +9,12 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Produto extends Mercadoria {
+public abstract class Servico extends Mercadoria {
 
-    public Produto(UUID ID, String nome, String descricao, Boolean status, Double custo,
+    public Servico(UUID ID, String nome, String descricao, Boolean status, Double custo,
             Double preco) {
         super(ID, nome, descricao, status, custo, preco);
     }
 
-    public Produto(){}
+    public Servico(){}
 }

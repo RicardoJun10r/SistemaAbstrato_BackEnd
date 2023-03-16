@@ -7,25 +7,25 @@ TECNOLOGIAS UTILIZADAS
 
 *BD*
 
--Postgres(Rodando em container)
+- Postgres(Rodando em container)
 
--Docker
+- Docker
 
 
 *Back End*
 
--Spring Boot
+- Spring Boot
 
-  -Spring Start Web
+  - Spring Start Web
 
-  -Spring Start Test
+  - Spring Start Test
 
-  -Spring Start Validation
+  - Spring Start Validation
 
-  -Spring Start JPA Data
+  - Spring Start JPA Data
 
-  -DevTools
+  - DevTools
 
-  -Lombok
+  - Lombok
   
-  -Model Map
+  - Model Map

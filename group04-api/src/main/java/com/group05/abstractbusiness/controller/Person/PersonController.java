@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.controller.Person;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group05.abstractbusiness.DTO.PersonPostDTO;
 import com.group05.abstractbusiness.DTO.PersonPutDTO;
 import com.group05.abstractbusiness.model.Person.Person;
-import com.group05.abstractbusiness.service.Person.PersonService;
+import com.group05.abstractbusiness.service.person.PersonService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("person")  
@@ -33,25 +34,25 @@ public class PersonController {
         return ResponseEntity.ok(personService.listAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@PathVariable Long id){
+    @GetMapping("/id:{id}")
+    public ResponseEntity<Person> findById(@PathVariable Long id){                      //Pode substituir por @RequestParam
         Person person = this.personService.findbyId(id);
         return ResponseEntity.ok().body(person);
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<List<Person>> findByName(@PathVariable String name){
+    @GetMapping("/name:{name}")
+    public ResponseEntity<List<Person>> findByName(@PathVariable String name){          //Pode substituir por @RequestParam
         List<Person> person = this.personService.findbyName(name);
         return ResponseEntity.ok().body(person);
     }
 
     @PostMapping
-    public ResponseEntity<Person> createPerson(@RequestBody PersonPostDTO person){
+    public ResponseEntity<Person> createPerson(@RequestBody @Valid PersonPostDTO person){
         return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Person> updatePerson(@RequestBody PersonPutDTO person){
+    public ResponseEntity<Person> updatePerson(@RequestBody @Valid PersonPutDTO person){
         return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
     }
 }

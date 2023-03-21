@@ -18,13 +18,10 @@
 		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
 	</properties>
 	<dependencies>
-
 		<dependency>
  			<groupId>org.mapstruct</groupId>
-        	<artifactId>mapstruct</artifactId>
-        <version>${org.mapstruct.version}</version>
-		</dependency>
-
+      <artifactId>mapstruct</artifactId>
+      <version>${org.mapstruct.version}</version>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

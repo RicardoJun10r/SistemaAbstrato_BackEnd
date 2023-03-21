@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.business;
+package com.group05.abstractbusiness.service.Business;
 
 import java.util.Optional;
 import java.util.UUID;

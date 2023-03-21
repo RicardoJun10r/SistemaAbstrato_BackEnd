@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Business;
+package com.group05.abstractbusiness.service.business;
 
 import java.util.List;
 import java.util.Optional;

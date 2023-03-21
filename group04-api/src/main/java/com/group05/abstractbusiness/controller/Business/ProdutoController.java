@@ -31,12 +31,12 @@ import com.group05.abstractbusiness.model.Business.factory.AbstractFactoryProdut
 import com.group05.abstractbusiness.model.Business.factory.DigitalFactory;
 import com.group05.abstractbusiness.model.Business.factory.FisicoFactory;
 import com.group05.abstractbusiness.model.Business.factory.IntelectualFactory;
-import com.group05.abstractbusiness.service.business.ProdutoDigitalService;
-import com.group05.abstractbusiness.service.business.ProdutoFisicoService;
-import com.group05.abstractbusiness.service.business.ProdutoIntelectualService;
-import com.group05.abstractbusiness.service.business.ServicoDigitalService;
-import com.group05.abstractbusiness.service.business.ServicoFisicoService;
-import com.group05.abstractbusiness.service.business.ServicoIntelectualService;
+import com.group05.abstractbusiness.service.Business.ProdutoDigitalService;
+import com.group05.abstractbusiness.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.service.Business.ProdutoIntelectualService;
+import com.group05.abstractbusiness.service.Business.ServicoDigitalService;
+import com.group05.abstractbusiness.service.Business.ServicoFisicoService;
+import com.group05.abstractbusiness.service.Business.ServicoIntelectualService;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.repository.personRepository;
+package com.group05.abstractbusiness.repository;
 
 import java.util.List;
 

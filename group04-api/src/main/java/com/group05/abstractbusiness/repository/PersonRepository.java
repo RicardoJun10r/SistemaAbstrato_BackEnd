@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.group05.abstractbusiness.model.Person.Person;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long>{
+public interface PersonRepository<T extends Person> extends JpaRepository<T, Long>{
     //Função para fazer busca de pessoa pelo nome
     @Query("SELECT p FROM Person p WHERE translate(lower(p.name), 'áàãâéêíóôõúüç','aaaaeeiooouuc') LIKE %:name%")       //Deixa tudo em minusculo e sem acento
-    public List<Person> findByName(@Param("name") String name);
+    public List<T> findByName(@Param("name") String name);
 }

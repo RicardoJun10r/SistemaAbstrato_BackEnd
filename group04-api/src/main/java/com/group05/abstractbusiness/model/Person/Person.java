@@ -1,6 +1,7 @@
 package com.group05.abstractbusiness.model.Person;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -48,14 +49,20 @@ public class Person {
     //registerDate
     @Column(name = "register_date", nullable = false)
     @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
-    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")                 // Padrão da data
-    private Timestamp registerDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")           // Padrão da data
+    private LocalDateTime registerDate;
 
+
+    public Person(String name) {
+        this.name = name;
+        this.registerDate = LocalDateTime.now();
+    }
 
     @PrePersist                                            // Anotação para que o metodo seja executado antes da prescrição no BD, para salvar a registerDate sempre com o horario atual
     protected void onCreate() {
-        this.registerDate = new Timestamp(System.currentTimeMillis());
+        this.registerDate = LocalDateTime.now();
     }
+
 
 
     @Override
@@ -66,12 +73,13 @@ public class Person {
             return false;
         }
         Person person = (Person) o;
-        return id == person.id && Objects.equals(name, person.name);
+        return id == person.id && Objects.equals(name, person.name) && Objects.equals(registerDate, person.registerDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, registerDate);
     }
+
 
 }

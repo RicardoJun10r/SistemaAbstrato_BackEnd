@@ -19,17 +19,7 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity                                                     // Anotação de entidade
 @Table(name = "person")                                     // Nome da tabela referida
 public class Person {
@@ -37,6 +27,8 @@ public class Person {
     @Column(name = "id", unique = true)                  
     @Id                                                     // Anotação do atributo PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // Padrão definido pelo BD
+    @NotEmpty
+    @NotNull
     private long id;                                        
     
     // name 
@@ -48,9 +40,15 @@ public class Person {
     
     //registerDate
     @Column(name = "register_date", nullable = false)
+    @NotEmpty
     @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
+<<<<<<< HEAD
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")           // Padrão da data
     private LocalDateTime registerDate;
+=======
+    @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
+    private Timestamp registerDate;
+>>>>>>> main
 
 
     public Person(String name) {
@@ -63,6 +61,34 @@ public class Person {
         this.registerDate = LocalDateTime.now();
     }
 
+    //Construtor vazio
+    public Person() {  
+    }
+
+    //Construtor Padrão
+    public Person(String name) {
+        this.name = name;
+    }
+
+    //Retorna Id de Pessoa
+    public long getId() {
+        return this.id;
+    }
+
+    //Seta Id de Pessoa
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    //Retorna nome de Pessoa
+    public String getName() {
+        return this.name;
+    }
+
+    //Seta nome de Pessoa
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
     @Override

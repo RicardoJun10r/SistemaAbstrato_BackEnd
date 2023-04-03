@@ -1,4 +1,4 @@
-/*package com.group05.abstractbusiness.controller.Business;
+package com.group05.abstractbusiness.controller.Business;
 
 import java.net.URI;
 import java.util.Optional;
@@ -31,18 +31,18 @@ import com.group05.abstractbusiness.model.Business.factory.AbstractFactoryProdut
 import com.group05.abstractbusiness.model.Business.factory.DigitalFactory;
 import com.group05.abstractbusiness.model.Business.factory.FisicoFactory;
 import com.group05.abstractbusiness.model.Business.factory.IntelectualFactory;
-import com.group05.abstractbusiness.service.business.ProdutoFisicoService;
-import com.group05.abstractbusiness.service.business.ProdutoDigitalService;
-import com.group05.abstractbusiness.service.business.ProdutoIntelectualService;
-import com.group05.abstractbusiness.service.business.ServicoFisicoService;
-import com.group05.abstractbusiness.service.business.ServicoDigitalService;
-import com.group05.abstractbusiness.service.business.ServicoIntelectualService;
+import com.group05.abstractbusiness.service.Business.ProdutoDigitalService;
+import com.group05.abstractbusiness.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.service.Business.ProdutoIntelectualService;
+import com.group05.abstractbusiness.service.Business.ServicoDigitalService;
+import com.group05.abstractbusiness.service.Business.ServicoFisicoService;
+import com.group05.abstractbusiness.service.Business.ServicoIntelectualService;
 
 
 /**
  *  ----------- AJEITAR ----------- 
  *  REFATORAR ESSE CONTROLLER PARA IMPLEMENTAR O PADRÃO DE PROJETO ABSTRACT FACTORY
- *
+ */
 @RestController
 @RequestMapping("/api")
 public class ProdutoController {
@@ -73,9 +73,9 @@ public class ProdutoController {
     public ResponseEntity<Mercadoria> criarFisico(@PathVariable String tipo, @RequestBody FisicoFactory fisicoFactory){
         ModelMapper mapper = new ModelMapper();
         if(tipo.equals("produto")){
-            return new ResponseEntity<Mercadoria>(ProdutoFisicoService.adicionar(mapper.map(fisicoFactory.criarProduto(), ProdutoFisico.class)), HttpStatus.CREATED);
+            return new ResponseEntity<Mercadoria>(produtoFisicoService.adicionar(mapper.map(fisicoFactory.criarProduto(), ProdutoFisico.class)), HttpStatus.CREATED);
         } else if(tipo.equals("servico")){
-            return new ResponseEntity<Mercadoria>(ServicoFisicoService.adicionar(mapper.map(fisicoFactory.criarServico(), ServicoFisico.class)), HttpStatus.CREATED);
+            return new ResponseEntity<Mercadoria>(serviceFisicoService.adicionar(mapper.map(fisicoFactory.criarServico(), ServicoFisico.class)), HttpStatus.CREATED);
         }  else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
@@ -104,5 +104,5 @@ public class ProdutoController {
     }
 
     //#endregion
-    
-}*/
+
+}

@@ -1,9 +1,13 @@
 package com.group05.abstractbusiness.model.Person;
 
-import java.util.Objects;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 public class User extends Person{
     //id
     @Id
@@ -75,23 +79,6 @@ public class User extends Person{
 
     public void setPermission(Integer permission) {
         this.permission = permission;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof User)) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && permission == user.permission;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, login, password, permission);
     }
 
 }

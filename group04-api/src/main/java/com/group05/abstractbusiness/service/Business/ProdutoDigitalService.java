@@ -28,4 +28,9 @@ public class ProdutoDigitalService {
         return produtoDigitalRepository.findAll();
     }
 
+    public String deletar(UUID id){
+        produtoDigitalRepository.deleteById(id);
+        return "Produto Digital: [ " + id + " ] deletado";
+    }
+
 }

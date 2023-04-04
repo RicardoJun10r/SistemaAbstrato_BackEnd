@@ -28,4 +28,9 @@ public class ProdutoFisicoService {
         return produtoFisicoRepository.findAll();
     }
 
+    public String deletar(UUID id){
+        produtoFisicoRepository.deleteById(id);
+        return "Produto Fisico: [ " + id + " ] deletado";
+    }
+
 }

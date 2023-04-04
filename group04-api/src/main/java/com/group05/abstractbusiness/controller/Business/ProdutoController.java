@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,25 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.group05.abstractbusiness.model.Business.Mercadoria;
-import com.group05.abstractbusiness.model.Business.Produto;
-import com.group05.abstractbusiness.model.Business.ProdutoDigital;
-import com.group05.abstractbusiness.model.Business.ProdutoFisico;
-import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
-import com.group05.abstractbusiness.model.Business.Servico;
-import com.group05.abstractbusiness.model.Business.ServicoDigital;
-import com.group05.abstractbusiness.model.Business.ServicoFisico;
-import com.group05.abstractbusiness.model.Business.ServicoIntelectual;
-import com.group05.abstractbusiness.model.Business.factory.AbstractFactoryProdutoServico;
-import com.group05.abstractbusiness.model.Business.factory.DigitalFactory;
-import com.group05.abstractbusiness.model.Business.factory.FisicoFactory;
-import com.group05.abstractbusiness.model.Business.factory.IntelectualFactory;
-import com.group05.abstractbusiness.service.Business.ProdutoDigitalService;
-import com.group05.abstractbusiness.service.Business.ProdutoFisicoService;
-import com.group05.abstractbusiness.service.Business.ProdutoIntelectualService;
-import com.group05.abstractbusiness.service.Business.ServicoDigitalService;
-import com.group05.abstractbusiness.service.Business.ServicoFisicoService;
-import com.group05.abstractbusiness.service.Business.ServicoIntelectualService;
+import com.group05.abstractbusiness.model.Business.factory.*;
+import com.group05.abstractbusiness.model.Business.*;
+import com.group05.abstractbusiness.service.Business.*;
 
 
 /**
@@ -104,5 +89,80 @@ public class ProdutoController {
     }
 
     //#endregion
+
+    @GetMapping("/fisico/{uuid}")
+    public Optional<ProdutoFisico> getFisicoById(@PathVariable UUID uuid){
+        try {
+            return produtoFisicoService.buscar(uuid); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/digital/{uuid}")
+    public Optional<ProdutoDigital> getDigitalById(@PathVariable UUID uuid){
+        try {
+            return produtoDigitalService.buscar(uuid); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/intelectual/{uuid}")
+    public Optional<ProdutoIntelectual> getIntelectualById(@PathVariable UUID uuid){
+        try {
+            return produtoIntelectualService.buscar(uuid); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/fisico")
+    public List<ProdutoFisico> listarFisico(){
+        try {
+            return produtoFisicoService.listar(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/digital")
+    public List<ProdutoDigital> listarDigitalById(){
+        try {
+            return produtoDigitalService.listar(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @GetMapping("/intelectual")
+    public List<ProdutoIntelectual> listarIntelectualById(){
+        try {
+            return produtoIntelectualService.listar(); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @DeleteMapping("/fisico/{uuid}")
+    public String deleteFisicoById(@PathVariable UUID uuid){
+        return produtoFisicoService.deletar(uuid); 
+    }
+
+    @DeleteMapping("/digital/{uuid}")
+    public String deletegetDigitalById(@PathVariable UUID uuid){
+        return produtoDigitalService.deletar(uuid); 
+    }
+
+    @DeleteMapping("/intelectual/{uuid}")
+    public String deletegetIntelectualById(@PathVariable UUID uuid){
+        return produtoIntelectualService.deletar(uuid); 
+    }
 
 }

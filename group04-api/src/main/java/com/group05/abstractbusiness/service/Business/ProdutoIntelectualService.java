@@ -27,4 +27,9 @@ public class ProdutoIntelectualService {
     public List<ProdutoIntelectual> listar(){
         return produtoIntelectualRepository.findAll();
     }
+
+    public String deletar(UUID id){
+        produtoIntelectualRepository.deleteById(id);
+        return "Produto Intelectual: [ " + id + " ] deletado";
+    }
 }

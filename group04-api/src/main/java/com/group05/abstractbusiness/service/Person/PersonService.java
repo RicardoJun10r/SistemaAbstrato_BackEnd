@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Person;
+/*package com.group05.abstractbusiness.service.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Person findbyId(Long id){
+    public Person findbyId(UUID id){
         Optional<Person> person = this.personRepository.findById(id);
         return person.orElseThrow( ()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pesso não econtrada pelo  id ->" + id));
     }
@@ -33,7 +33,6 @@ public class PersonService {
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public Person CreatePerson(Person person) {
-        person.setId(0);
         return this.personRepository.save(person);
     }
 
@@ -44,11 +43,11 @@ public class PersonService {
         return this.personRepository.save(newObj);
     } 
 
-    public void DeletePerson(Long id){
+    public void DeletePerson(UUID id){
         try {
             this.personRepository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Não é possivel excluir pois possui dados relacionados");
         }
     }
-}
+}*/

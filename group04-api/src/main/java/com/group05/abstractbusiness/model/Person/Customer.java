@@ -1,18 +1,17 @@
 package com.group05.abstractbusiness.model.Person;
 
-import java.util.Objects;
+import java.util.UUID;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "customer")
 public class Customer extends Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_customer")
-    private Long id;
-
     @Column(name = "address")
     private String address;
     
@@ -33,14 +32,9 @@ public class Customer extends Person {
         super();
     }
 
-    public Long getCustomerId() {
-        return id;
+    public UUID getCustomerId() {
+        return super.getId();
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -64,22 +58,4 @@ public class Customer extends Person {
     public void setNumber(String number) {
         this.number = number;
     }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Customer)) {
-            return false;
-        }
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(address, customer.address) && Objects.equals(email, customer.email) && Objects.equals(number, customer.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, address, email, number);
-    }
-
 }

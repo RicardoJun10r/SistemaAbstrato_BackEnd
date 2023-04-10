@@ -4,10 +4,15 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "Customer_PF")
+@Table(name = "customer_PF")
 public class CustomerPF extends Customer{
         
     @Column(nullable = false, unique = true, name = "Cpf")
@@ -29,22 +34,4 @@ public class CustomerPF extends Customer{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof CustomerPF)) {
-            return false;
-        }
-        CustomerPF customerPF = (CustomerPF) o;
-        return Objects.equals(cpf, customerPF.cpf);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(cpf);
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model.Company;
+/*package com.group05.abstractbusiness.model.Company;
 
 import java.util.Objects;
 
@@ -91,4 +91,4 @@ public class Company {
         return Objects.hash(id, name, address, phoneNumber);
     }
 
-}
+}*/

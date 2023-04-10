@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model.Company;
+/*package com.group05.abstractbusiness.model.Company;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,4 +44,4 @@ public class Finance {
         return Objects.hashCode(transactions);
     }
 
-}
+}*/

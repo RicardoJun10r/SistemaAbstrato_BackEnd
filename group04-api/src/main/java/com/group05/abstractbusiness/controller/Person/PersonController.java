@@ -1,7 +1,8 @@
-package com.group05.abstractbusiness.controller.Person;
+/*package com.group05.abstractbusiness.controller.Person;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@PathVariable Long id){
+    public ResponseEntity<Person> findById(@PathVariable UUID id){
         Person person = this.personService.findbyId(id);
         return ResponseEntity.ok().body(person);
     }
@@ -39,4 +40,4 @@ public class PersonController {
         List<Person> person = this.personService.findbyName(name);
         return ResponseEntity.ok().body(person);
     }
-}
+}*/

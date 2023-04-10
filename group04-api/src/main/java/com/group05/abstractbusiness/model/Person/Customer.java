@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "customer")
-public class Customer extends Person {
+public class Customer extends Person {    
     @Column(name = "address")
     private String address;
     
@@ -32,9 +32,6 @@ public class Customer extends Person {
         super();
     }
 
-    public UUID getCustomerId() {
-        return super.getId();
-    }
     public String getAddress() {
         return address;
     }
@@ -53,6 +50,10 @@ public class Customer extends Person {
 
     public String getNumber() {
         return number;
+    }
+    
+    public UUID getCustomerId(){
+        return this.customerId;
     }
 
     public void setNumber(String number) {

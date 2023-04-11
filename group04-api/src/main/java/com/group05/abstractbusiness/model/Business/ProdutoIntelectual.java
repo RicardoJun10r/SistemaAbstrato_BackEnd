@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.model.Business;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -14,26 +15,43 @@ import lombok.Setter;
 @Setter
 public class ProdutoIntelectual extends Produto {
     
-    @Column(name = "autor")
-    private String autor;
+    @Column(name = "author")
+    private String author;
 
-    @Column(name = "copyright")
-    private Boolean copyright;
+    @Column(name = "publisher")
+    private String publisher;
+
+    @Column(name = "isbn")
+    private String isbn;
+
+    @Column(name = "pages")
+    private int pages;
+
+    @Column(name = "edition")
+    private int edition;
 
     @Column(name = "tipo")
     private final String TIPO = "INTE";
 
-    public ProdutoIntelectual(ProdutoIntelectual product){
-        super(product.getID(), product.getNome(), product.getDescricao(), product.getStatus(), product.getCusto(), product.getPreco());
-        this.autor = product.autor;
-        this.copyright = product.copyright;
+    public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
+            LocalDateTime updatedAt, LocalDateTime deletedAt, String author, String publisher, String isbn, int pages,
+            int edition) {
+        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+                deletedAt);
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.edition = edition;
     }
 
-    public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status,
-            Double custo, Double preco, String autor, Boolean copyright) {
-        super(iD, nome, descricao, status, custo, preco);
-        this.autor = autor;
-        this.copyright = copyright;
+    public ProdutoIntelectual(String author, String publisher, String isbn, int pages, int edition) {
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.edition = edition;
     }
 
     public ProdutoIntelectual(){}

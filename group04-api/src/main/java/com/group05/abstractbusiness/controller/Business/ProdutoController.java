@@ -41,49 +41,20 @@ public class ProdutoController {
     @Autowired
     private ProdutoIntelectualService produtoIntelectualService;
 
-    @Autowired
-    private ServicoFisicoService serviceFisicoService;
-
-    @Autowired
-    private ServicoDigitalService servicoDigitalService;
-
-    @Autowired
-    private ServicoIntelectualService servicoIntelectualService;
-
-    private AbstractFactoryProdutoServico fabrica;
+    private AbstractFactoryProduto fabrica;
 
     //#region CRIAR PRODUTOS OU SERVIÇOS
 
-    @PostMapping("/fisico/{tipo}")
-    public ResponseEntity<Mercadoria> criarFisico(@PathVariable String tipo, @RequestBody FisicoFactory fisicoFactory){
+    @PostMapping("/produto/{tipo}")
+    public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @RequestBody ProdutoFactory produtoFactory){
         ModelMapper mapper = new ModelMapper();
-        if(tipo.equals("produto")){
-            return new ResponseEntity<Mercadoria>(produtoFisicoService.adicionar(mapper.map(fisicoFactory.criarProduto(), ProdutoFisico.class)), HttpStatus.CREATED);
-        } else if(tipo.equals("servico")){
-            return new ResponseEntity<Mercadoria>(serviceFisicoService.adicionar(mapper.map(fisicoFactory.criarServico(), ServicoFisico.class)), HttpStatus.CREATED);
-        }  else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping("/digital/{tipo}")
-    public ResponseEntity<Mercadoria> criarDigital(@PathVariable String tipo, @RequestBody DigitalFactory produto){
-        if(tipo.equals("produto")){
-            return new ResponseEntity<Mercadoria>(produtoDigitalService.adicionar((ProdutoDigital) produto.criarProduto()), HttpStatus.CREATED);
-        } else if(tipo.equals("servico")){
-            return new ResponseEntity<Mercadoria>(servicoDigitalService.adicionar((ServicoDigital) produto.criarServico()), HttpStatus.CREATED);
+        if(tipo.equals("fisico")){
+            return new ResponseEntity<Produto>(produtoFisicoService.adicionar(mapper.map(produtoFactory.criarFisco(), ProdutoFisico.class)), HttpStatus.CREATED);
+        } else if(tipo.equals("digital")){
+            return new ResponseEntity<Produto>(produtoDigitalService.adicionar(mapper.map(produtoFactory.criarDigital(), ProdutoDigital.class)), HttpStatus.CREATED);
+        } else if(tipo.equals("intelectual")){
+            return new ResponseEntity<Produto>(produtoIntelectualService.adicionar(mapper.map(produtoFactory.criarIntelectual(), ProdutoIntelectual.class)), HttpStatus.CREATED);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping("/intelectual/{tipo}")
-    public ResponseEntity<Mercadoria> criarIntelectual(@PathVariable String tipo, @RequestBody IntelectualFactory produto){
-        if(tipo.equals("produto")){
-            return new ResponseEntity<Mercadoria>(produtoIntelectualService.adicionar((ProdutoIntelectual) produto.criarProduto()), HttpStatus.CREATED);
-        } else if(tipo.equals("servico")){
-            return new ResponseEntity<Mercadoria>(servicoIntelectualService.adicionar((ServicoIntelectual) produto.criarServico()), HttpStatus.CREATED);
-        }  else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }

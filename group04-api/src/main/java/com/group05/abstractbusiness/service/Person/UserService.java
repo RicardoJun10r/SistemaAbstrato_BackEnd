@@ -1,4 +1,4 @@
-/*package com.group05.abstractbusiness.service.Person;
+package com.group05.abstractbusiness.service.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,45 +9,46 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
 
 import com.group05.abstractbusiness.model.Person.Person;
+import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.repository.PersonRepository;
 
 @Service
-public class PersonService {
+public class UserService {
     
     @Autowired
-    private PersonRepository personRepository;
+    private PersonRepository<User> repository;
 
-    public Person findbyId(UUID id){
-        Optional<Person> person = this.personRepository.findById(id);
-        return person.orElseThrow( ()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pesso não econtrada pelo  id ->" + id));
+    public User findbyId(UUID id){
+        Optional<User> user = this.repository.findById(id);
+        return user.orElseThrow( ()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "user não econtrado pelo  id ->" + id));
     }
 
-    public List<Person> findbyName(String name){
-        List<Person> person = this.personRepository.findByName(name);
-        if (person.isEmpty()){
+    public List<User> findbyName(String name){
+        List<User> users = repository.findByNameContainingIgnoreCase(name);
+        if (users.isEmpty()){
             throw new RuntimeException("Pessoa não encontrada " + name + " " + Person.class.getClass());
         }else{
-            return person;
+            return users;
         }
     }
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
-    public Person CreatePerson(Person person) {
-        return this.personRepository.save(person);
+    public User createUser(User user) {
+        return this.repository.save(user);
     }
 
     @Transactional
-    public Person UpdatePerson(Person person){
-        Person newObj = findbyId(person.getId());
-        newObj.setName(person.getName());
-        return this.personRepository.save(newObj);
+    public User updateUser(User user){
+        User newObj = findbyId(user.getId());
+        newObj.setName(user.getName());
+        return this.repository.save(newObj);
     } 
 
     public void DeletePerson(UUID id){
         try {
-            this.personRepository.deleteById(id);
+            this.repository.deleteById(id);
         } catch (Exception e) {
             throw new RuntimeException("Não é possivel excluir pois possui dados relacionados");
         }
     }
-}*/
+}

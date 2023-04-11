@@ -1,4 +1,4 @@
-/*package com.group05.abstractbusiness.controller.Person;
+package com.group05.abstractbusiness.controller.Person;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,21 +18,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.model.Person.Person;
+import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.repository.PersonRepository;
 import com.group05.abstractbusiness.service.Person.PersonService;
+import com.group05.abstractbusiness.service.Person.UserService;
 
 @RestController
 @RequestMapping("/person")
 @Validated
-public class PersonController {
+public class UserController {
 
     @Autowired
-    private PersonService personService;
+    private UserService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@PathVariable UUID id){
-        Person person = this.personService.findbyId(id);
-        return ResponseEntity.ok().body(person);
+    public ResponseEntity<User> findById(@PathVariable UUID id){
+        User user = this.service.findbyId(id);
+        return ResponseEntity.ok().body(user);
     }
 
     @GetMapping("/name/{name}")
@@ -40,4 +42,4 @@ public class PersonController {
         List<Person> person = this.personService.findbyName(name);
         return ResponseEntity.ok().body(person);
     }
-}*/
+}

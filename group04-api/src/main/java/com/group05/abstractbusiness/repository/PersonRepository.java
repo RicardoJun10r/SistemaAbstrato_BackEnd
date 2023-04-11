@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.repository.Person;
+package com.group05.abstractbusiness.repository;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +11,5 @@ import com.group05.abstractbusiness.model.Person.Person;
 
 @Repository
 public interface PersonRepository <T extends Person> extends JpaRepository<T, UUID>{
-    //Função para fazer busca de pessoa pelo nome
-    //@Query("SELECT p FROM Person p WHERE translate(lower(p.name), 'áàãâéêíóôõúüç','aaaaeeiooouuc') LIKE %:name%")       //Deixa tudo em minusculo e sem acento
-    public List<T> findByName(@Param("name") String name);
+    List<T> findByNameContainingIgnoreCase(String name);
 }

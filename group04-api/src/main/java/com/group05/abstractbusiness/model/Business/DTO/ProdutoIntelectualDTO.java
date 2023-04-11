@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoIntelectual {
+public class ProdutoIntelectualDTO {
     
     private UUID ID;
     

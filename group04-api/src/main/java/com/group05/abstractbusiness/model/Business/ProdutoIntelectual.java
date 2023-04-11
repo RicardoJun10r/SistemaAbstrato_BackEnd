@@ -7,6 +7,7 @@ import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Table(name = "intelectualPd_tb")
 @Getter
 @Setter
+@Valid
 public class ProdutoIntelectual extends Produto {
     
     @Column(name = "author")

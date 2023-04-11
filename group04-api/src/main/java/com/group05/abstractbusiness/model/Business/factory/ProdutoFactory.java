@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 public class ProdutoFactory implements AbstractFactoryProduto {
 
-    private UUID iD;
+    private UUID ID;
     
     private String nome;
     
@@ -80,7 +80,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
             int edition) {
-        this.iD = iD;
+        this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;
         this.status = status;
@@ -104,7 +104,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
             String imageUrl) {
-        this.iD = iD;
+        this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;
         this.status = status;
@@ -127,7 +127,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
             Integer downloadCount, LocalDateTime expiryDate) {
-        this.iD = iD;
+        this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;
         this.status = status;
@@ -151,19 +151,19 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     @Override
     public Produto criarFisco() {
-        return new ProdutoFisico(iD, nome, descricao, status, custo, preco, brand, category, subCategory, 
+        return new ProdutoFisico(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, weight, height, width, imageUrl);
     }
 
     @Override
     public Produto criarDigital() {
-        return new ProdutoDigital(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, 
+        return new ProdutoDigital(ID, nome, descricao, status, custo, preco, brand, category, subCategory, image, 
         createdAt, updatedAt, deletedAt, fileUrl, fileType, fileSize, downloadCount, expiryDate);
     }
 
     @Override
     public Produto criarIntelectual() {
-        return new ProdutoIntelectual(iD, nome, descricao, status, custo, preco, brand, category, subCategory, 
+        return new ProdutoIntelectual(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
     }
 

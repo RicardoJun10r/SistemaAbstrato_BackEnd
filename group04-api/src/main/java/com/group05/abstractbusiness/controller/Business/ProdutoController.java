@@ -57,56 +57,57 @@ public class ProdutoController {
 
     //#endregion
 
-    @GetMapping("/fisico/{uuid}")
-    public Optional<ProdutoFisico> getFisicoById(@PathVariable UUID uuid){
+    @GetMapping("/produto/fisico/{uuid}")
+    public ResponseEntity<Optional<ProdutoFisico>> getFisicoById(@PathVariable UUID uuid){
         try {
-            return produtoFisicoService.buscar(uuid); 
+            return new ResponseEntity<>(produtoFisicoService.buscar(uuid), HttpStatus.OK); 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return null;
-    }
-
-    @GetMapping("/digital/{uuid}")
-    public Optional<ProdutoDigital> getDigitalById(@PathVariable UUID uuid){
-        try {
-            return produtoDigitalService.buscar(uuid); 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @GetMapping("/intelectual/{uuid}")
-    public Optional<ProdutoIntelectual> getIntelectualById(@PathVariable UUID uuid){
-        try {
-            return produtoIntelectualService.buscar(uuid); 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @GetMapping("/produto/{tipo}/{uuid}")
-    public ResponseEntity<Optional<ProdutoDTO>> getProduto(@PathVariable String tipo, @PathVariable UUID uuid){
-        ModelMapper mapper = new ModelMapper();
-        if(tipo.equals("fisico")){
-            Optional<ProdutoFisico> produtoFisico = produtoFisicoService.buscar(uuid);
-            ProdutoDTO optional = mapper.map(produtoFisico, ProdutoDTO.class);
-            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
-        } else if(tipo.equals("digital")){
-            Optional<ProdutoDigital> produtoDigital = produtoDigitalService.buscar(uuid);
-            ProdutoDTO optional = mapper.map(produtoDigital, ProdutoDTO.class);
-            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
-        } else if(tipo.equals("intelectual")){
-            Optional<ProdutoIntelectual> produtoIntelectual = produtoIntelectualService.buscar(uuid);
-            ProdutoDTO optional = mapper.map(produtoIntelectual, ProdutoDTO.class);
-            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/fisico")
+    @GetMapping("/produto/digital/{uuid}")
+    public ResponseEntity<Optional<ProdutoDigital>> getDigitalById(@PathVariable UUID uuid){
+        try {
+            return new ResponseEntity<>(produtoDigitalService.buscar(uuid), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/produto/intelectual/{uuid}")
+    public ResponseEntity<Optional<ProdutoIntelectual>> getIntelectualById(@PathVariable UUID uuid){
+        try {
+            return new ResponseEntity<>(produtoIntelectualService.buscar(uuid), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    // EM ANÁLISE
+    // @GetMapping("/produto/{tipo}/{uuid}")
+    // public ResponseEntity<Optional<ProdutoDTO>> getProduto(@PathVariable String tipo, @PathVariable UUID uuid){
+    //     ModelMapper mapper = new ModelMapper();
+    //     if(tipo.equals("fisico")){
+    //         Optional<ProdutoFisico> produtoFisico = produtoFisicoService.buscar(uuid);
+    //         ProdutoDTO optional = mapper.map(produtoFisico, ProdutoDTO.class);
+    //         return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+    //     } else if(tipo.equals("digital")){
+    //         Optional<ProdutoDigital> produtoDigital = produtoDigitalService.buscar(uuid);
+    //         ProdutoDTO optional = mapper.map(produtoDigital, ProdutoDTO.class);
+    //         return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+    //     } else if(tipo.equals("intelectual")){
+    //         Optional<ProdutoIntelectual> produtoIntelectual = produtoIntelectualService.buscar(uuid);
+    //         ProdutoDTO optional = mapper.map(produtoIntelectual, ProdutoDTO.class);
+    //         return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+    //     }
+    //     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    // }
+
+    @GetMapping("/produto/fisico")
     public List<ProdutoFisico> listarFisico(){
         try {
             return produtoFisicoService.listar(); 
@@ -116,7 +117,7 @@ public class ProdutoController {
         return null;
     }
 
-    @GetMapping("/digital")
+    @GetMapping("/produto/digital")
     public List<ProdutoDigital> listarDigitalById(){
         try {
             return produtoDigitalService.listar(); 
@@ -126,7 +127,7 @@ public class ProdutoController {
         return null;
     }
 
-    @GetMapping("/intelectual")
+    @GetMapping("/produto/intelectual")
     public List<ProdutoIntelectual> listarIntelectualById(){
         try {
             return produtoIntelectualService.listar(); 

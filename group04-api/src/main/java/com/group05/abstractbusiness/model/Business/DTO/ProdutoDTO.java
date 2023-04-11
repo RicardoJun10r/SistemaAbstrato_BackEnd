@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class ProdutoDTO {
 
-    private UUID iD;
+    private UUID ID;
     
     private String nome;
     
@@ -64,5 +64,5 @@ public class ProdutoDTO {
     private int pages;
 
     private int edition;
-    
+
 }

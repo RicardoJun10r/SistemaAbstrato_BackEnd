@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.model.Business;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -34,8 +35,8 @@ public class ProdutoIntelectual extends Produto {
     private final String TIPO = "INTE";
 
     public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
-            LocalDateTime updatedAt, LocalDateTime deletedAt, String author, String publisher, String isbn, int pages,
+            String brand, String category, String subCategory, String image, LocalDate createdAt,
+            LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
             int edition) {
         super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);

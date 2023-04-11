@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.model.Business.factory.*;
 import com.group05.abstractbusiness.model.Business.*;
+import com.group05.abstractbusiness.model.Business.DTO.ProdutoDTO;
 import com.group05.abstractbusiness.service.Business.*;
 
 
@@ -86,6 +87,25 @@ public class ProdutoController {
         return null;
     }
 
+    @GetMapping("/produto/{tipo}/{uuid}")
+    public ResponseEntity<Optional<ProdutoDTO>> getProduto(@PathVariable String tipo, @PathVariable UUID uuid){
+        ModelMapper mapper = new ModelMapper();
+        if(tipo.equals("fisico")){
+            Optional<ProdutoFisico> produtoFisico = produtoFisicoService.buscar(uuid);
+            ProdutoDTO optional = mapper.map(produtoFisico, ProdutoDTO.class);
+            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+        } else if(tipo.equals("digital")){
+            Optional<ProdutoDigital> produtoDigital = produtoDigitalService.buscar(uuid);
+            ProdutoDTO optional = mapper.map(produtoDigital, ProdutoDTO.class);
+            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+        } else if(tipo.equals("intelectual")){
+            Optional<ProdutoIntelectual> produtoIntelectual = produtoIntelectualService.buscar(uuid);
+            ProdutoDTO optional = mapper.map(produtoIntelectual, ProdutoDTO.class);
+            return new ResponseEntity<Optional<ProdutoDTO>>(Optional.of(optional) , HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/fisico")
     public List<ProdutoFisico> listarFisico(){
         try {
@@ -116,19 +136,16 @@ public class ProdutoController {
         return null;
     }
 
-    @DeleteMapping("/fisico/{uuid}")
-    public String deleteFisicoById(@PathVariable UUID uuid){
-        return produtoFisicoService.deletar(uuid); 
-    }
-
-    @DeleteMapping("/digital/{uuid}")
-    public String deletegetDigitalById(@PathVariable UUID uuid){
-        return produtoDigitalService.deletar(uuid); 
-    }
-
-    @DeleteMapping("/intelectual/{uuid}")
-    public String deletegetIntelectualById(@PathVariable UUID uuid){
-        return produtoIntelectualService.deletar(uuid); 
+    @DeleteMapping("/produto/{tipo}/{uuid}")
+    public String deleteProduto(@PathVariable String tipo, @PathVariable UUID uuid){
+        if(tipo.equals("fisico")){
+            return produtoFisicoService.deletar(uuid);
+        } else if(tipo.equals("digital")){
+            return produtoDigitalService.deletar(uuid);
+        } else if(tipo.equals("intelectual")){
+            return produtoIntelectualService.deletar(uuid);
+        }
+        return "Nenhum Valor achado!!!";
     }
 
 }

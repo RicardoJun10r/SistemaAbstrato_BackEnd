@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.model.Business;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import jakarta.persistence.Column;
@@ -30,8 +31,8 @@ public class ProdutoFisico extends Produto {
     private final String TIPO = "FISI";
 
     public ProdutoFisico(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
-            LocalDateTime updatedAt, LocalDateTime deletedAt, Float weight, Float height, Float width,
+            String brand, String category, String subCategory, String image, LocalDate createdAt,
+            LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
             String imageUrl) {
         super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);

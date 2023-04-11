@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.model.Business;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -49,17 +50,17 @@ public abstract class Produto {
     private String image;
     
     @Column(name = "criado_em")
-    private LocalDateTime createdAt;                            // Define o nome da coluna como "criado_em" no banco de dados
+    private LocalDate createdAt;                            // Define o nome da coluna como "criado_em" no banco de dados
         
     @Column(name = "atualizado_em")                             // Define o nome da coluna como "atualizado_em" no banco de dados
-    private LocalDateTime updatedAt;    
+    private LocalDate updatedAt;    
         
     @Column(name = "deletado_em")                               // Define o nome da coluna como "deletado_em" no banco de dados
-    private LocalDateTime deletedAt;
+    private LocalDate deletedAt;
 
     public Produto(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco, String brand,
-            String category, String subCategory, String image, LocalDateTime createdAt, LocalDateTime updatedAt,
-            LocalDateTime deletedAt) {
+            String category, String subCategory, String image, LocalDate createdAt, LocalDate updatedAt,
+            LocalDate deletedAt) {
         this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;

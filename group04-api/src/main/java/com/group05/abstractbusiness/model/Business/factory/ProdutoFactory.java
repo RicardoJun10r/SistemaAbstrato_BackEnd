@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.model.Business.factory;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -41,11 +42,11 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     
     private String image;
     
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
     
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
     
-    private LocalDateTime deletedAt;
+    private LocalDate deletedAt;
 
     private String fileUrl;
 
@@ -76,8 +77,8 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     private int edition;
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
-            LocalDateTime updatedAt, LocalDateTime deletedAt, String author, String publisher, String isbn, int pages,
+            String brand, String category, String subCategory, String image, LocalDate createdAt,
+            LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
             int edition) {
         this.iD = iD;
         this.nome = nome;
@@ -100,8 +101,8 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     }
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
-            LocalDateTime updatedAt, LocalDateTime deletedAt, Float weight, Float height, Float width,
+            String brand, String category, String subCategory, String image, LocalDate createdAt,
+            LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
             String imageUrl) {
         this.iD = iD;
         this.nome = nome;
@@ -123,8 +124,8 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     }
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDateTime createdAt,
-            LocalDateTime updatedAt, LocalDateTime deletedAt, String fileUrl, String fileType, Double fileSize,
+            String brand, String category, String subCategory, String image, LocalDate createdAt,
+            LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
             Integer downloadCount, LocalDateTime expiryDate) {
         this.iD = iD;
         this.nome = nome;

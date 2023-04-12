@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "user_system")
-public class UserTest extends Person{
+public class User extends Person{
 
     //login
     @Column(name = "login",nullable = false, unique = true)                 // Garantido que o atributo não pode ser null
@@ -32,19 +32,21 @@ public class UserTest extends Person{
 
     //Permission
     @Column(name = "permission", nullable = false)
-    @NotEmpty
     @NotNull
     private int permission;
 
 
 
-    public UserTest(String name ,String login, String password, int permission) {
+    public User(String name ,String login, String password, int permission) {
         super(name);
         this.login = login;
         this.password = password;
         this.permission = permission;
     }
 
+
+    public User() {
+    }
 
     public String getLogin() {
         return this.login;

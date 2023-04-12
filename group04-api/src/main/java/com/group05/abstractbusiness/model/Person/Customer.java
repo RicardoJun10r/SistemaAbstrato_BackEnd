@@ -52,10 +52,6 @@ public class Customer extends Person {
         return number;
     }
     
-    public UUID getCustomerId(){
-        return this.customerId;
-    }
-
     public void setNumber(String number) {
         this.number = number;
     }

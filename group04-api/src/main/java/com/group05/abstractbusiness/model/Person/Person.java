@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -24,8 +26,7 @@ public abstract class Person {
     // id
     @Column(name = "id", unique = true)                  
     @Id                                                     // Anotação do atributo PK
-    @NotEmpty
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;                                        
     
     // name 
@@ -37,7 +38,6 @@ public abstract class Person {
     
     //registerDate
     @Column(name = "register_date", nullable = false)
-    @NotEmpty
     @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
     @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
     private Timestamp registerDate;

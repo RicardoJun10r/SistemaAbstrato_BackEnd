@@ -10,13 +10,13 @@ import java.util.*;
 
 import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.model.Person.User;
-import com.group05.abstractbusiness.repository.PersonRepository;
+import com.group05.abstractbusiness.repository.Person.UserRepository;
 
 @Service
 public class UserService {
     
     @Autowired
-    private PersonRepository<User> repository;
+    private UserRepository repository;
 
     public User findbyId(UUID id){
         Optional<User> user = this.repository.findById(id);
@@ -44,7 +44,7 @@ public class UserService {
         return this.repository.save(newObj);
     } 
 
-    public void DeletePerson(UUID id){
+    public void deletePerson(UUID id){
         try {
             this.repository.deleteById(id);
         } catch (Exception e) {

@@ -19,12 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.model.Person.User;
-import com.group05.abstractbusiness.repository.PersonRepository;
-import com.group05.abstractbusiness.service.Person.PersonService;
 import com.group05.abstractbusiness.service.Person.UserService;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/user")
 @Validated
 public class UserController {
 
@@ -37,9 +35,14 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<List<Person>> findByName(@PathVariable String name){
-        List<Person> person = this.personService.findbyName(name);
-        return ResponseEntity.ok().body(person);
+    @GetMapping("/name:{name}")
+    public ResponseEntity<List<User>> findByName(@PathVariable String name){
+        List<User> user = this.service.findbyName(name);
+        return ResponseEntity.ok().body(user);
+    }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        return new ResponseEntity<>(service.createUser(user), HttpStatus.OK);
     }
 }

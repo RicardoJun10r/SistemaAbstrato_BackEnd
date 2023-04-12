@@ -32,7 +32,6 @@ public class User extends Person{
 
     //Permission
     @Column(name = "permission", nullable = false)
-    @NotEmpty
     @NotNull
     private int permission;
 
@@ -45,6 +44,9 @@ public class User extends Person{
         this.permission = permission;
     }
 
+
+    public User() {
+    }
 
     public String getLogin() {
         return this.login;

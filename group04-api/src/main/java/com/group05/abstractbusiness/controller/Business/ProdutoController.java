@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.model.Business.factory.*;
 import com.group05.abstractbusiness.model.Business.*;
-import com.group05.abstractbusiness.model.Business.DTO.ProdutoDTO;
 import com.group05.abstractbusiness.model.Business.DTO.ProdutoDigitalDTO;
 import com.group05.abstractbusiness.model.Business.DTO.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.model.Business.DTO.ProdutoIntelectualDTO;

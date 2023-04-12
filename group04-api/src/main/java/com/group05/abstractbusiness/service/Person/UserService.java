@@ -8,7 +8,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
-import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.repository.Person.UserRepository;
 
@@ -26,7 +25,7 @@ public class UserService {
     public List<User> findbyName(String name){
         List<User> users = repository.findByNameContainingIgnoreCase(name);
         if (users.isEmpty()){
-            throw new RuntimeException("Pessoa não encontrada " + name + " " + Person.class.getClass());
+            throw new RuntimeException("Pessoa não encontrada " + name + " " + User.class.getClass());
         }else{
             return users;
         }
@@ -44,7 +43,7 @@ public class UserService {
         return this.repository.save(newObj);
     } 
 
-    public void deletePerson(UUID id){
+    public void deleteUser(UUID id){
         try {
             this.repository.deleteById(id);
         } catch (Exception e) {

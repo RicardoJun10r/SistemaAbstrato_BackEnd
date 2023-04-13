@@ -1,18 +1,14 @@
 package com.group05.abstractbusiness.model.Person;
-
-import java.util.Objects;
-
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "supplier")
 public class Supplier extends Person {
-
-    // id
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_supplier", unique = true, nullable = false)
-    private Long id;
 
     // address
     @Column(name = "address", nullable = false)
@@ -34,15 +30,9 @@ public class Supplier extends Person {
     }
 
     public Supplier() {
+        super();
     }
 
-    public Long getSuppluerId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getAddress() {
         return address;
@@ -66,23 +56,6 @@ public class Supplier extends Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Supplier)) {
-            return false;
-        }
-        Supplier supplier = (Supplier) o;
-        return Objects.equals(id, supplier.id) && Objects.equals(address, supplier.address) && Objects.equals(email, supplier.email) && Objects.equals(phone, supplier.phone);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, address, email, phone);
     }
 
 }

@@ -1,27 +1,25 @@
 package com.group05.abstractbusiness.model.Person;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "user_system")
 public class User extends Person{
-    //id
-    @Id
-    @Column(name = "id_user", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)                     // Padrão definido pelo BD
-    @NotEmpty
-    @NotNull
-    private Long userId;
-
 
     //login
     @Column(name = "login",nullable = false, unique = true)                 // Garantido que o atributo não pode ser null
     @NotEmpty
-    @NotNull
     @Size(min = 2, max = 30)
     private String login;
 
@@ -29,13 +27,11 @@ public class User extends Person{
     //Password
     @Column(name = "password",nullable = false, unique = false)              // Garantido que o atributo não pode ser null
     @NotEmpty
-    @NotNull
     @Size(min = 4, max = 30)
     private String password;
 
     //Permission
     @Column(name = "permission", nullable = false)
-    @NotEmpty
     @NotNull
     private int permission;
 
@@ -49,12 +45,7 @@ public class User extends Person{
     }
 
 
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public User() {
     }
 
     public String getLogin() {

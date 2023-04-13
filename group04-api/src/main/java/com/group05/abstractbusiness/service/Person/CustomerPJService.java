@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.person;
+package com.group05.abstractbusiness.service.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

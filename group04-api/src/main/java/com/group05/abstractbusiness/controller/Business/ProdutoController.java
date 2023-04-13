@@ -60,44 +60,38 @@ public class ProdutoController {
 
     //#region GET PRODUTO
 
-    @GetMapping("/produto/{tipo}/{uuid}")
-    public ResponseEntity<Optional<ProdutoFisicoDTO>> getFisicoById(@PathVariable String tipo, @PathVariable UUID uuid){
-        if(tipo.equals("fisico")){
-            ModelMapper mapper = new ModelMapper();
-            try {
-                ProdutoFisicoDTO dto = mapper.map(produtoFisicoService.buscar(uuid).get(), ProdutoFisicoDTO.class);
-                return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/fisico/{uuid}")
+    public ResponseEntity<Optional<ProdutoFisicoDTO>> getFisicoById(@PathVariable UUID uuid){
+        ModelMapper mapper = new ModelMapper();
+        try {
+            ProdutoFisicoDTO dto = mapper.map(produtoFisicoService.buscar(uuid).get(), ProdutoFisicoDTO.class);
+            return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/{tipo}/{uuid}")
-    public ResponseEntity<Optional<ProdutoDigitalDTO>> getDigitalById(@PathVariable String tipo, @PathVariable UUID uuid){
-        if(tipo.equals("digital")){
-            ModelMapper mapper = new ModelMapper();
-            try {
-                ProdutoDigitalDTO dto = mapper.map(produtoDigitalService.buscar(uuid).get(), ProdutoDigitalDTO.class);
-                return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/digital/{uuid}")
+    public ResponseEntity<Optional<ProdutoDigitalDTO>> getDigitalById(@PathVariable UUID uuid){
+        ModelMapper mapper = new ModelMapper();
+        try {
+            ProdutoDigitalDTO dto = mapper.map(produtoDigitalService.buscar(uuid).get(), ProdutoDigitalDTO.class);
+            return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/{tipo}/{uuid}")
-    public ResponseEntity<Optional<ProdutoIntelectualDTO>> getIntelectualById(@PathVariable String tipo, @PathVariable UUID uuid){
-        if(tipo.equals("intelectual")){
-            ModelMapper mapper = new ModelMapper();
-            try {
-                ProdutoIntelectualDTO dto = mapper.map(produtoIntelectualService.buscar(uuid).get(), ProdutoIntelectualDTO.class);
-                return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/intelectual/{uuid}")
+    public ResponseEntity<Optional<ProdutoIntelectualDTO>> getIntelectualById(@PathVariable UUID uuid){
+        ModelMapper mapper = new ModelMapper();
+        try {
+            ProdutoIntelectualDTO dto = mapper.map(produtoIntelectualService.buscar(uuid).get(), ProdutoIntelectualDTO.class);
+            return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
@@ -106,38 +100,32 @@ public class ProdutoController {
 
     //#region LIST PRODUTOS
 
-    @GetMapping("/produto/{tipo}")
-    public ResponseEntity<List<ProdutoFisico>> listarFisico(@PathVariable String tipo){
-        if(tipo.equals("fisico")){
-            try {
-                return new ResponseEntity<>(produtoFisicoService.listar(), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/fisico")
+    public ResponseEntity<List<ProdutoFisico>> listarFisico(){
+        try {
+            return new ResponseEntity<>(produtoFisicoService.listar(), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/{tipo}")
-    public ResponseEntity<List<ProdutoDigital>> listarDigitalById(@PathVariable String tipo){
-        if(tipo.equals("digital")){
-            try {
-                return new ResponseEntity<>(produtoDigitalService.listar(), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/digital")
+    public ResponseEntity<List<ProdutoDigital>> listarDigitalById(){
+        try {
+            return new ResponseEntity<>(produtoDigitalService.listar(), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/{tipo}")
-    public ResponseEntity<List<ProdutoIntelectual>> listarIntelectualById(@PathVariable String tipo){
-        if(tipo.equals("intelectual")){
-            try {
-                return new ResponseEntity<>(produtoIntelectualService.listar(), HttpStatus.OK); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @GetMapping("/produto/intelectual")
+    public ResponseEntity<List<ProdutoIntelectual>> listarIntelectualById(){
+        try {
+            return new ResponseEntity<>(produtoIntelectualService.listar(), HttpStatus.OK); 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

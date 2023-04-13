@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.model.Business.DTO;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProdutoFisicoDTO {
-    
-    private UUID ID;
     
     private String nome;
     
@@ -43,5 +40,4 @@ public class ProdutoFisicoDTO {
     private Float width;
 
     private String imageUrl;
-    
 }

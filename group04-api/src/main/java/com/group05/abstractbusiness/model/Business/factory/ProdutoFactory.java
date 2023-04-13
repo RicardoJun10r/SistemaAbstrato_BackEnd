@@ -14,9 +14,6 @@ import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *  FACTORY de produtos INTELECTUAIS
- */
 @Component
 @Getter
 @Setter

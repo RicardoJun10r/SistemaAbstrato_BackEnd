@@ -2,7 +2,6 @@ package com.group05.abstractbusiness.model.Business.DTO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,8 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProdutoDigitalDTO {
-    
-    private UUID ID;
     
     private String nome;
     
@@ -45,6 +42,4 @@ public class ProdutoDigitalDTO {
 
     private Integer downloadCount;
 
-    private LocalDateTime expiryDate;
-    
 }

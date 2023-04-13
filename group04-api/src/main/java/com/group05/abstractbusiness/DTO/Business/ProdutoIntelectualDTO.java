@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model.Business.DTO;
+package com.group05.abstractbusiness.DTO.Business;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoFisicoDTO {
+public class ProdutoIntelectualDTO {
     
     private String nome;
     
@@ -33,11 +33,14 @@ public class ProdutoFisicoDTO {
     
     private LocalDate deletedAt;
 
-    private Float weight;
+    private String author;
 
-    private Float height;
+    private String publisher;
 
-    private Float width;
+    private String isbn;
 
-    private String imageUrl;
+    private int pages;
+
+    private int edition;
+
 }

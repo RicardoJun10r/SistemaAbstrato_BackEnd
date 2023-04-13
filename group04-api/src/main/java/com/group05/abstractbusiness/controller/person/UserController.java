@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.DTO.person.UserPOST;
-import com.group05.abstractbusiness.DTO.person.UserReturn;
+import com.group05.abstractbusiness.DTO.Person.UserPOST;
+import com.group05.abstractbusiness.DTO.Person.UserReturn;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.service.Person.UserService;
 

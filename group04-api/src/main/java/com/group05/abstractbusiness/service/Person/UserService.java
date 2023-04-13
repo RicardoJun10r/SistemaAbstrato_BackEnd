@@ -8,6 +8,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
+import com.group05.abstractbusiness.DTO.person.UserPOST;
+import com.group05.abstractbusiness.DTO.person.UserReturn;
+import com.group05.abstractbusiness.mapper.UserMapper;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.repository.Person.UserRepository;
 
@@ -32,8 +35,8 @@ public class UserService {
     }
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
-    public User createUser(User user) {
-        return this.repository.save(user);
+    public UserReturn createUser(UserPOST user) {
+        return UserMapper.INSTACE.toUserReturn(this.repository.save(UserMapper.INSTACE.toUser(user)));
     }
 
     @Transactional

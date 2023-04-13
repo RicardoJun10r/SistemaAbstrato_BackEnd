@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.DTO.person.UserPOST;
+import com.group05.abstractbusiness.DTO.person.UserReturn;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.service.Person.UserService;
 
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<UserReturn> createUser(@RequestBody UserPOST user){
         return new ResponseEntity<>(service.createUser(user), HttpStatus.OK);
     }
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -35,8 +36,6 @@ public class User extends Person{
     @NotNull
     private int permission;
 
-
-
     public User(String name ,String login, String password, int permission) {
         super(name);
         this.login = login;
@@ -46,6 +45,12 @@ public class User extends Person{
 
 
     public User() {
+    }
+
+
+    @Override
+    public UUID getId(){
+        return super.getId();
     }
 
     public String getLogin() {

@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Person;
+package com.group05.abstractbusiness.service.person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.*;
+
+import com.group05.abstractbusiness.model.Person.CustomerPF;
 import com.group05.abstractbusiness.model.Person.CustomerPJ;
 import com.group05.abstractbusiness.repository.Person.CustomerPJRepository;
 

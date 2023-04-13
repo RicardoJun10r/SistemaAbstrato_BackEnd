@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.model.Person.Person;
 import com.group05.abstractbusiness.model.Person.User;
-import com.group05.abstractbusiness.service.Person.UserService;
+import com.group05.abstractbusiness.service.person.UserService;
 
 @RestController
 @RequestMapping("/user")

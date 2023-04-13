@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.repository;
+package com.group05.abstractbusiness.repository.Business;
 
 
 import java.util.UUID;

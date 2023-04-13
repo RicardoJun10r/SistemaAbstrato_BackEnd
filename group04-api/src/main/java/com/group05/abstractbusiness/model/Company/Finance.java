@@ -1,3 +1,4 @@
+/*
 package com.group05.abstractbusiness.model.Company;
 
 import java.util.ArrayList;
@@ -45,3 +46,4 @@ public class Finance {
     }
 
 }
+*/

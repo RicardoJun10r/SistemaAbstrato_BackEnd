@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
-import com.group05.abstractbusiness.repository.ProdutoIntelectualRepository;
+import com.group05.abstractbusiness.repository.Business.ProdutoIntelectualRepository;
 
 @Service
 public class ProdutoIntelectualService {

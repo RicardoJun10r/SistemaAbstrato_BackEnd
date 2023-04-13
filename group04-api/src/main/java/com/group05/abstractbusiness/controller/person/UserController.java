@@ -1,7 +1,6 @@
-package com.group05.abstractbusiness.controller.Person;
+package com.group05.abstractbusiness.controller.person;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.model.Person.Person;
+import com.group05.abstractbusiness.DTO.person.UserPOST;
+import com.group05.abstractbusiness.DTO.person.UserReturn;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.service.Person.UserService;
 
@@ -42,7 +40,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<UserReturn> createUser(@RequestBody UserPOST user){
         return new ResponseEntity<>(service.createUser(user), HttpStatus.OK);
     }
 }

@@ -1,14 +1,13 @@
-package com.group05.abstractbusiness.model.Business.DTO;
+package com.group05.abstractbusiness.DTO.Business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoDigitalDTO {
+public class ProdutoFisicoDTO {
     
     private String nome;
     
@@ -34,12 +33,11 @@ public class ProdutoDigitalDTO {
     
     private LocalDate deletedAt;
 
-    private String fileUrl;
+    private Float weight;
 
-    private String fileType;
+    private Float height;
 
-    private Double fileSize;
+    private Float width;
 
-    private Integer downloadCount;
-
+    private String imageUrl;
 }

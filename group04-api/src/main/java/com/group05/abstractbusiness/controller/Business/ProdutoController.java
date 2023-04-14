@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.group05.abstractbusiness.model.Business.factory.*;
+import com.group05.abstractbusiness.DTO.Business.ProdutoDigitalDTO;
+import com.group05.abstractbusiness.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.DTO.Business.ProdutoIntelectualDTO;
 import com.group05.abstractbusiness.model.Business.*;
-import com.group05.abstractbusiness.model.Business.DTO.ProdutoDigitalDTO;
-import com.group05.abstractbusiness.model.Business.DTO.ProdutoFisicoDTO;
-import com.group05.abstractbusiness.model.Business.DTO.ProdutoIntelectualDTO;
 import com.group05.abstractbusiness.service.Business.*;
 
 

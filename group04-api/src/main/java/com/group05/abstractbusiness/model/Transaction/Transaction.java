@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,9 +14,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
-@EqualsAndHashCode
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class Transaction {
 
 	@Id
@@ -26,8 +27,8 @@ public abstract class Transaction {
 	@Column(name = "transactionDate")
 	private Date transactionDate;
 
-	@Column(name = "cart")
-	private Cart cart;
+	// @Column(name = "cart")
+	// private Cart cart;
 
 	@Column(name = "value")
 	private long value;
@@ -35,13 +36,11 @@ public abstract class Transaction {
 	@Column(name = "discount")
 	private int discount;
 
-	public Transaction() {
-	}
+	public Transaction() {}
 
-	public Transaction(UUID id, Date transactionDate, Cart cart, long value, int discount) {
+	public Transaction(UUID id, Date transactionDate, long value, int discount) {
 		this.id = id;
 		this.transactionDate = transactionDate;
-		this.cart = cart;
 		this.value = value;
 		this.discount = discount;
 	}

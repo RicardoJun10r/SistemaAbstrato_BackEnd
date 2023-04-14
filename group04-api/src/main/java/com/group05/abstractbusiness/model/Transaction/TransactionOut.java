@@ -1,27 +1,30 @@
 package com.group05.abstractbusiness.model.Transaction;
 
+import java.util.Date;
+import java.util.UUID;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 public class TransactionOut extends Transaction {
 
+	// Alterar JOIN TABLE CUSTOMER
 	@Column(name = "customerId")
 	private long customerId;
 
-	@Column(name = "document")
-	private Receipter document;
+	// @Column(name = "document")
+	// private Receipter document;
 
-	public TransactionOut(long customerId, Receipter document) {
-		super();
+	public TransactionOut(UUID id, Date transactionDate, long value, int discount, long customerId) {
+		super(id, transactionDate, value, discount);
 		this.customerId = customerId;
-		this.document = document;
 	}
 
-	void sellProduct() {
-
-	}
+	public TransactionOut() {}
 
 }

@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserPOST {
     String name;
     String login;

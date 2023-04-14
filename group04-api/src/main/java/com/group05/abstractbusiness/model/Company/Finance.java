@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.group05.abstractbusiness.model.Transaction.Transaction;
+
 public class Finance {
+    
     private List<Transaction> transactions; // atributo para armazenar uma lista de transações
 
     public Finance() {

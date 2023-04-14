@@ -1,13 +1,14 @@
-package com.group05.abstractbusiness.model.Business.DTO;
+package com.group05.abstractbusiness.DTO.Business;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProdutoIntelectualDTO {
+public class ProdutoDigitalDTO {
     
     private String nome;
     
@@ -33,14 +34,12 @@ public class ProdutoIntelectualDTO {
     
     private LocalDate deletedAt;
 
-    private String author;
+    private String fileUrl;
 
-    private String publisher;
+    private String fileType;
 
-    private String isbn;
+    private Double fileSize;
 
-    private int pages;
-
-    private int edition;
+    private Integer downloadCount;
 
 }

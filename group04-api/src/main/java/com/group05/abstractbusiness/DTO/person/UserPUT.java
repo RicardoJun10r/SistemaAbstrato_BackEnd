@@ -3,16 +3,13 @@ package com.group05.abstractbusiness.DTO.person;
 
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Data
-public class UserPOST {
+public class UserPUT {
+    UUID id;
     String name;
     String login;
     String password;
-    int permission;
-    Timestamp registerDate;
 }

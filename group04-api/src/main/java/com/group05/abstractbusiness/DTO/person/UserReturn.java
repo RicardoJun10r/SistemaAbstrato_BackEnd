@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserReturn {
     UUID id;
     String name;

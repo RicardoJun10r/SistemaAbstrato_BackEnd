@@ -1,5 +1,7 @@
 package com.group05.abstractbusiness.mapper;
 
+import java.util.Optional;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -15,5 +17,8 @@ public abstract class UserMapper {
     public abstract User toUser(UserPOST userPost);
 
     public abstract UserReturn toUserReturn(User userPost);
+   
+    public abstract UserReturn toUserReturnOptional(Optional<User> userPost);
+
     
 }

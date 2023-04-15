@@ -1,7 +1,7 @@
 package com.group05.abstractbusiness.model.Transaction;
 
 import java.util.Date;
-import java.util.UUID;
+/*import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,4 +45,4 @@ public abstract class Transaction {
 		this.discount = discount;
 	}
 
-}
+}*/

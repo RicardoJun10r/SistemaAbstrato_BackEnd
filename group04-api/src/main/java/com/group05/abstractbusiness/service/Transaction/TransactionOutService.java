@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Transaction;
+/*package com.group05.abstractbusiness.service.Transaction;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -39,4 +39,4 @@ public class TransactionOutService {
 		transactionOutRepository.deleteById(id);
 	}
 
-}
+}*/

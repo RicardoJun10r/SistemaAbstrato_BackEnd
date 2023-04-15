@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model.Transaction;
+/*package com.group05.abstractbusiness.model.Transaction;
 
 import java.util.Date;
 import java.util.UUID;
@@ -27,4 +27,4 @@ public class TransactionOut extends Transaction {
 
 	public TransactionOut() {}
 
-}
+}*/

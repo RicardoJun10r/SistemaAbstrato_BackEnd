@@ -4,8 +4,8 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.group05.abstractbusiness.model.Stock.StockProducts;
+import com.group05.abstractbusiness.model.Stock.StockFisico;
 
-public interface StockRepository extends JpaRepository<StockProducts, UUID> {
+public interface StockFisicoRepository extends JpaRepository<StockFisico, UUID> {
     
 }

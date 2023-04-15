@@ -28,7 +28,7 @@ import com.group05.abstractbusiness.service.Business.*;
  *  REFATORAR ESSE CONTROLLER PARA IMPLEMENTAR O PADRÃO DE PROJETO ABSTRACT FACTORY
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/produto")
 public class ProdutoController {
     
     @Autowired
@@ -42,7 +42,7 @@ public class ProdutoController {
 
     //#region CRIAR PRODUTOS
 
-    @PostMapping("/produto/{tipo}")
+    @PostMapping("/{tipo}")
     public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @RequestBody ProdutoFactory produtoFactory){
         ModelMapper mapper = new ModelMapper();
         if(tipo.equals("fisico")){
@@ -60,7 +60,7 @@ public class ProdutoController {
 
     //#region GET PRODUTO
 
-    @GetMapping("/produto/fisico/{uuid}")
+    @GetMapping("/fisico/{uuid}")
     public ResponseEntity<Optional<ProdutoFisicoDTO>> getFisicoById(@PathVariable UUID uuid){
         ModelMapper mapper = new ModelMapper();
         try {
@@ -72,7 +72,7 @@ public class ProdutoController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/digital/{uuid}")
+    @GetMapping("/digital/{uuid}")
     public ResponseEntity<Optional<ProdutoDigitalDTO>> getDigitalById(@PathVariable UUID uuid){
         ModelMapper mapper = new ModelMapper();
         try {
@@ -84,7 +84,7 @@ public class ProdutoController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/intelectual/{uuid}")
+    @GetMapping("/intelectual/{uuid}")
     public ResponseEntity<Optional<ProdutoIntelectualDTO>> getIntelectualById(@PathVariable UUID uuid){
         ModelMapper mapper = new ModelMapper();
         try {
@@ -100,7 +100,7 @@ public class ProdutoController {
 
     //#region LIST PRODUTOS
 
-    @GetMapping("/produto/fisico")
+    @GetMapping("/fisico")
     public ResponseEntity<List<ProdutoFisico>> listarFisico(){
         try {
             return new ResponseEntity<>(produtoFisicoService.listar(), HttpStatus.OK); 
@@ -110,7 +110,7 @@ public class ProdutoController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/digital")
+    @GetMapping("/digital")
     public ResponseEntity<List<ProdutoDigital>> listarDigitalById(){
         try {
             return new ResponseEntity<>(produtoDigitalService.listar(), HttpStatus.OK); 
@@ -120,7 +120,7 @@ public class ProdutoController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/produto/intelectual")
+    @GetMapping("/intelectual")
     public ResponseEntity<List<ProdutoIntelectual>> listarIntelectualById(){
         try {
             return new ResponseEntity<>(produtoIntelectualService.listar(), HttpStatus.OK); 
@@ -134,7 +134,7 @@ public class ProdutoController {
 
     //#region DELETE PRODUTO
 
-    @DeleteMapping("/produto/{tipo}/{uuid}")
+    @DeleteMapping("/{tipo}/{uuid}")
     public String deleteProduto(@PathVariable String tipo, @PathVariable UUID uuid){
         if(tipo.equals("fisico")){
             return produtoFisicoService.deletar(uuid);

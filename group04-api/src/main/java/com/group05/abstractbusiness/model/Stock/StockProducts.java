@@ -1,49 +1,46 @@
 package com.group05.abstractbusiness.model.Stock;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
-import com.group05.abstractbusiness.model.Business.Produto;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+@MappedSuperclass
 @Getter
 @Setter
-@Table(name = "stock_tb")
-public class StockProducts {
+public abstract class StockProducts {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
     private UUID id;
 
+    @Column(name = "nome")
     private String nome;
 
+    @Column(name = "localizacao")
     private String localizacao;
 
+    @Column(name = "quantidade")
     private Integer quantidade;
 
+    @Column(name = "lastUpdated")
     private LocalDate lastUpdated;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "stock_id")
-    private List<Produto> produtos;
 
     public StockProducts() {}
 
-    public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated,
-            List<Produto> produtos) {
+    public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated) {
         this.id = id;
         this.nome = nome;
         this.localizacao = localizacao;
         this.quantidade = quantidade;
         this.lastUpdated = lastUpdated;
-        this.produtos = produtos;
     }
 
 }

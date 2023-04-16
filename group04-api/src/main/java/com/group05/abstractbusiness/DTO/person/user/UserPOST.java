@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.DTO.person;
+package com.group05.abstractbusiness.DTO.person.user;
 
 
 

@@ -22,7 +22,7 @@ public class Supplier extends Person {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    public Supplier(String name, String address, String email, String phone) {
+        public Supplier(String name, String address, String email, String phone) {
         super(name);
         this.address = address;
         this.email = email;

@@ -1,16 +1,20 @@
 package com.group05.abstractbusiness.service.Person;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
 
-import com.group05.abstractbusiness.DTO.person.UserPOST;
-import com.group05.abstractbusiness.DTO.person.UserPUT;
-import com.group05.abstractbusiness.DTO.person.UserReturn;
+import com.group05.abstractbusiness.DTO.person.*;
+import com.group05.abstractbusiness.DTO.person.user.UserPOST;
+import com.group05.abstractbusiness.DTO.person.user.UserPUT;
+import com.group05.abstractbusiness.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.mapper.UserMapper;
 import com.group05.abstractbusiness.model.Person.User;
 import com.group05.abstractbusiness.repository.Person.UserRepository;
@@ -59,10 +63,11 @@ public class UserService {
     } 
 
     public void deleteUser(UUID id){
-        try {
-            this.repository.deleteById(id);
-        } catch (Exception e) {
-            throw new RuntimeException("Não é possivel excluir pois possui dados relacionados");
+        if(this.repository.existsById(id)){
+            repository.deleteById(id);
+        }
+        else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User com id [ " + id + " ] não encontrado");
         }
     }
 }

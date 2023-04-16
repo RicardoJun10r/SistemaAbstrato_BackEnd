@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.group05.abstractbusiness.DTO.person.UserPOST;
-import com.group05.abstractbusiness.DTO.person.UserReturn;
+import com.group05.abstractbusiness.DTO.person.user.UserPOST;
+import com.group05.abstractbusiness.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.model.Person.User;
 
 
@@ -19,6 +19,4 @@ public abstract class UserMapper {
     public abstract UserReturn toUserReturn(User userPost);
    
     public abstract UserReturn toUserReturnOptional(Optional<User> userPost);
-
-    
 }

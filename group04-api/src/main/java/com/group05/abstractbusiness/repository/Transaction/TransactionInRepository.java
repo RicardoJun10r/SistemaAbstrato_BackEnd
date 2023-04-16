@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.repository.Transaction;
+/*package com.group05.abstractbusiness.repository.Transaction;
 
 import java.util.UUID;
 
@@ -8,4 +8,4 @@ import com.group05.abstractbusiness.model.Transaction.TransactionIn;
 
 public interface TransactionInRepository extends JpaRepository<TransactionIn, UUID> {
 
-}
+}*/

@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 
-import com.group05.abstractbusiness.DTO.person.*;
-import com.group05.abstractbusiness.DTO.person.user.UserPOST;
-import com.group05.abstractbusiness.DTO.person.user.UserPUT;
-import com.group05.abstractbusiness.DTO.person.user.UserReturn;
-import com.group05.abstractbusiness.mapper.UserMapper;
+import com.group05.abstractbusiness.helper.DTO.person.*;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 

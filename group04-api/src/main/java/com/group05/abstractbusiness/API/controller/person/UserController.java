@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.DTO.person.user.UserPOST;
-import com.group05.abstractbusiness.DTO.person.user.UserPUT;
-import com.group05.abstractbusiness.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
     
 @RestController

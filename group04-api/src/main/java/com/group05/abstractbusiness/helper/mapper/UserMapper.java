@@ -1,12 +1,12 @@
-package com.group05.abstractbusiness.mapper;
+package com.group05.abstractbusiness.helper.mapper;
 
 import java.util.Optional;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.group05.abstractbusiness.DTO.person.user.UserPOST;
-import com.group05.abstractbusiness.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.modules.model.Person.User;
 
 

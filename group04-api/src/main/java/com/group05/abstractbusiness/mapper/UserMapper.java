@@ -7,7 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 import com.group05.abstractbusiness.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.DTO.person.user.UserReturn;
-import com.group05.abstractbusiness.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.User;
 
 
 @Mapper(componentModel = "spring")

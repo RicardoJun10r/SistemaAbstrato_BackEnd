@@ -2,8 +2,7 @@ package com.group05.abstractbusiness.API.controller.person;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
+    
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierReturn;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.service.Person.SupplierService;
 
@@ -28,25 +29,25 @@ public class SupplierController {
     SupplierService service;
 
     @GetMapping("{id}")
-    public ResponseEntity<Supplier> findById(@PathVariable UUID id){
-        Supplier supplier = this.service.findbyId(id);
+    public ResponseEntity<SupplierReturn> findById(@PathVariable UUID id){
+        SupplierReturn supplier = this.service.findbyId(id);
         return ResponseEntity.ok().body(supplier);
     }
 
     @GetMapping("/name:{name}")
-    public ResponseEntity<List<Supplier>> findByName(@PathVariable String name){
-        List<Supplier> suppliers = this.service.findbyName(name);
+    public ResponseEntity<List<SupplierReturn>> findByName(@PathVariable String name){
+        List<SupplierReturn> suppliers = this.service.findbyName(name);
         return ResponseEntity.ok().body(suppliers);
     }
     
     @PostMapping
-    public ResponseEntity<Supplier> createSupplier(@RequestBody Supplier supplier){
+    public ResponseEntity<Supplier> createSupplier(@RequestBody SupplierDTO supplier){
         return new ResponseEntity<>(this.service.createSupplier(supplier), HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<Supplier> updateSupplier(@RequestBody Supplier supplier){
-        return new ResponseEntity<>(this.service.updateSupplier(supplier), HttpStatus.OK);
+    @PutMapping("/update:{id}")
+    public ResponseEntity<SupplierReturn> updateSupplier(@RequestBody SupplierDTO supplier, @PathVariable UUID id){
+        return new ResponseEntity<>(this.service.updateSupplier(id,supplier), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleted:{id}")

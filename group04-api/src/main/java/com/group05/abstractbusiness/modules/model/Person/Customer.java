@@ -18,14 +18,14 @@ public class Customer extends Person {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "number")
-    private String number;
+    @Column(name = "phone")
+    private String phone;
 
-    public Customer(String name, String address, String email, String number) {
+    public Customer(String name, String address, String email, String phone) {
         super(name);
         this.address = address;
         this.email = email;
-        this.number = number;
+        this.phone = phone;
     }
 
     public Customer() {
@@ -48,11 +48,11 @@ public class Customer extends Person {
         this.email = email;
     }
 
-    public String getNumber() {
-        return number;
+    public String getPhone() {
+        return phone;
     }
     
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

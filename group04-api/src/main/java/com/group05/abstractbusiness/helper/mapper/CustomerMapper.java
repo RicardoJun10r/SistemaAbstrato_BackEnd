@@ -26,12 +26,15 @@ public abstract class CustomerMapper {
     public abstract CustomerDTO_PF toCustomerDTO(CustomerPF customer);
     public abstract CustomerDTO_PJ toCustomerDTO(CustomerPJ customer);
    
-    public abstract CustomerDTO_PF toCustomerDTOOpt_PF(Optional<CustomerPF> customer);
-    public abstract CustomerDTO_PJ toCustomerDTOOpt_PJ(Optional<CustomerPJ> customer);
+    public abstract CustomerDTO_PF toCustomerDTO_PF(Optional<CustomerPF> customer);
+    public abstract CustomerDTO_PJ toCustomerDTO_PJ(Optional<CustomerPJ> customer);
 
-    public abstract CustomerReturn_PF  toCustomerRtn_PF(CustomerDTO_PF customer);
-    public abstract CustomerReturn_PJ  toCustomerRtn_PJ(CustomerDTO_PJ customer);
+    public abstract CustomerReturn_PF toCustomerRtn(CustomerPF customer);
+    public abstract CustomerReturn_PJ toCustomerRtn(CustomerPJ customer);
 
-    public abstract CustomerReturn_PF toSupplierCustomerRtnOpt_PF(Optional<CustomerPF> customer);
-    public abstract CustomerReturn_PJ toSupplierCustomerRtnOpt_PJ(Optional<CustomerPJ> customer);
+    public abstract CustomerReturn_PF  toCustomerRtn(CustomerDTO_PF customer);
+    public abstract CustomerReturn_PJ  toCustomerRtn(CustomerDTO_PJ customer);
+
+    public abstract CustomerReturn_PF toCustomerRtn_PF(Optional<CustomerPF> customer);
+    public abstract CustomerReturn_PJ toCustomerRtn_PJ(Optional<CustomerPJ> customer);
 }

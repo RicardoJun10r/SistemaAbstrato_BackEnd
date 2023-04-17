@@ -46,17 +46,14 @@ public class SupplierService {
 
     @Transactional
     public SupplierReturn updateSupplier(UUID id, SupplierDTO supplier){
-        if(repository.findById(id).isPresent()){
-        Supplier newObj = SupplierMapper.INSTACE.toSupplier(findbyId(id));
+        Supplier newObj = this.repository.findById(id).orElseThrow(
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier com id [ " + id  + " ] não encontrado"));
         newObj.setName(supplier.getName());
         newObj.setAddress(supplier.getAddress());
         newObj.setEmail(supplier.getEmail());
         newObj.setPhone(supplier.getPhone());
         return SupplierMapper.INSTACE.toSupplierReturn(this.repository.save(newObj));
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier com id [ " + id + " ] não encontrado");
-        }
-    } 
+        } 
 
     public void deleteSupplier(UUID id){
         try {

@@ -13,6 +13,7 @@ import com.group05.abstractbusiness.modules.model.Person.Supplier;
 public abstract class SupplierMapper {
     public static final SupplierMapper INSTACE = Mappers.getMapper(SupplierMapper.class);
 
+
     public abstract Supplier toSupplier(SupplierDTO supplier);
 
     public abstract Supplier toSupplier(SupplierReturn supplier);

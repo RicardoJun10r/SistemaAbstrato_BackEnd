@@ -45,7 +45,7 @@ public class SupplierController {
         return new ResponseEntity<>(this.service.createSupplier(supplier), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update:{id}")
     public ResponseEntity<SupplierReturn> updateSupplier(@RequestBody SupplierDTO supplier, @PathVariable UUID id){
         return new ResponseEntity<>(this.service.updateSupplier(id,supplier), HttpStatus.OK);
     }

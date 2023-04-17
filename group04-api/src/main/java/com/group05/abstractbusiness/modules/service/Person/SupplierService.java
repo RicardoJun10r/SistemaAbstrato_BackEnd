@@ -8,6 +8,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierReturn;
+import com.group05.abstractbusiness.helper.mapper.SupplierMapper;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.repository.Person.SupplierRepository;
 
@@ -18,37 +21,48 @@ public class SupplierService {
     @Autowired
     private SupplierRepository repository;
 
-    public Supplier findbyId(UUID id){
-        Optional<Supplier> suppliers = this.repository.findById(id);
-        return suppliers.orElseThrow( ()-> new ResponseStatusException(HttpStatus.BAD_REQUEST, "user não econtrado pelo  id ->" + id));
+    public SupplierReturn findbyId(UUID id){
+        this.repository.findById(id).orElseThrow( ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id ->" + id));
+        return SupplierMapper.INSTACE.toSupplierReturnOptional(this.repository.findById(id));
     }
 
-    public List<Supplier> findbyName(String name){
-        List<Supplier> suppliers = repository.findByNameContainingIgnoreCase(name);
-        if (suppliers.isEmpty()){
-            throw new RuntimeException("Pessoa não encontrada " + name + " " + Supplier.class.getClass());
+    public List<SupplierReturn> findbyName(String name){
+        if (this.repository.findByNameContainingIgnoreCase(name).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada " + name + " " + Supplier.class.getClass());
         }else{
+            List<SupplierReturn> suppliers = new ArrayList<>();
+            for(int i = 0; i <  this.repository.findByNameContainingIgnoreCase(name).size();i++){
+                suppliers.add(i, SupplierMapper.INSTACE
+                .toSupplierReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
+            }
             return suppliers;
         }
     }
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
-    public Supplier createSupplier(Supplier supplier) {
-        return this.repository.save(supplier);
+    public Supplier createSupplier(SupplierDTO supplier) {
+        return this.repository.save(SupplierMapper.INSTACE.toSupplier(supplier));
     }
 
     @Transactional
-    public Supplier updateSupplier(Supplier supplier){
-        Supplier newObj = findbyId(supplier.getId());
+    public SupplierReturn updateSupplier(UUID id, SupplierDTO supplier){
+        if(repository.findById(id).isPresent()){
+        Supplier newObj = SupplierMapper.INSTACE.toSupplier(findbyId(id));
         newObj.setName(supplier.getName());
-        return this.repository.save(newObj);
+        newObj.setAddress(supplier.getAddress());
+        newObj.setEmail(supplier.getEmail());
+        newObj.setPhone(supplier.getPhone());
+        return SupplierMapper.INSTACE.toSupplierReturn(this.repository.save(newObj));
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier com id [ " + id + " ] não encontrado");
+        }
     } 
 
     public void deleteSupplier(UUID id){
         try {
             this.repository.deleteById(id);
         } catch (Exception e) {
-            throw new RuntimeException("Não é possivel excluir pois possui dados relacionados");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Não é possivel excluir pois possui dados relacionados");
         }
     }
 }

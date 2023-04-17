@@ -32,11 +32,12 @@ public class UserService {
 
     public List<UserReturn> findbyName(String name){
         if (this.repository.findByNameContainingIgnoreCase(name).isEmpty()){
-            throw new RuntimeException("Pessoa não encontrada " + name + " " + User.class.getClass());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada " + name + " " + User.class.getClass());
         }else{
             List<UserReturn> users = new ArrayList<>();
             for(int i = 0; i < this.repository.findByNameContainingIgnoreCase(name).size();i++){
-            users.add(i, UserMapper.INSTACE.toUserReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
+            users.add(i, UserMapper.INSTACE
+            .toUserReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
             }
             return users;
         }

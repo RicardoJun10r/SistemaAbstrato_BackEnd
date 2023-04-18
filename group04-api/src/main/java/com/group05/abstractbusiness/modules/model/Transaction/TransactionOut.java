@@ -1,15 +1,13 @@
-/*package com.group05.abstractbusiness.modules.model.Transaction;
+package com.group05.abstractbusiness.model.Transaction;
 
 import java.util.Date;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class TransactionOut extends Transaction {
 
@@ -20,11 +18,12 @@ public class TransactionOut extends Transaction {
 	// @Column(name = "document")
 	// private Receipter document;
 
+	public TransactionOut() {
+	}
+
 	public TransactionOut(UUID id, Date transactionDate, long value, int discount, long customerId) {
 		super(id, transactionDate, value, discount);
 		this.customerId = customerId;
 	}
 
-	public TransactionOut() {}
-
-}*/
+}

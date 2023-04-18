@@ -55,7 +55,6 @@ public class StockController {
             return this.stockFisicoService.adicionar((StockFisico) stockProducts);
         } else if(tipo.equals("digital")){
             return this.stockDigitalService.adicionar((StockDigital) stockProducts);
-
         } else if(tipo.equals("intelectual")){
             return this.stockIntelectualService.adicionar((StockIntelectual) stockProducts);
         } else {

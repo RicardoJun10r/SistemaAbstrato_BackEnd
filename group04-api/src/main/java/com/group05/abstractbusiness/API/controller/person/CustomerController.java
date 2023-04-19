@@ -52,6 +52,12 @@ public class CustomerController {
         return ResponseEntity.ok().body(customer);
     }
 
+    @GetMapping("/PF/FindByCpf:{cpf}")
+    public ResponseEntity<CustomerReturn_PF> findByCpf(@PathVariable String cpf){
+        CustomerReturn_PF customer = this.servicePF.findbyCpf(cpf);
+        return ResponseEntity.ok().body(customer);
+    }
+
     @GetMapping("/PF/findByName:{name}")
     public ResponseEntity<List<CustomerReturn_PF>> findByNamePF(@PathVariable String name){
         List<CustomerReturn_PF> customers = this.servicePF.findbyName(name);

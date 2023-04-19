@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Stock;
+package com.group05.abstractbusiness.modules.service.Stock;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.group05.abstractbusiness.model.Stock.StockIntelectual;
-import com.group05.abstractbusiness.repository.Stock.StockIntelectualRepository;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
+import com.group05.abstractbusiness.modules.repository.Stock.StockIntelectualRepository;
 
 @Service
 public class StockIntelectualService {

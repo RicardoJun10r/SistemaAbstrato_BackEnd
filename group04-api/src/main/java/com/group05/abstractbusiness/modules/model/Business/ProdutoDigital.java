@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.group05.abstractbusiness.model.Stock.StockProducts;
+import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

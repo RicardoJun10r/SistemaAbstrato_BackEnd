@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.controller.Stock;
+package com.group05.abstractbusiness.API.controller.Stock;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -13,19 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.model.Business.ProdutoDigital;
-import com.group05.abstractbusiness.model.Business.ProdutoFisico;
-import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
-import com.group05.abstractbusiness.model.Stock.StockDigital;
-import com.group05.abstractbusiness.model.Stock.StockFisico;
-import com.group05.abstractbusiness.model.Stock.StockIntelectual;
-import com.group05.abstractbusiness.model.Stock.StockProducts;
-import com.group05.abstractbusiness.service.Business.ProdutoDigitalService;
-import com.group05.abstractbusiness.service.Business.ProdutoFisicoService;
-import com.group05.abstractbusiness.service.Business.ProdutoIntelectualService;
-import com.group05.abstractbusiness.service.Stock.StockDigitalService;
-import com.group05.abstractbusiness.service.Stock.StockFisicoService;
-import com.group05.abstractbusiness.service.Stock.StockIntelectualService;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
+import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
+import com.group05.abstractbusiness.modules.service.Stock.StockDigitalService;
+import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
+import com.group05.abstractbusiness.modules.service.Stock.StockIntelectualService;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoDigitalService;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoIntelectualService;
 
 @RestController
 @RequestMapping("/stock")

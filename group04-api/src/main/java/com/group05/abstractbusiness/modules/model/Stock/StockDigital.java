@@ -1,7 +1,7 @@
-package com.group05.abstractbusiness.model.Stock;
+package com.group05.abstractbusiness.modules.model.Stock;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group05.abstractbusiness.model.Business.ProdutoDigital;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.service.Stock;
+package com.group05.abstractbusiness.modules.service.Stock;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.group05.abstractbusiness.model.Stock.StockDigital;
-import com.group05.abstractbusiness.repository.Stock.StockDigitalRepository;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.repository.Stock.StockDigitalRepository;
 
 @Service
 public class StockDigitalService {

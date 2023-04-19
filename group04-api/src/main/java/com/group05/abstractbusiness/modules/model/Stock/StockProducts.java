@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.model.Stock;
+package com.group05.abstractbusiness.modules.model.Stock;
 
 import java.time.LocalDate;
 import java.util.UUID;

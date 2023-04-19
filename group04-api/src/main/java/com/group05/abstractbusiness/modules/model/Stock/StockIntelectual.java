@@ -1,11 +1,11 @@
-package com.group05.abstractbusiness.model.Stock;
+package com.group05.abstractbusiness.modules.model.Stock;
 
 import java.time.LocalDate;
 import java.util.UUID;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group05.abstractbusiness.model.Business.ProdutoIntelectual;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

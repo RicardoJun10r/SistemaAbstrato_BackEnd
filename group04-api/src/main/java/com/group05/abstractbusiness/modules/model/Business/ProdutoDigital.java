@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -35,6 +39,10 @@ public class ProdutoDigital extends Produto {
 
     @Column(name = "tipo")
     private final String TIPO = "DIGI";
+
+    @JsonBackReference
+    @ManyToOne
+    private StockProducts stock;
 
     public ProdutoDigital(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,

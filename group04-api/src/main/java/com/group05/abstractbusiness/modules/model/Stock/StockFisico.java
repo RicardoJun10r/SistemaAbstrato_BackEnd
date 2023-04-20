@@ -30,10 +30,10 @@ public class StockFisico extends StockProducts {
         this.produtosFisicos = produtos;
     }
 
-    public StockFisico(List<ProdutoFisico> produtos) {
+    public StockFisico(List<ProdutoFisico> produtos){
         this.produtosFisicos = produtos;
     }
 
-    public StockFisico() {}
+    public StockFisico(){}
 
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,16 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
+import com.group05.abstractbusiness.modules.model.Stock.StockComponent;
 import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
 import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
-import com.group05.abstractbusiness.modules.service.Stock.StockDigitalService;
-import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
-import com.group05.abstractbusiness.modules.service.Stock.StockIntelectualService;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoDigitalService;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoIntelectualService;
+import com.group05.abstractbusiness.modules.service.Stock.StockDigitalService;
+import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
+import com.group05.abstractbusiness.modules.service.Stock.StockIntelectualService;
 
 @RestController
 @RequestMapping("/stock")
@@ -50,13 +52,14 @@ public class StockController {
     private ProdutoIntelectualService produtoIntelectualService;
 
     @PostMapping("/adicionar/{tipo}")
-    public StockProducts adicionar(@PathVariable String tipo, @RequestBody StockProducts stockProducts){
+    public StockProducts adicionar(@PathVariable String tipo, @RequestBody StockComponent stockProducts){
+        ModelMapper mapper = new ModelMapper();
         if(tipo.equals("fisico")){
-            return this.stockFisicoService.adicionar((StockFisico) stockProducts);
+            return mapper.map(this.stockFisicoService.adicionar((StockFisico) stockProducts.criarFisico()), StockProducts.class);
         } else if(tipo.equals("digital")){
-            return this.stockDigitalService.adicionar((StockDigital) stockProducts);
+            return this.stockDigitalService.adicionar((StockDigital) stockProducts.criarDigital());
         } else if(tipo.equals("intelectual")){
-            return this.stockIntelectualService.adicionar((StockIntelectual) stockProducts);
+            return this.stockIntelectualService.adicionar((StockIntelectual) stockProducts.criarIntelectual());
         } else {
             return null;
         }

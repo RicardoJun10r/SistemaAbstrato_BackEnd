@@ -69,12 +69,12 @@ public class CustomerController {
         return ResponseEntity.ok().body(customers);
     }
     
-    @PostMapping
+    @PostMapping("/PF")
     public ResponseEntity<CustomerPF> createCustomerPF(@RequestBody CustomerDTO_PF customer){
         return new ResponseEntity<>(this.servicePF.createCustomerPF(customer), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/PJ")
     public ResponseEntity<CustomerPJ> createCustomerPJ(@RequestBody CustomerDTO_PJ customer){
         return new ResponseEntity<>(this.servicePJ.createCustomerPJ(customer), HttpStatus.OK);
     }

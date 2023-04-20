@@ -33,7 +33,7 @@ public abstract class StockProducts {
     @Column(name = "lastUpdated")
     private LocalDate lastUpdated;
 
-    public StockProducts() {}
+    public StockProducts(){}
 
     public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated) {
         this.id = id;

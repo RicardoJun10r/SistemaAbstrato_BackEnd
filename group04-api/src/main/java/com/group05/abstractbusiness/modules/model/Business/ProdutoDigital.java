@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,7 +42,7 @@ public class ProdutoDigital extends Produto {
 
     @JsonBackReference
     @ManyToOne
-    private StockProducts stock;
+    private StockDigital stock;
 
     public ProdutoDigital(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,

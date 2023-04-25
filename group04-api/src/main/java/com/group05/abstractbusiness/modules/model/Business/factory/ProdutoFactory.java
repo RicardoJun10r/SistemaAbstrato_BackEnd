@@ -61,7 +61,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private Float width;
 
-    private String imageUrl;
+    private Integer quantidade;
 
     private String author;
 
@@ -100,7 +100,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
-            String imageUrl) {
+            Integer quantidade) {
         this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;
@@ -117,7 +117,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.imageUrl = imageUrl;
+        this.quantidade = quantidade;
     }
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
@@ -149,7 +149,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     @Override
     public Produto criarFisco() {
         return new ProdutoFisico(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
-        image, createdAt, updatedAt, deletedAt, weight, height, width, imageUrl);
+        image, createdAt, updatedAt, deletedAt, weight, height, width, quantidade);
     }
 
     @Override
@@ -163,5 +163,4 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         return new ProdutoIntelectual(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
     }
-
 }

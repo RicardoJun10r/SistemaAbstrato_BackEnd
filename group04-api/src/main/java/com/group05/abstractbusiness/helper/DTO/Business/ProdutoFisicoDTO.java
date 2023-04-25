@@ -39,5 +39,5 @@ public class ProdutoFisicoDTO {
 
     private Float width;
 
-    private String imageUrl;
+    private Integer quantidade;
 }

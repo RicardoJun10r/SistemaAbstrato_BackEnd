@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
-import com.group05.abstractbusiness.modules.model.Person.Customer;
+import com.group05.abstractbusiness.modules.model.Person.User;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -19,17 +19,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyJoinColumn;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode
 @Entity
 @Table(name = "cart")
+@NoArgsConstructor 
 public class Cart {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true)
+	@Column(name = "id", unique = true, nullable = false)
 	private UUID id;
 
     @ElementCollection
@@ -38,6 +41,11 @@ public class Cart {
 	@Column(name = "quantity")
 	private Map<ProdutoFisico, Integer> products;                           //Map para guardar produto e quantidade de produto no carrinho
     //TO-DO Adicionar vendendor
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+    @NotEmpty
+	private User user;
 
 	public Cart(UUID id) {
 		this.id = id;
@@ -63,12 +71,15 @@ public class Cart {
             }
         }
     }
-    //Metodo que retorna produtos no carrinho
+
+/*    //Metodo que retorna produtos no carrinho
     public List<ProdutoFisico> getProducts() {
         return new ArrayList<>(products.keySet());
-    }
+    }*/
+
     //Metodo que retorna quantidade especifica de produtos no carrinho
     public int getQuantity(ProdutoFisico product) {
         return products.getOrDefault(product, 0);
     }
+
 }

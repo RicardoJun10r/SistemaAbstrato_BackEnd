@@ -20,14 +20,10 @@ import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO_PF;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO_PJ;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerReturn_PF;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerReturn_PJ;
-import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
-import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierReturn;
 import com.group05.abstractbusiness.modules.model.Person.CustomerPF;
 import com.group05.abstractbusiness.modules.model.Person.CustomerPJ;
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.service.Person.CustomerPFService;
 import com.group05.abstractbusiness.modules.service.Person.CustomerPJService;
-import com.group05.abstractbusiness.modules.service.Person.SupplierService;
 
 @RestController
 @RequestMapping("/customer")
@@ -40,30 +36,30 @@ public class CustomerController {
     CustomerPJService servicePJ;
 
 
-    @GetMapping("/PF/FindById:{id}")
+    @GetMapping("/PF/{id}")
     public ResponseEntity<CustomerReturn_PF> findByIdPF(@PathVariable UUID id){
         CustomerReturn_PF customer = this.servicePF.findbyId(id);
         return ResponseEntity.ok().body(customer);
     }
 
-    @GetMapping("/PJ/FindById::{id}")
+    @GetMapping("/PJ/{id}")
     public ResponseEntity<CustomerReturn_PJ> findByIdPJ(@PathVariable UUID id){
         CustomerReturn_PJ customer = this.servicePJ.findbyId(id);
         return ResponseEntity.ok().body(customer);
     }
 
-    @GetMapping("/PF/FindByCpf:{cpf}")
+    @GetMapping("/PF/cpf:{cpf}")
     public ResponseEntity<CustomerReturn_PF> findByCpf(@PathVariable String cpf){
         CustomerReturn_PF customer = this.servicePF.findbyCpf(cpf);
         return ResponseEntity.ok().body(customer);
     }
 
-    @GetMapping("/PF/findByName:{name}")
+    @GetMapping("/PF/name:{name}")
     public ResponseEntity<List<CustomerReturn_PF>> findByNamePF(@PathVariable String name){
         List<CustomerReturn_PF> customers = this.servicePF.findbyName(name);
         return ResponseEntity.ok().body(customers);
     }
-    @GetMapping("/PJ/findByName:{name}")
+    @GetMapping("/PJ/name:{name}")
     public ResponseEntity<List<CustomerReturn_PJ>> findByNamePJ(@PathVariable String name){
         List<CustomerReturn_PJ> customers = this.servicePJ.findbyName(name);
         return ResponseEntity.ok().body(customers);

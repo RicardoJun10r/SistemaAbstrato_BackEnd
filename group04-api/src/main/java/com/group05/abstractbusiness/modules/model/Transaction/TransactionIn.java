@@ -8,10 +8,11 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -28,7 +29,7 @@ public class TransactionIn extends Transaction {
 	// @Column(name = "document")
 	// private Receipter document;
 
-	public TransactionIn(long value, int discount, Supplier supplier, Cart cart) {
+	public TransactionIn(Double value, int discount, Supplier supplier, Cart cart) {
 		super(value, discount, cart);
 		this.supplier = supplier;
 	}

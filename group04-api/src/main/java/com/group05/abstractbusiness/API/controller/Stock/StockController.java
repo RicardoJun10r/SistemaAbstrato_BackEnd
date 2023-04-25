@@ -71,7 +71,7 @@ public class StockController {
         Optional<ProdutoFisico> proOptional = this.produtoFisicoService.buscar(idproduto);
         stock.get().getProdutosFisicos().add(proOptional.get());
         stock.get().setQuantidade(stock.get().getQuantidade()+1);
-        proOptional.get().setStock(stock.get());
+        proOptional.get().setStock(stock.get()); 
         return this.stockFisicoService.adicionar(stock.get());
     }
 

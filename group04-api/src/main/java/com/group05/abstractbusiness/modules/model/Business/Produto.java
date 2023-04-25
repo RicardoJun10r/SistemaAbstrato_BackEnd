@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.modules.model.Business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;

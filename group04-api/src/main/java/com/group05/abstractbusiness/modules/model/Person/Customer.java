@@ -1,7 +1,5 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
-import java.util.UUID;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -22,8 +22,8 @@ public class SupplierService {
     private SupplierRepository repository;
 
     public SupplierReturn findbyId(UUID id){
-        this.repository.findById(id).orElseThrow( ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id ->" + id));
-        return SupplierMapper.INSTACE.toSupplierReturnOptional(this.repository.findById(id));
+        return SupplierMapper.INSTACE.toSupplierReturn(this.repository.findById(id).orElseThrow(
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id ->" + id)));
     }
 
     public List<SupplierReturn> findbyName(String name){
@@ -41,7 +41,11 @@ public class SupplierService {
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public Supplier createSupplier(SupplierDTO supplier) {
-        return this.repository.save(SupplierMapper.INSTACE.toSupplier(supplier));
+        if(repository.findByEmail(supplier.getEmail()).isEmpty()){
+            return this.repository.save(SupplierMapper.INSTACE.toSupplier(supplier));
+        }else{
+            throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Supplier já existente com esse email");
+        }
     }
 
     @Transactional

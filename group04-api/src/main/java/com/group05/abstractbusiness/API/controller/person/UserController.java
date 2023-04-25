@@ -23,7 +23,7 @@ import com.group05.abstractbusiness.modules.service.Person.UserService;
     
 @RestController
 @RequestMapping("/user")
-@Validated
+//@Validated
 public class UserController {
 
     @Autowired

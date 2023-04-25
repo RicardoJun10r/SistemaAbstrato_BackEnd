@@ -1,30 +1,34 @@
-/*package com.group05.abstractbusiness.modules.model.Transaction;
+package com.group05.abstractbusiness.modules.model.Transaction;
 
-import java.util.Date;
-import java.util.UUID;
+import com.group05.abstractbusiness.modules.model.Cart;
+import com.group05.abstractbusiness.modules.model.Person.Customer;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
 @Entity
-public class TransactionOut extends Transaction {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("O")
+public class TransactionOut extends Transaction{
 
-	// Alterar JOIN TABLE CUSTOMER
-	@Column(name = "customerId")
-	private long customerId;
+	// Alterar JOIN TABLE CUSTOMER 
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
 	// @Column(name = "document")
 	// private Receipter document;
 
-	public TransactionOut(UUID id, Date transactionDate, long value, int discount, long customerId) {
-		super(id, transactionDate, value, discount);
-		this.customerId = customerId;
+	public TransactionOut( long value, int discount, Customer customer, Cart cart) {
+		super(value, discount, cart);
+		this.customer = customer;
 	}
 
 	public TransactionOut() {}
 
-}*/
+}

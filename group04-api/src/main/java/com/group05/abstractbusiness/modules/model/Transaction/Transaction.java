@@ -24,6 +24,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -38,26 +39,29 @@ public abstract class Transaction{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true)
+	@NotEmpty
 	private UUID id;
 
-	@Column(name = "transaction_date")
+	@Column(name = "transaction_date", nullable = false)
 	@Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
     @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
 	private Timestamp transactionDate;
 
 	@ManyToOne(targetEntity = Cart.class)
-	@JoinColumn(name = "cart_id")
+	@JoinColumn(name = "cart_id", nullable = false)
+	@NotEmpty
 	private Cart cart;
 
-	@Column(name = "value")
-	private long value;
+	@Column(name = "value", nullable = false)
+	@NotEmpty
+	private Double value;
 
 	@Column(name = "discount")
 	private int discount;
 
 	protected Transaction() {}
 
-	protected Transaction(long value, int discount, Cart cart) {
+	protected Transaction(Double value, int discount, Cart cart) {
 		this.value = value;
 		this.discount = discount;
 		this.cart = cart;

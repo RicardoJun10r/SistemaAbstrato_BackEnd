@@ -39,47 +39,15 @@ public class Cart {
     @CollectionTable(name = "cart_products", joinColumns = @JoinColumn(name = "cart_id"))
     @MapKeyJoinColumn(name = "product_id")
 	@Column(name = "quantity")
-	private Map<ProdutoFisico, Integer> products;                           //Map para guardar produto e quantidade de produto no carrinho
+	private Map<UUID, Integer> products;                           //Map para guardar produto e quantidade de produto no carrinho
     //TO-DO Adicionar vendendor
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-    @NotEmpty
 	private User user;
 
 	public Cart(UUID id) {
 		this.id = id;
-    }
-
-    //Metodo que adiciona produto, se já existir no carrinho aumenta a quantidade
-    public void addProduct(ProdutoFisico product, int quantity) {
-        if (products.containsKey(product)) {
-            int currentQuantity = products.get(product);
-            products.put(product, currentQuantity + quantity);
-        } else {
-            products.put(product, quantity);
-        }
-    }
-    //Metodo que remove produto, se já existir no carrinho diminui a quantidade
-    public void removeProduct(ProdutoFisico product, int quantity) {
-        if (products.containsKey(product)) {
-            int currentQuantity = products.get(product);
-            if (quantity >= currentQuantity) {
-                products.remove(product);
-            } else {
-                products.put(product, currentQuantity - quantity);
-            }
-        }
-    }
-
-/*    //Metodo que retorna produtos no carrinho
-    public List<ProdutoFisico> getProducts() {
-        return new ArrayList<>(products.keySet());
-    }*/
-
-    //Metodo que retorna quantidade especifica de produtos no carrinho
-    public int getQuantity(ProdutoFisico product) {
-        return products.getOrDefault(product, 0);
     }
 
 }

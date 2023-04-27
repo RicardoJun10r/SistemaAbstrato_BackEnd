@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.mapstruct.factory.Mappers;
 
-import com.group05.abstractbusiness.helper.DTO.person.transaction.TransactionOutDTO;
-import com.group05.abstractbusiness.helper.DTO.person.transaction.TransactionOutReturn;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.modules.model.Transaction.TransactionOut;
 
 public abstract class TransactionOutMapper{

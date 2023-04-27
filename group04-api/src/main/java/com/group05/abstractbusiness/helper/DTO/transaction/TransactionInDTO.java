@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.helper.DTO.person.transaction;
+package com.group05.abstractbusiness.helper.DTO.transaction;
 
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import lombok.Data;

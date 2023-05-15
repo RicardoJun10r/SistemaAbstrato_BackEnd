@@ -12,7 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
+import com.group05.abstractbusiness.modules.repository.Person.SupplierRepository;
 
 @Service
 public class ProdutoFisicoService {
@@ -20,9 +22,18 @@ public class ProdutoFisicoService {
     @Autowired
     private ProdutoFisicoRepository produtoFisicoRepository;
 
-    public ProdutoFisico create(ProdutoFisico produto){
-        ModelMapper mapper = new ModelMapper();
-        return mapper.map(produtoFisicoRepository.save(produto), ProdutoFisico.class);
+    @Autowired
+    private SupplierRepository supplierRepository;
+
+    public ProdutoFisico create(ProdutoFisico produto, UUID idSupplier){
+        Optional<Supplier> supplier = supplierRepository.findById(idSupplier);
+        if(supplier.isPresent()){
+            produto.setSupplier(supplier.get());
+            ModelMapper mapper = new ModelMapper();
+            return mapper.map(produtoFisicoRepository.save(produto), ProdutoFisico.class);
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND," Fornecedor não encontrado ");
+        }
     }
 
     public ProdutoFisicoDTO findById(UUID id){
@@ -49,5 +60,4 @@ public class ProdutoFisicoService {
         produtoFisicoRepository.deleteById(id);
         return "Produto Fisico: [ " + id + " ] deletado";
     }
-
 }

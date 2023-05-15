@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
@@ -65,17 +66,20 @@ public class StockController {
         }
     }
 
-    /* 
+     
     @PostMapping("/fisico/{idstock}/{idproduto}")
     public StockFisico adicionarProdutoFisico(@PathVariable UUID idstock, @PathVariable UUID idproduto){
         Optional<StockFisico> stock = this.stockFisicoService.buscar(idstock);
-        Optional<ProdutoFisico> proOptional = this.produtoFisicoService.buscar(idproduto);
-        stock.get().getProdutosFisicos().add(proOptional.get());
+        ProdutoFisicoDTO proOptional = this.produtoFisicoService.findById(idproduto);
+        ModelMapper model = new ModelMapper();
+        ProdutoFisico produto = model.map(proOptional, ProdutoFisico.class);
+        
+        stock.get().getProdutosFisicos().add(produto);
         stock.get().setQuantidade(stock.get().getQuantidade()+1);
-        proOptional.get().setStock(stock.get()); 
+        produto.setStock(stock.get()); 
         return this.stockFisicoService.adicionar(stock.get());
     }
-*/
+
     @PostMapping("/digital/{idstock}/{idproduto}")
     public StockDigital adicionarProdutoDigital(@PathVariable UUID idstock, @PathVariable UUID idproduto){
         Optional<StockDigital> stock = this.stockDigitalService.buscar(idstock);

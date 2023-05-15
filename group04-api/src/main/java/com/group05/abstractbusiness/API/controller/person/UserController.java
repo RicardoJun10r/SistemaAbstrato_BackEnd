@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserReturn> createUser(@RequestBody UserPOST user){
-        return new ResponseEntity<>(service.createUser(user), HttpStatus.OK);
+        return new ResponseEntity<>(service.createUser(user), HttpStatus.CREATED);
     }
 
     @PutMapping

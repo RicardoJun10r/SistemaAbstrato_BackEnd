@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 
-import com.group05.abstractbusiness.helper.DTO.person.*;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
@@ -26,8 +25,8 @@ public class UserService {
     private UserRepository repository;
 
     public UserReturn findbyId(UUID id){
-        this.repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User com o id [ "+ id + " ] não encontrado"));
-        return UserMapper.INSTACE.toUserReturnOptional(this.repository.findById(id));
+        return UserMapper.INSTACE.toUserReturn(this.repository.findById(id).orElseThrow(
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User com o id [ "+ id + " ] não encontrado")));
     }
 
     public List<UserReturn> findbyName(String name){
@@ -50,6 +49,7 @@ public class UserService {
 
     @Transactional
     public UserReturn updateUser(UserPUT user){
+        //TO-DO utilizar metodo findbyId da propria classe.
         User userFind = this.repository.findById(user.getId())
         .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User com o id [ "+ user.getId() + " ] não encontrado"));
         

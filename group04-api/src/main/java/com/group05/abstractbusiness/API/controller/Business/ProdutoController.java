@@ -42,18 +42,18 @@ public class ProdutoController {
 
     //#region CRIAR PRODUTOS
 
-    @PostMapping("/{tipo}")
-    public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @RequestBody ProdutoFactory produtoFactory){
+    @PostMapping("/{tipo}/{supplierId}")
+    public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @PathVariable UUID supplierId, @RequestBody ProdutoFactory produtoFactory){
         ModelMapper mapper = new ModelMapper();
         if(tipo.equals("fisico")){
-            return new ResponseEntity<Produto>(produtoFisicoService.adicionar(mapper.map(produtoFactory.criarFisco(), ProdutoFisico.class)), HttpStatus.CREATED);
+            return new ResponseEntity<Produto>(produtoFisicoService.create(mapper.map(produtoFactory.criarFisco(), ProdutoFisico.class), supplierId), HttpStatus.CREATED);
         } else if(tipo.equals("digital")){
             return new ResponseEntity<Produto>(produtoDigitalService.adicionar(mapper.map(produtoFactory.criarDigital(), ProdutoDigital.class)), HttpStatus.CREATED);
         } else if(tipo.equals("intelectual")){
             return new ResponseEntity<Produto>(produtoIntelectualService.adicionar(mapper.map(produtoFactory.criarIntelectual(), ProdutoIntelectual.class)), HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+        } 
     }
 
     //#endregion
@@ -61,15 +61,9 @@ public class ProdutoController {
     //#region GET PRODUTO
 
     @GetMapping("/fisico/{uuid}")
-    public ResponseEntity<Optional<ProdutoFisicoDTO>> getFisicoById(@PathVariable UUID uuid){
-        ModelMapper mapper = new ModelMapper();
-        try {
-            ProdutoFisicoDTO dto = mapper.map(produtoFisicoService.buscar(uuid).get(), ProdutoFisicoDTO.class);
-            return new ResponseEntity<>(Optional.of(dto), HttpStatus.OK); 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ProdutoFisicoDTO> getFisicoById(@PathVariable UUID uuid){
+        ProdutoFisicoDTO produto = this.produtoFisicoService.findById(uuid);
+        return ResponseEntity.ok().body(produto);
     }
 
     @GetMapping("/digital/{uuid}")

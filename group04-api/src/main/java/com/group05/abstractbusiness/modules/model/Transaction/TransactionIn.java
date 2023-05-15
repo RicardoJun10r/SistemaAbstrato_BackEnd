@@ -1,30 +1,38 @@
-/*package com.group05.abstractbusiness.modules.model.Transaction;
+package com.group05.abstractbusiness.modules.model.Transaction;
 
-import java.util.Date;
-import java.util.UUID;
 
-import jakarta.persistence.Column;
+import com.group05.abstractbusiness.modules.model.Cart;
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
+
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@NoArgsConstructor
 @Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("I")
 public class TransactionIn extends Transaction {
 
 	// Alterar JOIN TABLE SUPPLIER
-	@Column(name = "supplierId")
-	private long supplierId;
+	@ManyToOne
+	@JoinColumn(name = "supplier_id")
+	private Supplier supplier;
 
+
+	
 	// @Column(name = "document")
 	// private Receipter document;
 
-	public TransactionIn(UUID id, Date transactionDate, long value, int discount, long supplierId) {
-		super(id, transactionDate, value, discount);
-		this.supplierId = supplierId;
+	public TransactionIn(Double value, int discount, Supplier supplier, Cart cart) {
+		super(value, discount, cart);
+		this.supplier = supplier;
 	}
 
-	public TransactionIn(){}
 
-}*/
+}

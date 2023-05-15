@@ -1,48 +1,74 @@
-/*package com.group05.abstractbusiness.modules.model.Transaction;
+package com.group05.abstractbusiness.modules.model.Transaction;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 import java.util.UUID;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+import com.group05.abstractbusiness.modules.model.Cart;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@MappedSuperclass
-@Getter
-@Setter
-public abstract class Transaction {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("T")
+@Data
+@EqualsAndHashCode
+@Entity
+public abstract class Transaction{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true)
+	@NotEmpty
 	private UUID id;
 
-	@Column(name = "transactionDate")
-	private Date transactionDate;
+	@Column(name = "transaction_date", nullable = false)
+	@Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
+    @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
+	private Timestamp transactionDate;
 
-	// @Column(name = "cart")
-	// private Cart cart;
+	@ManyToOne(targetEntity = Cart.class)
+	@JoinColumn(name = "cart_id", nullable = false)
+	@NotEmpty
+	private Cart cart;
 
-	@Column(name = "value")
-	private long value;
+	@Column(name = "value", nullable = false)
+	@NotEmpty
+	private Double value;
 
 	@Column(name = "discount")
 	private int discount;
 
-	public Transaction() {}
+	protected Transaction() {}
 
-	public Transaction(UUID id, Date transactionDate, long value, int discount) {
-		this.id = id;
-		this.transactionDate = transactionDate;
+	protected Transaction(Double value, int discount, Cart cart) {
 		this.value = value;
 		this.discount = discount;
+		this.cart = cart;
 	}
-
-}*/
+	// Anotação para que o metodo seja executado antes da prescrição no BD, para salvar a registerDate sempre com o horario atual
+	@PrePersist
+    public void onCreate() {
+        this.transactionDate = new Timestamp(System.currentTimeMillis());
+    }
+}

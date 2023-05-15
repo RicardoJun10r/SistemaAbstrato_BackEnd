@@ -1,16 +1,20 @@
-/*package com.group05.abstractbusiness.modules.model.Transaction;
+package com.group05.abstractbusiness.modules.model.Transaction;
 
-import java.util.List;
+import com.group05.abstractbusiness.modules.model.Cart;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
-@Getter
-@Setter
-public class TransactionLoss extends Transaction {
-
-	
-
-}*/
+@Data
+@EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("L")
+public class TransactionLoss extends Transaction{
+    public TransactionLoss(Double value, int discount, Cart cart){
+        super(value, discount, cart);
+    }
+}

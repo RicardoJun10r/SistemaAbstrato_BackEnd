@@ -1,4 +1,4 @@
-/*package com.group05.abstractbusiness.service.Transaction;
+package com.group05.abstractbusiness.modules.service.Transaction;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -9,34 +9,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.group05.abstractbusiness.model.Transaction.TransactionIn;
-import com.group05.abstractbusiness.repository.Transaction.TransactionInRepository;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionInDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionInReturn;
+import com.group05.abstractbusiness.helper.mapper.Transaction.TransactionInMapper;
+import com.group05.abstractbusiness.modules.model.Transaction.TransactionIn;
+import com.group05.abstractbusiness.modules.repository.Transaction.TransactionFisico.TransactionInFRepository;
 
 @Service
 public class TransactionInService {
 
 	@Autowired
-	private TransactionInRepository transactionInRepository;
+	private TransactionInFRepository repository;
 
 	@Transactional
-	public TransactionIn create(TransactionIn transactionIn) {
-		return transactionInRepository.save(transactionIn);
+	public TransactionInReturn create(TransactionInDTO transaction) {
+		return TransactionInMapper
+		.INSTACE.toTransactionReturn(repository.save(TransactionInMapper
+		.INSTACE.toTransactionIn(transaction)));
 	}
 
-	public TransactionIn findById(UUID id) {
-		// return transactionInRepository.findById(id);
-		Optional<TransactionIn> transactionIn = transactionInRepository.findById(id);
-		return transactionIn.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,
-				"Transacao de entrada nao encontrada pelo id " + id));
+	public TransactionInReturn findById(UUID id) {
+		return TransactionInMapper.INSTACE.toTransactionReturn(this.repository.findById(id).orElseThrow(
+		()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction de id [ " + id +" ] não encontrada")));
 	}
 
-	@Transactional
-	public TransactionIn update(TransactionIn transactionIn) {
-		return transactionInRepository.save(transactionIn);
-	}
+	/*@Transactional
+	public TransactionInReturn update(TransactionInReturn transaction) {
+		TransactionInReturn transactionFind = findById(transaction.getId());
+		transactionFind.setCart(transaction.getCart());
+		transactionFind.setDiscount(transaction.getDiscount());
+		transactionFind.setValue(transaction.getValue());
+		return TransactionInMapper.INSTACE.toTransactionReturn(this.repository
+		.save(TransactionInMapper.INSTACE.toTransactionIn(transactionFind)));
+	}*/
 
 	public void delete(UUID id) {
-		transactionInRepository.deleteById(id);
+		repository.deleteById(id);
 	}
 
-}*/
+}

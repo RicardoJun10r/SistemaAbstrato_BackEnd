@@ -1,6 +1,7 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,14 +39,14 @@ public abstract class Person {
     
     //registerDate
     @Column(name = "register_date", nullable = false)
-    @Temporal(value = TemporalType.TIMESTAMP)               // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
-    @DateTimeFormat(pattern = "dd/MM/yyyy")                 // Padrão da data
-    private Timestamp registerDate;
+    @Temporal(value = TemporalType.DATE)                // Tipo do valor de data, poderia ser DATE invés de TIMESTAMP
+    @DateTimeFormat(pattern = "dd/MM/yyyy")             // Padrão da data
+    private LocalDate registerDate;
 
 
     @PrePersist                                            // Anotação para que o metodo seja executado antes da prescrição no BD, para salvar a registerDate sempre com o horario atual
     public void onCreate() {
-        this.registerDate = new Timestamp(System.currentTimeMillis());
+        this.registerDate = LocalDate.now();
     }
 
     //Construtor vazio

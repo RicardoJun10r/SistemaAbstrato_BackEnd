@@ -142,4 +142,13 @@ public class ProdutoController {
 
     //#endregion
 
+    //#region GERENCIAR QUANTIDADE
+
+    // @PostMapping("/fisico/{uuid}/{quantidade}")
+    // public ResponseEntity<ProdutoFisicoDTO> atualizarQuantidade(@PathVariable UUID uuid, @PathVariable Integer quantidade){
+    //     ProdutoFisico produtoFisico = getFisicoById(uuid).getBody().get();
+    // }
+
+    //#endregion
+
 }

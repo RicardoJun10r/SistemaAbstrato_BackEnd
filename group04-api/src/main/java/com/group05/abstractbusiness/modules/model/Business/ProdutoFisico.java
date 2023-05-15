@@ -34,8 +34,8 @@ public class ProdutoFisico extends Produto {
     @Column(name = "width")
     private Float width;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "quantidade")
+    private Integer quantidade;
 
     @Column(name = "tipo")
     private final String TIPO = "FISI";
@@ -51,21 +51,21 @@ public class ProdutoFisico extends Produto {
     public ProdutoFisico(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
-            String imageUrl, Supplier supplier) {
+            String imageUrl) {
         super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.imageUrl = imageUrl;
+        this.quantidade = quantidade;
         this.supplier = supplier;
     }
 
-    public ProdutoFisico(Float weight, Float height, Float width, String imageUrl) {
+    public ProdutoFisico(Float weight, Float height, Float width, Integer quantidade) {
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.imageUrl = imageUrl;
+        this.quantidade = quantidade;
     }
 
     public ProdutoFisico(){}

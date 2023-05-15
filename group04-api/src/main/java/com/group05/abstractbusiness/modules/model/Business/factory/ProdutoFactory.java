@@ -10,6 +10,7 @@ import com.group05.abstractbusiness.modules.model.Business.Produto;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -61,7 +62,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private Float width;
 
-    private String imageUrl;
+    private Integer quantidade;
 
     private String author;
 
@@ -72,6 +73,8 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     private int pages;
 
     private int edition;
+
+    private Supplier supplier;
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
@@ -100,7 +103,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
-            String imageUrl) {
+            Integer quantidade, Supplier supplier) {
         this.ID = iD;
         this.nome = nome;
         this.descricao = descricao;
@@ -163,5 +166,4 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         return new ProdutoIntelectual(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
     }
-
 }

@@ -2,6 +2,8 @@ package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
 
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,4 +42,6 @@ public class ProdutoFisicoDTO {
     private Float width;
 
     private Integer quantidade;
+
+    private Supplier supplier;
 }

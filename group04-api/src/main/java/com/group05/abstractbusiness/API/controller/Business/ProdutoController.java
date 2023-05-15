@@ -42,11 +42,11 @@ public class ProdutoController {
 
     //#region CRIAR PRODUTOS
 
-    @PostMapping("/{tipo}")
-    public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @RequestBody ProdutoFactory produtoFactory){
+    @PostMapping("/{tipo}/{supplierId}")
+    public ResponseEntity<Produto> criarFisico(@PathVariable String tipo, @PathVariable UUID supplierId, @RequestBody ProdutoFactory produtoFactory){
         ModelMapper mapper = new ModelMapper();
         if(tipo.equals("fisico")){
-            return new ResponseEntity<Produto>(produtoFisicoService.create(mapper.map(produtoFactory.criarFisco(), ProdutoFisico.class)), HttpStatus.CREATED);
+            return new ResponseEntity<Produto>(produtoFisicoService.create(mapper.map(produtoFactory.criarFisco(), ProdutoFisico.class), supplierId), HttpStatus.CREATED);
         } else if(tipo.equals("digital")){
             return new ResponseEntity<Produto>(produtoDigitalService.adicionar(mapper.map(produtoFactory.criarDigital(), ProdutoDigital.class)), HttpStatus.CREATED);
         } else if(tipo.equals("intelectual")){

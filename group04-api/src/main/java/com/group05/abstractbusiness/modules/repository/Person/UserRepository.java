@@ -9,4 +9,5 @@ import com.group05.abstractbusiness.modules.model.Person.User;
 
 public interface UserRepository  extends JpaRepository<User, UUID>{
     List<User> findByNameContainingIgnoreCase(String name);
+
 }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.group05.abstractbusiness.helper.DTO.person.transaction.TransactionInDTO;
-import com.group05.abstractbusiness.helper.DTO.person.transaction.TransactionInReturn;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionInDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionInReturn;
 import com.group05.abstractbusiness.helper.mapper.Transaction.TransactionInMapper;
 import com.group05.abstractbusiness.modules.model.Transaction.TransactionIn;
 import com.group05.abstractbusiness.modules.repository.Transaction.TransactionFisico.TransactionInFRepository;

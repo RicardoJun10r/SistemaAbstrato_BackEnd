@@ -65,6 +65,7 @@ public class StockController {
         }
     }
 
+    /* 
     @PostMapping("/fisico/{idstock}/{idproduto}")
     public StockFisico adicionarProdutoFisico(@PathVariable UUID idstock, @PathVariable UUID idproduto){
         Optional<StockFisico> stock = this.stockFisicoService.buscar(idstock);
@@ -74,7 +75,7 @@ public class StockController {
         proOptional.get().setStock(stock.get()); 
         return this.stockFisicoService.adicionar(stock.get());
     }
-
+*/
     @PostMapping("/digital/{idstock}/{idproduto}")
     public StockDigital adicionarProdutoDigital(@PathVariable UUID idstock, @PathVariable UUID idproduto){
         Optional<StockDigital> stock = this.stockDigitalService.buscar(idstock);

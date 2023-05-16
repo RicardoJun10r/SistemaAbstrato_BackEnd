@@ -27,13 +27,23 @@ public class ProdutoFisicoService {
     private SupplierRepository supplierRepository;
 
     public ProdutoFisico create(ProdutoFisico produto, UUID idSupplier){
-        Optional<Supplier> supplier = supplierRepository.findById(idSupplier);
-        if(supplier.isPresent()){
-            produto.setSupplier(supplier.get());
-            ModelMapper mapper = new ModelMapper();
-            return mapper.map(produtoFisicoRepository.save(produto), ProdutoFisico.class);
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND," Fornecedor não encontrado ");
+        try {
+            Optional<Supplier> supplier = supplierRepository.findById(idSupplier);
+            Optional<ProdutoFisico> p = produtoFisicoRepository.findByNome(produto.getNome());
+            if(supplier.isPresent()){
+                produto.setSupplier(supplier.get());
+                if(p.isEmpty()){
+                    ModelMapper mapper = new ModelMapper();
+                    return mapper.map(produtoFisicoRepository.save(produto), ProdutoFisico.class);
+                } else {
+                    throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"Produto já existe");
+                }
+            }else{
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND," Fornecedor não encontrado ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

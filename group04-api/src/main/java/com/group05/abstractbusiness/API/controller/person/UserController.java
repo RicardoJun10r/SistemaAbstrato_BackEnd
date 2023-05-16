@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
     
 @RestController
@@ -28,6 +31,10 @@ public class UserController {
 
     @Autowired
     private UserService service;
+    
+    @Autowired
+    private ProdutoFisicoService productService;
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<UserReturn> findById(@PathVariable UUID id){
@@ -50,6 +57,16 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserReturn> createUser(@RequestBody UserPOST user){
         return new ResponseEntity<>(service.createUser(user), HttpStatus.CREATED);
+    }
+
+    @PostMapping("{supplierId}")
+    public ResponseEntity<Boolean> createProduct(@PathVariable UUID supplierId, @RequestBody ProdutoFisicoDTO product){
+        return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Boolean> login(@RequestBody UserLogin user){
+        return new ResponseEntity<>(service.authenticate(user), HttpStatus.CREATED);
     }
 
     @PutMapping

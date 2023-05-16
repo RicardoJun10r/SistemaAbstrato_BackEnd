@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -72,8 +73,7 @@ public class UserService {
         }else{
             List<UserReturn> users = new ArrayList<>();
             for(int i = 0; i < this.repository.findByNameContainingIgnoreCase(name).size();i++){
-            users.add(i, UserMapper.INSTACE
-            .toUserReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
+            users.add(i, model.map(this.repository.findByNameContainingIgnoreCase(name).get(i), UserReturn.class));
             }
             return users;
         }
@@ -88,13 +88,18 @@ public class UserService {
     }
 
     public boolean createProduct(ProdutoFisicoDTO produto, UUID idSuplier){
+        boolean result = false;
         try {
             ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
-            productService.create(aux, idSuplier);
-            return true;
+            ProdutoFisico aux2 = productService.create(aux, idSuplier);
+            if(aux2 == null)
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Produto não criado");
+            else
+                result = true;
         } catch (ResponseStatusException e) {
             return false;
         }
+        return result;
     }
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações
@@ -112,7 +117,7 @@ public class UserService {
         if(userFind.getPassword().equals(user.getPassword())){
             userFind.setName(user.getName());               // Atualizando Nome
             userFind.setLogin(user.getLogin());             // Atualizando Login
-            return UserMapper.INSTACE.toUserReturn(this.repository.save(userFind));
+            return model.map(this.repository.save(userFind), UserReturn.class);
         }else{
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Password incorreto");
         }

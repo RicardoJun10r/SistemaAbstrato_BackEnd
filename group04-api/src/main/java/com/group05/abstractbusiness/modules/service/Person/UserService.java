@@ -68,16 +68,12 @@ public class UserService {
         }
     }
 
-    public List<UserReturn> findbyUsername(String username){
+    public UserReturn findbyUsername(String username){
         if (this.repository.findByLogin(username).isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada " + username + " " + User.class.getClass());
         }else{
-            List<UserReturn> users = new ArrayList<>();
-            for(int i = 0; i < this.repository.findByLogin(username).size();i++){
-            users.add(i, UserMapper.INSTACE
-            .toUserReturn(this.repository.findByLogin(username).get(i)));
-            }
-            return users;
+            ModelMapper model = new ModelMapper();
+            return model.map(repository.findByLogin(username).get(), UserReturn.class);
         }
     }
 
@@ -85,17 +81,11 @@ public class UserService {
         try {
             ModelMapper model = new ModelMapper();
             ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
-            try {
-                productService.create(aux, idSuplier);
-            } catch (ResponseStatusException e) {
-                e.printStackTrace();
-                return false;
-            }
-        } catch (Exception e) {
+            productService.create(aux, idSuplier);
+            return true;
+        } catch (ResponseStatusException e) {
             return false;
         }
-
-        return  true;
     }
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações

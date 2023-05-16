@@ -49,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping("/username:{username}")
-    public ResponseEntity<List<UserReturn>> findByUsername(@PathVariable String username){
-        List<UserReturn> user = this.service.findbyUsername(username);
+    public ResponseEntity<UserReturn> findByUsername(@PathVariable String username){
+        UserReturn user = this.service.findbyUsername(username);
         return ResponseEntity.ok().body(user);
     }
 

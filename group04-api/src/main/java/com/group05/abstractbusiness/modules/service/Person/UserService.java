@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.group05.abstractbusiness.helper.DTO.CartReturn;
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
@@ -22,9 +23,12 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
+import com.group05.abstractbusiness.modules.service.CartService;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
 
 @Service
 public class UserService {
@@ -34,6 +38,12 @@ public class UserService {
 
     @Autowired
     private ProdutoFisicoService productService;
+
+    @Autowired
+    private StockFisicoService stockService;
+
+    @Autowired
+    private CartService cartService;
 
     ModelMapper model = new ModelMapper();
 
@@ -101,6 +111,46 @@ public class UserService {
         }
         return result;
     }
+
+    public StockFisico createStock(StockFisico stock){
+        try {
+            return stockService.adicionar(stock);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    
+    public CartReturn createCart(UUID idUSer){
+        try {
+            return cartService.create(idUSer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public CartReturn addProduct(UUID idCart, String productName){
+        try {
+            ProdutoFisico aux = model.map(productService.findByName(productName), ProdutoFisico.class);
+            return cartService.addProduct(idCart, aux.getID());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public StockFisico addProductStock(String stockName, String productName){
+        try {
+            return stockService.adicionarProduto(stockName, productName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações
     public UserReturn createUser(UserPOST user) {

@@ -1,6 +1,7 @@
 package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 
@@ -10,7 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProdutoFisicoDTO {
-    
+    private UUID id;
+
     private String nome;
     
     private String descricao;

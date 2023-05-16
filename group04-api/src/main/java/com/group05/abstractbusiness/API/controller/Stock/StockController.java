@@ -69,14 +69,14 @@ public class StockController {
      
     @PostMapping("/fisico/{idstock}/{idproduto}")
     public StockFisico adicionarProdutoFisico(@PathVariable UUID idstock, @PathVariable UUID idproduto){
-        Optional<StockFisico> stock = this.stockFisicoService.buscar(idstock);
+        StockFisico stock = this.stockFisicoService.buscar(idstock);
         ProdutoFisicoDTO proOptional = this.produtoFisicoService.findById(idproduto);
         ModelMapper model = new ModelMapper();
         ProdutoFisico produto = model.map(proOptional, ProdutoFisico.class);
         
-        stock.get().getProdutosFisicos().add(produto);
-        stock.get().setQuantidade(stock.get().getQuantidade()+1);
-        produto.setStock(stock.get()); 
+        stock.getProdutosFisicos().add(produto);
+        stock.setQuantidade(stock.getQuantidade()+1);
+        produto.setStock(stock); 
         return this.stockFisicoService.adicionar(stock.get());
     }
 

@@ -10,6 +10,10 @@ import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 
 public interface ProdutoFisicoRepository extends JpaRepository<ProdutoFisico, UUID> {
     List<ProdutoFisico> findByNomeContainingIgnoreCase(String nome);
-
-
+    List<ProdutoFisico> findByPreco(Double preco);
+    List<ProdutoFisico> findByStatus(Boolean stataus);
+    List<ProdutoFisico> findByCusto(Double custo);
+    List<ProdutoFisico> findByBrand(String brand);
+    List<ProdutoFisico> findByCategory(String category);
+    List<ProdutoFisico> findBySubCategory(String subCategory);
 }

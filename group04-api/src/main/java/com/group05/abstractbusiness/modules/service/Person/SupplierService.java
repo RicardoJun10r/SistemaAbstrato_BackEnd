@@ -39,6 +39,32 @@ public class SupplierService {
         }
     }
 
+    public List<SupplierReturn> findbyEmail(String email){
+        if (this.repository.findByEmail(email).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada " + name + " " + Supplier.class.getClass());
+        }else{
+            List<SupplierReturn> suppliers = new ArrayList<>();
+            for(int i = 0; i <  this.repository.findByEmail(email).size();i++){
+                suppliers.add(i, SupplierMapper.INSTACE
+                .toSupplierReturn(this.repository.findByEmail(email).get(i)));
+            }
+            return suppliers;
+        }
+    }
+
+    public List<SupplierReturn> findbyPhone(String phone){
+        if (this.repository.findByPhone(phone).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada " + name + " " + Supplier.class.getClass());
+        }else{
+            List<SupplierReturn> suppliers = new ArrayList<>();
+            for(int i = 0; i <  this.repository.findByPhone(phone).size();i++){
+                suppliers.add(i, SupplierMapper.INSTACE
+                .toSupplierReturn(this.repository.findByPhone(phone).get(i)));
+            }
+            return suppliers;
+        }
+    }
+
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public Supplier createSupplier(SupplierDTO supplier) {
         if(repository.findByEmail(supplier.getEmail()).isEmpty()){

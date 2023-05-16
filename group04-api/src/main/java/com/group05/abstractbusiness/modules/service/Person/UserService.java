@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-
+import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 
 @Service
@@ -23,6 +24,9 @@ public class UserService {
     
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private ProdutoFisicoRepository productRepository;
 
     public UserReturn findbyId(UUID id){
         return UserMapper.INSTACE.toUserReturn(this.repository.findById(id).orElseThrow(
@@ -39,6 +43,27 @@ public class UserService {
             .toUserReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
             }
             return users;
+        }
+    }
+
+    public List<UserReturn> findbyUsername(String username){
+        if (this.repository.findByLogin(username).isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada " + username + " " + User.class.getClass());
+        }else{
+            List<UserReturn> users = new ArrayList<>();
+            for(int i = 0; i < this.repository.findByLogin(username).size();i++){
+            users.add(i, UserMapper.INSTACE
+            .toUserReturn(this.repository.findByLogin(username).get(i)));
+            }
+            return users;
+        }
+    }
+
+    public boolean createProduct(ProdutoFisicoDTO produto){
+        try {
+            productRepository.save(produto);
+        } catch (Exception e) {
+            // TODO: handle exception
         }
     }
 
@@ -62,6 +87,7 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Password incorreto");
         }
     } 
+
 
     public void deleteUser(UUID id){
         if(this.repository.existsById(id)){

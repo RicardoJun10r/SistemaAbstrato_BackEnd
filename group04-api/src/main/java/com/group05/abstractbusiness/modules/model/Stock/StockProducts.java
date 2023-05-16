@@ -42,5 +42,5 @@ public abstract class StockProducts {
         this.quantidade = quantidade;
         this.lastUpdated = lastUpdated;
     }
-
+    
 }

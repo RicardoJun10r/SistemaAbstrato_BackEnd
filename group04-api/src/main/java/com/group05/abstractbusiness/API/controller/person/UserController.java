@@ -62,7 +62,7 @@ public class UserController {
 
     @PostMapping("{supplierId}")
     public ResponseEntity<Boolean> createProduct(@PathVariable UUID supplierId, @RequestBody ProdutoFisicoDTO product){
-        return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.OK);
     }
 
     @PostMapping("/login")

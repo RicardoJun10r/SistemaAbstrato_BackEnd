@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.helper.DTO.CartReturn;
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
@@ -78,7 +80,7 @@ public class UserController {
     public ResponseEntity<StockFisico> addProductOnStock(@PathVariable String stockName, @PathVariable String productName){
         return new ResponseEntity<>(service.addProductStock(stockName, productName), HttpStatus.OK);
     }
-    
+
     @PostMapping("/cart/{idUser}")
     public ResponseEntity<CartReturn> createCart(@PathVariable UUID idUser){
         return new ResponseEntity<>(service.createCart(idUser), HttpStatus.OK);
@@ -100,6 +102,10 @@ public class UserController {
         return new ResponseEntity<>(service.createTransaction(idCart, transaction), HttpStatus.OK);
     }
 
+    @PostMapping("/supplier")
+    public ResponseEntity<Supplier> createTransaction(@RequestBody SupplierDTO supplier){
+        return new ResponseEntity<>(service.createSupplier(supplier), HttpStatus.OK);
+    }
 
     @PutMapping
     public ResponseEntity<UserReturn> updateUser(@RequestBody UserPUT user){

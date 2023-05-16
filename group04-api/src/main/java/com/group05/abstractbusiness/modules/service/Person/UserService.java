@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.CartReturn;
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
@@ -24,6 +25,7 @@ import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
@@ -50,6 +52,9 @@ public class UserService {
 
     @Autowired
     private TransactionOutService transactionService;
+
+    @Autowired
+    private SupplierService supplierService;
 
 
     ModelMapper model = new ModelMapper();
@@ -171,6 +176,17 @@ public class UserService {
     @Transactional                                           // Só persiste o dado caso passe todas as informações
     public UserReturn createUser(UserPOST user) {
         return model.map(this.repository.save(model.map(user, User.class)), UserReturn.class);
+    }
+
+    
+    @Transactional                                           // Só persiste o dado caso passe todas as informações
+    public Supplier createSupplier(SupplierDTO user) {
+        try {
+            return model.map(supplierService.createSupplier(user), Supplier.class);    
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Transactional

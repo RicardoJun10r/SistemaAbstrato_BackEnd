@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
@@ -58,19 +60,20 @@ public class UserService {
             return users;
         }
     }
-    /*
+
     public boolean createProduct(ProdutoFisicoDTO produto){
         try {
+
             productRepository.save(produto);
         } catch (Exception e) {
             // TODO: handle exception
         }
     }
-     */
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações
     public UserReturn createUser(UserPOST user) {
-        return UserMapper.INSTACE.toUserReturn(this.repository.save(UserMapper.INSTACE.toUser(user)));
+        ModelMapper model = new ModelMapper();
+        return model.map(this.repository.save(model.map(user, User.class)), UserReturn.class);
     }
 
     @Transactional

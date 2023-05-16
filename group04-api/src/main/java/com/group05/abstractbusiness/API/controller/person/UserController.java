@@ -21,6 +21,7 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
     
@@ -65,8 +66,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Boolean> login(@RequestBody UserLogin user){
-        return new ResponseEntity<>(service.authenticate(user), HttpStatus.CREATED);
+    public ResponseEntity<User> login(@RequestBody UserLogin user){
+        return new ResponseEntity<>(service.authenticate(user), HttpStatus.OK);
     }
 
     @PutMapping

@@ -78,10 +78,11 @@ public class ProdutoFisicoService {
                 }
                 return dto;
                 } else{
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico com id [" + id + " ] não encontrado");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico  não encontrado");
                 }
             }catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -96,10 +97,11 @@ public class ProdutoFisicoService {
                 }
                 return dto;
                 } else{
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico com id [" + id + " ] não encontrado");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico não encontrado");
                 }
             }catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -114,10 +116,11 @@ public class ProdutoFisicoService {
                 }
                 return dto;
                 } else{
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico com id [" + id + " ] não encontrado");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico  não encontrado");
                 }
             }catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -132,10 +135,11 @@ public class ProdutoFisicoService {
                 }
                 return dto;
                 } else{
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico com id [" + id + " ] não encontrado");
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico não encontrado");
                 }
             }catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

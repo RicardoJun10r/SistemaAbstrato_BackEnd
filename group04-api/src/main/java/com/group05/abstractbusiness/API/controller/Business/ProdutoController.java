@@ -95,9 +95,9 @@ public class ProdutoController {
     //#region LIST PRODUTOS
 
     @GetMapping("/fisico")
-    public ResponseEntity<List<ProdutoFisico>> listarFisico(){
+    public ResponseEntity<List<ProdutoFisicoDTO>> listarFisico(){
         try {
-            return new ResponseEntity<>(produtoFisicoService.listar(), HttpStatus.OK); 
+            return new ResponseEntity<>(produtoFisicoService.findAll(), HttpStatus.OK); 
         } catch (Exception e) {
             e.printStackTrace();
         }

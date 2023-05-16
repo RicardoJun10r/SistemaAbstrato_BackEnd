@@ -34,25 +34,36 @@ public class UserService {
     @Autowired
     private ProdutoFisicoService productService;
 
-    public Boolean authenticate(UserLogin user){
+    ModelMapper model = new ModelMapper();
+
+    public User authenticate(UserLogin user){
         try {
             Optional<User> aux = repository.findByLogin(user.getLogin());
             if(aux.isEmpty()){
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"user não encontrado");
             } else {
                 if(aux.get().getPassword().equals(user.getPassword()))
-                    return true;
+                    return aux.get();
                 else
                     throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"Senha errada");
             }
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            return null;
         }
     }
 
     public UserReturn findbyId(UUID id){
-        return UserMapper.INSTACE.toUserReturn(this.repository.findById(id).orElseThrow(
-            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User com o id [ "+ id + " ] não encontrado")));
+        try {
+            if(repository.findById(id).isEmpty()){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"user não encontrado");
+            }else{
+                UserReturn user = model.map(repository.findById(id).get(), UserReturn.class);
+                return user;
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<UserReturn> findbyName(String name){
@@ -72,14 +83,12 @@ public class UserService {
         if (this.repository.findByLogin(username).isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pessoa não encontrada " + username + " " + User.class.getClass());
         }else{
-            ModelMapper model = new ModelMapper();
             return model.map(repository.findByLogin(username).get(), UserReturn.class);
         }
     }
 
     public boolean createProduct(ProdutoFisicoDTO produto, UUID idSuplier){
         try {
-            ModelMapper model = new ModelMapper();
             ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
             productService.create(aux, idSuplier);
             return true;
@@ -90,7 +99,6 @@ public class UserService {
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações
     public UserReturn createUser(UserPOST user) {
-        ModelMapper model = new ModelMapper();
         return model.map(this.repository.save(model.map(user, User.class)), UserReturn.class);
     }
 

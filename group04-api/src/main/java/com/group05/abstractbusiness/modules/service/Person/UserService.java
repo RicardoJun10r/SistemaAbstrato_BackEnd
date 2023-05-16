@@ -2,6 +2,7 @@ package com.group05.abstractbusiness.modules.service.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
@@ -13,13 +14,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.mapper.UserMapper;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 
 @Service
 public class UserService {
@@ -28,7 +32,23 @@ public class UserService {
     private UserRepository repository;
 
     @Autowired
-    private ProdutoFisicoRepository productRepository;
+    private ProdutoFisicoService productService;
+
+    public Boolean authenticate(UserLogin user){
+        try {
+            Optional<User> aux = repository.findByLogin(user.getLogin());
+            if(aux.isEmpty()){
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"user não encontrado");
+            } else {
+                if(aux.get().getPassword().equals(user.getPassword()))
+                    return true;
+                else
+                    throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"Senha errada");
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public UserReturn findbyId(UUID id){
         return UserMapper.INSTACE.toUserReturn(this.repository.findById(id).orElseThrow(
@@ -61,13 +81,21 @@ public class UserService {
         }
     }
 
-    public boolean createProduct(ProdutoFisicoDTO produto){
+    public boolean createProduct(ProdutoFisicoDTO produto, UUID idSuplier){
         try {
-
-            productRepository.save(produto);
+            ModelMapper model = new ModelMapper();
+            ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
+            try {
+                productService.create(aux, idSuplier);
+            } catch (ResponseStatusException e) {
+                e.printStackTrace();
+                return false;
+            }
         } catch (Exception e) {
-            // TODO: handle exception
+            return false;
         }
+
+        return  true;
     }
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações

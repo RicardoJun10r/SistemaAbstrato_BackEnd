@@ -10,4 +10,5 @@ import com.group05.abstractbusiness.modules.model.Person.Supplier;
 public interface SupplierRepository extends JpaRepository<Supplier, UUID>{
     List<Supplier> findByNameContainingIgnoreCase(String name);
     List<Supplier> findByEmail(String email);
+    List<Supplier> findByPhone(String phone);
 }

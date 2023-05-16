@@ -41,6 +41,12 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
+    @GetMapping("/username:{username}")
+    public ResponseEntity<List<UserReturn>> findByUsername(@PathVariable String username){
+        List<UserReturn> user = this.service.findbyUsername(username);
+        return ResponseEntity.ok().body(user);
+    }
+
     @PostMapping
     public ResponseEntity<UserReturn> createUser(@RequestBody UserPOST user){
         return new ResponseEntity<>(service.createUser(user), HttpStatus.CREATED);

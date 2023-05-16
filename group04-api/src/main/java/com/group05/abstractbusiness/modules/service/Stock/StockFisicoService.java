@@ -5,7 +5,9 @@ import java.util.UUID;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.repository.Stock.StockFisicoRepository;
@@ -20,9 +22,11 @@ public class StockFisicoService {
         return stockRepository.save(stockService);
     }
 
-    public Optional<StockFisico> buscar(UUID id){
-        return stockRepository.findById(id);
+    public StockFisico buscar(UUID id){
+        return stockRepository.findById(id).orElseThrow(
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não retornar resultado"));
     }
+
 
     public List<StockFisico> listar(){
         return stockRepository.findAll();

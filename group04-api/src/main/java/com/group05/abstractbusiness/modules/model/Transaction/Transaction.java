@@ -39,7 +39,6 @@ public abstract class Transaction{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true)
-	@NotEmpty
 	private UUID id;
 
 	@Column(name = "transaction_date", nullable = false)
@@ -49,11 +48,9 @@ public abstract class Transaction{
 
 	@ManyToOne(targetEntity = Cart.class)
 	@JoinColumn(name = "cart_id", nullable = false)
-	@NotEmpty
 	private Cart cart;
 
 	@Column(name = "value", nullable = false)
-	@NotEmpty
 	private Double value;
 
 	@Column(name = "discount")

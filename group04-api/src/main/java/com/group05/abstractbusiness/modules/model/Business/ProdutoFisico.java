@@ -50,8 +50,7 @@ public class ProdutoFisico extends Produto {
 
     public ProdutoFisico(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
-            LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
-            String imageUrl) {
+            LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width, Integer quantidade, Supplier supplier) {
         super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.weight = weight;

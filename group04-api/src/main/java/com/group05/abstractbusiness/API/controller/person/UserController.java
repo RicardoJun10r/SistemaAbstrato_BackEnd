@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.helper.DTO.CartReturn;
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
     
@@ -63,6 +65,26 @@ public class UserController {
     @PostMapping("{supplierId}")
     public ResponseEntity<Boolean> createProduct(@PathVariable UUID supplierId, @RequestBody ProdutoFisicoDTO product){
         return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.OK);
+    }
+
+    @PostMapping("/stock")
+    public ResponseEntity<StockFisico> createStock(@RequestBody StockFisico stock){
+        return new ResponseEntity<>(service.createStock(stock), HttpStatus.OK);
+    }
+
+    @PostMapping("/stock/{stockName}/{productName}")
+    public ResponseEntity<StockFisico> addProductOnStock(@PathVariable String stockName, @PathVariable String productName){
+        return new ResponseEntity<>(service.addProductStock(stockName, productName), HttpStatus.OK);
+    }
+
+    @PostMapping("/cart/{idUser}")
+    public ResponseEntity<CartReturn> createCart(@PathVariable UUID idUser){
+        return new ResponseEntity<>(service.createCart(idUser), HttpStatus.OK);
+    }
+
+    @PostMapping("/cart/{idCart}/{productName}")
+    public ResponseEntity<CartReturn> addProductOnCart(@PathVariable UUID idCart, @PathVariable String productName){
+        return new ResponseEntity<>(service.addProduct(idCart, productName), HttpStatus.OK);
     }
 
     @PostMapping("/login")

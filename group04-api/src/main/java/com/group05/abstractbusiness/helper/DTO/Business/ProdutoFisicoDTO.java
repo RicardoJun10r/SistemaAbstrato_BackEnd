@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProdutoFisicoDTO {
-    private UUID id;
+    private UUID ID;
 
     private String nome;
     

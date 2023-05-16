@@ -17,6 +17,8 @@ import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
 import com.group05.abstractbusiness.modules.repository.Person.SupplierRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ProdutoFisicoService {
     
@@ -25,6 +27,8 @@ public class ProdutoFisicoService {
 
     @Autowired
     private SupplierRepository supplierRepository;
+
+    ModelMapper mapper = new ModelMapper();
 
     public ProdutoFisico create(ProdutoFisico produto, UUID idSupplier){
         try {
@@ -48,7 +52,6 @@ public class ProdutoFisicoService {
     }
 
     public ProdutoFisicoDTO findById(UUID id){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(produtoFisicoRepository.findById(id).isPresent()){
             ProdutoFisicoDTO dto = mapper.map(produtoFisicoRepository.findById(id).get(), ProdutoFisicoDTO.class);
@@ -63,10 +66,9 @@ public class ProdutoFisicoService {
     }
 
     public ProdutoFisicoDTO findByName(String name){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(!produtoFisicoRepository.findByNomeContainingIgnoreCase(name).isEmpty()){
-            ProdutoFisicoDTO dto = mapper.map(produtoFisicoRepository.findByNomeContainingIgnoreCase(name), ProdutoFisicoDTO.class);
+            ProdutoFisicoDTO dto = mapper.map(produtoFisicoRepository.findByNome(name).get(), ProdutoFisicoDTO.class);
             return dto;
             } else{
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto fisico com o nome [" + name + " ] não encontrado");
@@ -78,7 +80,6 @@ public class ProdutoFisicoService {
     }
 
     public List<ProdutoFisicoDTO> findAll(){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(!produtoFisicoRepository.findAll().isEmpty()){
                 List<ProdutoFisico> produtos = produtoFisicoRepository.findAll();
@@ -97,7 +98,6 @@ public class ProdutoFisicoService {
     }
 
     public List<ProdutoFisicoDTO> findByBrand(String brand){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(!produtoFisicoRepository.findByBrand(brand).isEmpty()){
                 List<ProdutoFisico> produtos = produtoFisicoRepository.findByBrand(brand);
@@ -116,7 +116,6 @@ public class ProdutoFisicoService {
     }
 
     public List<ProdutoFisicoDTO> findByCategory(String category){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(!produtoFisicoRepository.findByCategory(category).isEmpty()){
                 List<ProdutoFisico> produtos = produtoFisicoRepository.findByCategory(category);
@@ -135,7 +134,6 @@ public class ProdutoFisicoService {
     }
 
     public List<ProdutoFisicoDTO> findBySubcategory(String subcategory){
-        ModelMapper mapper = new ModelMapper();
         try {
             if(!produtoFisicoRepository.findBySubCategory(subcategory).isEmpty()){
                 List<ProdutoFisico> produtos = produtoFisicoRepository.findBySubCategory(subcategory);
@@ -153,6 +151,30 @@ public class ProdutoFisicoService {
         }
     }
 
+    @Transactional
+    public ProdutoFisicoDTO updateProduto(ProdutoFisico produto){
+        //TO-DO utilizar metodo findbyId da propria classe.
+        ProdutoFisico produtoFind = this.produtoFisicoRepository.findById(produto.getID())
+        .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto com o id [ "+ produto.getID() + " ] não encontrado"));
+        
+        // Validando produto
+        if(produtoFind.getNome().equals(produto.getNome()) && produtoFind.getBrand().equals(produto.getBrand())){
+            produtoFind.setBrand(produto.getBrand());
+            produtoFind.setCategory(produto.getCategory());
+            produtoFind.setDescricao(produto.getDescricao());
+            produtoFind.setStatus(produto.getStatus());
+            produtoFind.setPreco(produto.getPreco());
+            produtoFind.setSubCategory(produto.getSubCategory());
+            produtoFind.setWeight(produto.getWeight());
+            produtoFind.setHeight(produto.getHeight());
+            produtoFind.setWidth(produto.getWidth());
+            produtoFind.setQuantidade(produto.getQuantidade());
+            produtoFind.setStock(produto.getStock());
+            return mapper.map(this.produtoFisicoRepository.save(produtoFind), ProdutoFisicoDTO.class);
+        }else{
+            throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Produto não compativel");
+        }
+    } 
     public String deletar(UUID id){
         produtoFisicoRepository.deleteById(id);
         return "Produto Fisico: [ " + id + " ] deletado";

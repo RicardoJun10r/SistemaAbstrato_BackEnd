@@ -22,6 +22,8 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
@@ -76,7 +78,7 @@ public class UserController {
     public ResponseEntity<StockFisico> addProductOnStock(@PathVariable String stockName, @PathVariable String productName){
         return new ResponseEntity<>(service.addProductStock(stockName, productName), HttpStatus.OK);
     }
-
+    
     @PostMapping("/cart/{idUser}")
     public ResponseEntity<CartReturn> createCart(@PathVariable UUID idUser){
         return new ResponseEntity<>(service.createCart(idUser), HttpStatus.OK);
@@ -91,6 +93,13 @@ public class UserController {
     public ResponseEntity<User> login(@RequestBody UserLogin user){
         return new ResponseEntity<>(service.authenticate(user), HttpStatus.OK);
     }
+
+
+    @PostMapping("/transaction/{idCart}")
+    public ResponseEntity<TransactionOutReturn> createTransaction(@PathVariable UUID idCart, @RequestBody TransactionOutDTO transaction){
+        return new ResponseEntity<>(service.createTransaction(idCart, transaction), HttpStatus.OK);
+    }
+
 
     @PutMapping
     public ResponseEntity<UserReturn> updateUser(@RequestBody UserPUT user){

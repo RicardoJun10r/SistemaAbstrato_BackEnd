@@ -20,6 +20,8 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Person.User;
@@ -29,6 +31,7 @@ import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 import com.group05.abstractbusiness.modules.service.CartService;
 import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
+import com.group05.abstractbusiness.modules.service.Transaction.TransactionOutService;
 
 @Service
 public class UserService {
@@ -44,6 +47,10 @@ public class UserService {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private TransactionOutService transactionService;
+
 
     ModelMapper model = new ModelMapper();
 
@@ -145,6 +152,15 @@ public class UserService {
     public StockFisico addProductStock(String stockName, String productName){
         try {
             return stockService.adicionarProduto(stockName, productName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public TransactionOutReturn createTransaction(UUID idCart, TransactionOutDTO transaction){
+        try {
+            return transactionService.create(idCart, transaction);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

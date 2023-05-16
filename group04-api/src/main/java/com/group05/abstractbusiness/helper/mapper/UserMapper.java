@@ -11,7 +11,9 @@ import com.group05.abstractbusiness.modules.model.Person.User;
 
 
 @Mapper(componentModel = "spring")
+
 public abstract class UserMapper {
+
     public static final UserMapper INSTACE = Mappers.getMapper(UserMapper.class);
 
     public abstract User toUser(UserPOST userPost);

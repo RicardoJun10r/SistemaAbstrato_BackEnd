@@ -58,7 +58,7 @@ public class UserService {
             return users;
         }
     }
-
+    /*
     public boolean createProduct(ProdutoFisicoDTO produto){
         try {
             productRepository.save(produto);
@@ -66,6 +66,7 @@ public class UserService {
             // TODO: handle exception
         }
     }
+     */
 
     @Transactional                                           // Só persiste o dado caso passe todas as informações
     public UserReturn createUser(UserPOST user) {

@@ -41,7 +41,7 @@ public class SupplierService {
 
     public List<SupplierReturn> findbyEmail(String email){
         if (this.repository.findByEmail(email).isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada " + name + " " + Supplier.class.getClass());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada ");
         }else{
             List<SupplierReturn> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByEmail(email).size();i++){
@@ -54,7 +54,7 @@ public class SupplierService {
 
     public List<SupplierReturn> findbyPhone(String phone){
         if (this.repository.findByPhone(phone).isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada " + name + " " + Supplier.class.getClass());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada ");
         }else{
             List<SupplierReturn> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByPhone(phone).size();i++){

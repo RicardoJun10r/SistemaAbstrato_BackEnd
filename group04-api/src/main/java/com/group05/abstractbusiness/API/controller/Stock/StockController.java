@@ -77,7 +77,7 @@ public class StockController {
         stock.getProdutosFisicos().add(produto);
         stock.setQuantidade(stock.getQuantidade()+1);
         produto.setStock(stock); 
-        return this.stockFisicoService.adicionar(stock.get());
+        return this.stockFisicoService.adicionar(stock);
     }
 
     @PostMapping("/digital/{idstock}/{idproduto}")

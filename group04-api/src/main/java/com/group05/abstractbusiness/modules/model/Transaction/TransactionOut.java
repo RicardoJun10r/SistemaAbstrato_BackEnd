@@ -3,6 +3,7 @@ package com.group05.abstractbusiness.modules.model.Transaction;
 import com.group05.abstractbusiness.modules.model.Cart;
 import com.group05.abstractbusiness.modules.model.Person.Customer;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -17,16 +18,16 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @DiscriminatorValue("O")
 public class TransactionOut extends Transaction{
-	@ManyToOne
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+
+	@Column(name = "client_name")
+	private String customer;
 
 
 	//TO-DO
 	// @Column(name = "document")
 	// private Receipter document;
 
-	public TransactionOut( Double value, int discount, Customer customer, Cart cart) {
+	public TransactionOut( Double value, int discount, String customer, Cart cart) {
 		super(value, discount, cart);
 		this.customer = customer;
 	}

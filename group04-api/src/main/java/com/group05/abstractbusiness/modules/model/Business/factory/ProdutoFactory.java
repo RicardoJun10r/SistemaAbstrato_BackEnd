@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.stereotype.Component;
 
 import com.group05.abstractbusiness.modules.model.Business.Produto;
@@ -120,7 +121,8 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.imageUrl = imageUrl;
+        this.quantidade = quantidade;
+        this.supplier = supplier;
     }
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
@@ -152,7 +154,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     @Override
     public Produto criarFisco() {
         return new ProdutoFisico(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
-        image, createdAt, updatedAt, deletedAt, weight, height, width, imageUrl);
+        image, createdAt, updatedAt, deletedAt, weight, height, width, quantidade, supplier);
     }
 
     @Override

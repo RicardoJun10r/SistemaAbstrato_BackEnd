@@ -1,38 +1,30 @@
-// package com.group05.abstractbusiness.controller.Transaction;
+package com.group05.abstractbusiness.API.controller.Transaction;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// import java.util.UUID;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
+import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
+import com.group05.abstractbusiness.modules.model.Transaction.TransactionOut;
+import com.group05.abstractbusiness.modules.service.Transaction.TransactionOutService;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.RestController;
 
-// import com.group05.abstractbusiness.model.Transaction.Transaction;
-// import com.group05.abstractbusiness.service.Transaction.TransactionService;
+@RestController
+@RequestMapping("/transaction") 
+class TransactionController {
+    @Autowired
+    private TransactionOutService service;
 
-// @RestController
-// public class TransactionController {
+    @PostMapping("/{idCart}")
+    public ResponseEntity<TransactionOutReturn> createTransaction(@PathVariable UUID idCart, @RequestBody TransactionOutDTO transaction){
+        return new ResponseEntity<>(service.create(idCart, transaction), HttpStatus.OK);
+    }
 
-// 	@Autowired
-// 	private TransactionService transactionService;
-
-// 	@GetMapping("/{transaction}")
-// 	public ResponseEntity<Transaction> create(@PathVariable Transaction transaction) {
-// 		Transaction newTransaction = transactionService.create(transaction);
-// 		return ResponseEntity.ok().body(newTransaction);
-// 	}
-
-// 	@GetMapping("/{id}")
-// 	public ResponseEntity<Transaction> findById(@PathVariable UUID id) {
-// 		Transaction transaction = transactionService.findById(id);
-// 		return ResponseEntity.ok().body(transaction);
-// 	}
-
-// 	@GetMapping("/{transaction}")
-// 	public ResponseEntity<Transaction> update(@PathVariable Transaction transaction) {
-// 		Transaction newTransaction = transactionService.update(transaction);
-// 		return ResponseEntity.ok().body(newTransaction);
-// 	}
-
-// }
+}

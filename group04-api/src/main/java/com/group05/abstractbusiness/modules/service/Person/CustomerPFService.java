@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.modules.service.Person;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,6 @@ import java.util.*;
 
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO_PF;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerReturn_PF;
-import com.group05.abstractbusiness.helper.mapper.CustomerMapper;
 import com.group05.abstractbusiness.modules.model.Person.CustomerPF;
 import com.group05.abstractbusiness.modules.repository.Person.CustomerPFRepository;
 
@@ -19,15 +19,17 @@ public class CustomerPFService {
     @Autowired
     private CustomerPFRepository repository;
 
+    private ModelMapper mapper = new ModelMapper();
 
     public CustomerReturn_PF findbyId(UUID id){
-        return CustomerMapper.INSTACE.toCustomerRtn(this.repository.findById(id).orElseThrow( 
-            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id [ " + id + " ]")));
+        return mapper.map(
+        (this.repository.findById(id).orElseThrow( 
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id [ " + id + " ]"))), CustomerReturn_PF.class);
     }
 
     public CustomerReturn_PF findbyCpf(String cpf){
-        return CustomerMapper.INSTACE.toCustomerRtn(this.repository.findByCpf(cpf).orElseThrow( 
-            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id [ " + cpf + " ]")));
+        return mapper.map(this.repository.findByCpf(cpf).orElseThrow( 
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id [ " + cpf + " ]")), CustomerReturn_PF.class);
     }
 
 
@@ -37,8 +39,7 @@ public class CustomerPFService {
         }else{
             List<CustomerReturn_PF> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByNameContainingIgnoreCase(name).size();i++){
-                suppliers.add(i, CustomerMapper.INSTACE
-                .toCustomerRtn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
+                suppliers.add(i, mapper.map(this.repository.findByNameContainingIgnoreCase(name).get(i), CustomerReturn_PF.class));
             }
             return suppliers;
         }
@@ -46,7 +47,7 @@ public class CustomerPFService {
 
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public CustomerPF createCustomerPF(CustomerDTO_PF customer) {
-        return this.repository.save(CustomerMapper.INSTACE.toCustomerPF(customer));
+        return this.repository.save(mapper.map(customer, CustomerPF.class));
     }
 
     @Transactional
@@ -58,7 +59,7 @@ public class CustomerPFService {
         newObj.setEmail(customer.getEmail());
         newObj.setPhone(customer.getPhone());
         newObj.setCpf(customer.getCpf());
-        return CustomerMapper.INSTACE.toCustomerRtn(this.repository.save(newObj));
+        return mapper.map(this.repository.save(newObj), CustomerReturn_PF.class);
     } 
 
     public void deleteCustomerPF(UUID id){

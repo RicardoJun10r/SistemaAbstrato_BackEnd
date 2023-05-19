@@ -1,5 +1,6 @@
 package com.group05.abstractbusiness.modules.service.Person;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import java.util.*;
 
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierReturn;
-import com.group05.abstractbusiness.helper.mapper.SupplierMapper;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.repository.Person.SupplierRepository;
 
@@ -21,9 +21,11 @@ public class SupplierService {
     @Autowired
     private SupplierRepository repository;
 
+    private ModelMapper mapper = new ModelMapper();
+
     public SupplierReturn findbyId(UUID id){
-        return SupplierMapper.INSTACE.toSupplierReturn(this.repository.findById(id).orElseThrow(
-            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id ->" + id)));
+        return mapper.map(this.repository.findById(id).orElseThrow(
+            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "user não econtrado pelo  id ->" + id)), SupplierReturn.class);
     }
 
     public List<SupplierReturn> findbyName(String name){
@@ -32,8 +34,7 @@ public class SupplierService {
         }else{
             List<SupplierReturn> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByNameContainingIgnoreCase(name).size();i++){
-                suppliers.add(i, SupplierMapper.INSTACE
-                .toSupplierReturn(this.repository.findByNameContainingIgnoreCase(name).get(i)));
+                suppliers.add(i, mapper.map(this.repository.findByNameContainingIgnoreCase(name).get(i), SupplierReturn.class));
             }
             return suppliers;
         }
@@ -45,8 +46,7 @@ public class SupplierService {
         }else{
             List<SupplierReturn> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByEmail(email).size();i++){
-                suppliers.add(i, SupplierMapper.INSTACE
-                .toSupplierReturn(this.repository.findByEmail(email).get(i)));
+                suppliers.add(i, mapper.map(this.repository.findByEmail(email).get(i), SupplierReturn.class));
             }
             return suppliers;
         }
@@ -58,8 +58,7 @@ public class SupplierService {
         }else{
             List<SupplierReturn> suppliers = new ArrayList<>();
             for(int i = 0; i <  this.repository.findByPhone(phone).size();i++){
-                suppliers.add(i, SupplierMapper.INSTACE
-                .toSupplierReturn(this.repository.findByPhone(phone).get(i)));
+                suppliers.add(i, mapper.map(this.repository.findByPhone(phone).get(i), SupplierReturn.class));
             }
             return suppliers;
         }
@@ -68,7 +67,7 @@ public class SupplierService {
     @Transactional                                                              // Só persiste o dado caso passe todas as informações
     public Supplier createSupplier(SupplierDTO supplier) {
         if(repository.findByEmail(supplier.getEmail()).isEmpty()){
-            return this.repository.save(SupplierMapper.INSTACE.toSupplier(supplier));
+            return this.repository.save(mapper.map(supplier, Supplier.class));
         }else{
             throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED, "Supplier já existente com esse email");
         }
@@ -82,7 +81,7 @@ public class SupplierService {
         newObj.setAddress(supplier.getAddress());
         newObj.setEmail(supplier.getEmail());
         newObj.setPhone(supplier.getPhone());
-        return SupplierMapper.INSTACE.toSupplierReturn(this.repository.save(newObj));
+        return mapper.map(this.repository.save(newObj), SupplierReturn.class);
         } 
 
     public void deleteSupplier(UUID id){

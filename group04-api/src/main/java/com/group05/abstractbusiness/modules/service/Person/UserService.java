@@ -8,10 +8,8 @@ import java.util.UUID;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.CartReturn;
@@ -23,7 +21,6 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserPUT;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
-import com.group05.abstractbusiness.helper.mapper.UserMapper;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.User;
@@ -81,8 +78,7 @@ public class UserService {
             if(repository.findById(id).isEmpty()){
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"user não encontrado");
             }else{
-                UserReturn user = model.map(repository.findById(id).get(), UserReturn.class);
-                return user;
+                return model.map(repository.findById(id).get(), UserReturn.class);
             }
         } catch (Exception e) {
             return null;

@@ -2,21 +2,20 @@ package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
 
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
-
 import lombok.Data;
-@Data
-public class ProdutoFisicoDTO {
 
-    private String nome;
+@Data
+public class ProductReturn {
     
-    private String descricao;
+    private String name;
+    
+    private String description;
     
     private Boolean status;
     
-    private Double custo;
+    private Double cost;
     
-    private Double preco;
+    private Double price;
     
     private String brand;
     
@@ -31,14 +30,5 @@ public class ProdutoFisicoDTO {
     private LocalDate updatedAt;
     
     private LocalDate deletedAt;
-
-    private Float weight;
-
-    private Float height;
-
-    private Float width;
-
-    private Integer quantidade;
-
-    private Supplier supplier;
+    
 }

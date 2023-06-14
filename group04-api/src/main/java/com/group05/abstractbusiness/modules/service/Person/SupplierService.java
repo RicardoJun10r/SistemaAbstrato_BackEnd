@@ -9,11 +9,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
+import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierReturn;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.repository.Person.SupplierRepository;
-
 
 @Service
 public class SupplierService {
@@ -50,6 +50,21 @@ public class SupplierService {
             }
             return suppliers;
         }
+    }
+
+    public Supplier findSupplierByEmail(String email){
+        
+        List<Supplier> suppliers = this.repository.findAll();
+
+        Iterator<Supplier> iterator = suppliers.iterator();
+
+        while (iterator.hasNext()) {
+            Supplier supplier = iterator.next();
+            if(supplier.getEmail().equals(email)) return supplier;
+        }
+
+        throw new ResourceNotFoundException("Supplier not found");
+
     }
 
     public List<SupplierReturn> findbyPhone(String phone){

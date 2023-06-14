@@ -28,7 +28,7 @@ import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
-import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoService;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
     
 @RestController
@@ -40,7 +40,7 @@ public class UserController {
     private UserService service;
     
     @Autowired
-    private ProdutoFisicoService productService;
+    private ProdutoService productService;
     
 
     @GetMapping("/{id}")
@@ -66,30 +66,30 @@ public class UserController {
         return new ResponseEntity<>(service.createUser(user), HttpStatus.CREATED);
     }
 
-    @PostMapping("{supplierId}")
-    public ResponseEntity<Boolean> createProduct(@PathVariable UUID supplierId, @RequestBody ProdutoFisicoDTO product){
-        return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.OK);
-    }
+    // @PostMapping("{supplierId}")
+    // public ResponseEntity<Boolean> createProduct(@PathVariable UUID supplierId, @RequestBody ProdutoFisicoDTO product){
+    //     return new ResponseEntity<>(service.createProduct(product, supplierId), HttpStatus.OK);
+    // }
 
     @PostMapping("/stock")
     public ResponseEntity<StockFisico> createStock(@RequestBody StockFisico stock){
         return new ResponseEntity<>(service.createStock(stock), HttpStatus.OK);
     }
 
-    @PostMapping("/stock/{stockName}/{productName}")
-    public ResponseEntity<StockFisico> addProductOnStock(@PathVariable String stockName, @PathVariable String productName){
-        return new ResponseEntity<>(service.addProductStock(stockName, productName), HttpStatus.OK);
-    }
+    // @PostMapping("/stock/{stockName}/{productName}")
+    // public ResponseEntity<StockFisico> addProductOnStock(@PathVariable String stockName, @PathVariable String productName){
+    //     return new ResponseEntity<>(service.addProductStock(stockName, productName), HttpStatus.OK);
+    // }
 
     @PostMapping("/cart/{idUser}")
     public ResponseEntity<CartReturn> createCart(@PathVariable UUID idUser){
         return new ResponseEntity<>(service.createCart(idUser), HttpStatus.OK);
     }
 
-    @PostMapping("/cart/{idCart}/{productName}")
-    public ResponseEntity<CartReturn> addProductOnCart(@PathVariable UUID idCart, @PathVariable String productName){
-        return new ResponseEntity<>(service.addProduct(idCart, productName), HttpStatus.OK);
-    }
+    // @PostMapping("/cart/{idCart}/{productName}")
+    // public ResponseEntity<CartReturn> addProductOnCart(@PathVariable UUID idCart, @PathVariable String productName){
+    //     return new ResponseEntity<>(service.addProduct(idCart, productName), HttpStatus.OK);
+    // }
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody UserLogin user){

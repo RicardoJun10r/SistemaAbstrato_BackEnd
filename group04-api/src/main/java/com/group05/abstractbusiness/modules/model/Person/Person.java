@@ -1,6 +1,5 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -25,9 +24,9 @@ import lombok.EqualsAndHashCode;
 @MappedSuperclass
 public abstract class Person {
     // id
-    @Column(name = "id", unique = true)                  
     @Id                                                     // Anotação do atributo PK
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
     private UUID id;                                        
     
     // name 

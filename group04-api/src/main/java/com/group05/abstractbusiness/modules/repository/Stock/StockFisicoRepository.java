@@ -9,6 +9,6 @@ import java.util.List;
 
 
 public interface StockFisicoRepository extends JpaRepository<StockFisico, UUID> {
-   StockFisico findByNome(String nome);
-   List<StockFisico> findByLocalizacao(String localizacao); 
+   StockFisico findByName(String name);
+   List<StockFisico> findByLocation(String location); 
 }

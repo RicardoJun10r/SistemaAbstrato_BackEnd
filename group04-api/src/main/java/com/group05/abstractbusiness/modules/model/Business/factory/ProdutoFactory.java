@@ -1,10 +1,8 @@
 package com.group05.abstractbusiness.modules.model.Business.factory;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.stereotype.Component;
 
 import com.group05.abstractbusiness.modules.model.Business.Produto;
@@ -22,16 +20,18 @@ import lombok.Setter;
 public class ProdutoFactory implements AbstractFactoryProduto {
 
     private UUID ID;
+
+    private Long code;
     
-    private String nome;
+    private String name;
     
-    private String descricao;
+    private String description;
     
     private Boolean status;
     
-    private Double custo;
+    private Double cost;
     
-    private Double preco;
+    private Double price;
     
     private String brand;
     
@@ -55,7 +55,7 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private Integer downloadCount;
 
-    private LocalDateTime expiryDate;
+    private LocalDate expiryDate;
 
     private Float weight;
 
@@ -63,7 +63,9 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private Float width;
 
-    private Integer quantidade;
+    private Integer quantity;
+    
+    private Supplier supplier;
 
     private String author;
 
@@ -75,18 +77,17 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private int edition;
 
-    private Supplier supplier;
-
-    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
             int edition) {
         this.ID = iD;
-        this.nome = nome;
-        this.descricao = descricao;
+        this.code = codigo;
+        this.name = nome;
+        this.description = descricao;
         this.status = status;
-        this.custo = custo;
-        this.preco = preco;
+        this.cost = custo;
+        this.price = preco;
         this.brand = brand;
         this.category = category;
         this.subCategory = subCategory;
@@ -101,16 +102,17 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.edition = edition;
     }
 
-    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
             Integer quantidade, Supplier supplier) {
         this.ID = iD;
-        this.nome = nome;
-        this.descricao = descricao;
+        this.code = codigo;
+        this.name = nome;
+        this.description = descricao;
         this.status = status;
-        this.custo = custo;
-        this.preco = preco;
+        this.cost = custo;
+        this.price = preco;
         this.brand = brand;
         this.category = category;
         this.subCategory = subCategory;
@@ -121,20 +123,21 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.quantidade = quantidade;
+        this.quantity = quantidade;
         this.supplier = supplier;
     }
 
-    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
-            Integer downloadCount, LocalDateTime expiryDate) {
+            Integer downloadCount, LocalDate expiryDate) {
         this.ID = iD;
-        this.nome = nome;
-        this.descricao = descricao;
+        this.code = codigo;
+        this.name = nome;
+        this.description = descricao;
         this.status = status;
-        this.custo = custo;
-        this.preco = preco;
+        this.cost = custo;
+        this.price = preco;
         this.brand = brand;
         this.category = category;
         this.subCategory = subCategory;
@@ -153,19 +156,19 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     @Override
     public Produto criarFisco() {
-        return new ProdutoFisico(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
-        image, createdAt, updatedAt, deletedAt, weight, height, width, quantidade, supplier);
+        return new ProdutoFisico(ID, code, name, description, status, cost, price, brand, category, subCategory, 
+        image, createdAt, updatedAt, deletedAt, weight, height, width, quantity, supplier);
     }
 
     @Override
     public Produto criarDigital() {
-        return new ProdutoDigital(ID, nome, descricao, status, custo, preco, brand, category, subCategory, image, 
+        return new ProdutoDigital(ID, code, name, description, status, cost, price, brand, category, subCategory, image, 
         createdAt, updatedAt, deletedAt, fileUrl, fileType, fileSize, downloadCount, expiryDate);
     }
 
     @Override
     public Produto criarIntelectual() {
-        return new ProdutoIntelectual(ID, nome, descricao, status, custo, preco, brand, category, subCategory, 
+        return new ProdutoIntelectual(ID, code, name, description, status, cost, price, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
     }
 }

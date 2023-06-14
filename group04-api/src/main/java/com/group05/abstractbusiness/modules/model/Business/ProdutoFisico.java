@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.modules.model.Business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,10 +36,7 @@ public class ProdutoFisico extends Produto {
     private Float width;
 
     @Column(name = "quantidade")
-    private Integer quantidade;
-
-    @Column(name = "tipo")
-    private final String TIPO = "FISI";
+    private Integer quantity;
 
     @JsonBackReference
     @ManyToOne
@@ -50,15 +46,15 @@ public class ProdutoFisico extends Produto {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    public ProdutoFisico(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFisico(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width, Integer quantidade, Supplier supplier) {
-        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+        super(iD, codigo, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.quantidade = quantidade;
+        this.quantity = quantidade;
         this.supplier = supplier;
     }
 
@@ -66,7 +62,7 @@ public class ProdutoFisico extends Produto {
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.quantidade = quantidade;
+        this.quantity = quantidade;
     }
 
     public ProdutoFisico(){}

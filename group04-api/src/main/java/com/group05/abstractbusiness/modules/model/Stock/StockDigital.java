@@ -25,15 +25,15 @@ public class StockDigital extends StockProducts {
     private List<ProdutoDigital> produtosDigitais;
 
     public StockDigital(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated,
-            List<ProdutoDigital> produtos) {
+            List<ProdutoDigital> produtos){
         super(id, nome, localizacao, quantidade, lastUpdated);
         this.produtosDigitais = produtos;
     }
 
-    public StockDigital(List<ProdutoDigital> produtos) {
+    public StockDigital(List<ProdutoDigital> produtos){
         this.produtosDigitais = produtos;
     }
 
-    public StockDigital() {}
+    public StockDigital(){}
     
 }

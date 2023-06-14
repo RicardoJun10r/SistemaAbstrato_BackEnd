@@ -42,10 +42,7 @@ public class User extends Person{
         this.permission = permission;
     }
 
-
-    public User() {
-    }
-
+    public User(){}
 
     @Override
     public UUID getId(){

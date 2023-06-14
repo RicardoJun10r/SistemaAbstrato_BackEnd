@@ -22,24 +22,24 @@ public abstract class StockProducts {
     private UUID id;
 
     @Column(name = "nome")
-    private String nome;
+    private String name;
 
     @Column(name = "localizacao")
-    private String localizacao;
+    private String location;
 
     @Column(name = "quantidade")
-    private Integer quantidade;
+    private Integer quantity;
 
     @Column(name = "lastUpdated")
     private LocalDate lastUpdated;
 
     public StockProducts(){}
 
-    public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated) {
+    public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated){
         this.id = id;
-        this.nome = nome;
-        this.localizacao = localizacao;
-        this.quantidade = quantidade;
+        this.name = nome;
+        this.location = localizacao;
+        this.quantity = quantidade;
         this.lastUpdated = lastUpdated;
     }
     

@@ -17,7 +17,7 @@ public class StockComponent {
 
     private String nome;
 
-    private String localizacao;
+    private String location;
 
     private Integer quantidade;
 
@@ -28,20 +28,20 @@ public class StockComponent {
     public StockComponent(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated){
         this.id = id;
         this.nome = nome;
-        this.localizacao = localizacao;
+        this.location = localizacao;
         this.quantidade = quantidade;
         this.lastUpdated = lastUpdated;
     }
 
     public StockProducts criarFisico(){
-        return new StockFisico(id, nome, localizacao, quantidade, lastUpdated, null);
+        return new StockFisico(id, nome, location, quantidade, lastUpdated, null);
     }
 
     public StockProducts criarDigital(){
-        return new StockDigital(id, nome, localizacao, quantidade, lastUpdated, null);
+        return new StockDigital(id, nome, location, quantidade, lastUpdated, null);
     }
 
     public StockProducts criarIntelectual(){
-        return new StockIntelectual(id, nome, localizacao, quantidade, lastUpdated, null);
+        return new StockIntelectual(id, nome, location, quantidade, lastUpdated, null);
     }
 }

@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.modules.model.Business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -37,18 +36,15 @@ public class ProdutoIntelectual extends Produto {
     @Column(name = "edition")
     private int edition;
 
-    @Column(name = "tipo")
-    private final String TIPO = "INTE";
-
     @JsonBackReference
     @ManyToOne
     private StockIntelectual stock;
 
-    public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoIntelectual(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
             int edition) {
-        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+        super(iD, codigo, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.author = author;
         this.publisher = publisher;

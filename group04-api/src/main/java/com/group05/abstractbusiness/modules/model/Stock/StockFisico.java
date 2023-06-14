@@ -25,7 +25,7 @@ public class StockFisico extends StockProducts {
     private List<ProdutoFisico> produtosFisicos;
 
     public StockFisico(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated,
-            List<ProdutoFisico> produtos) {
+            List<ProdutoFisico> produtos){
         super(id, nome, localizacao, quantidade, lastUpdated);
         this.produtosFisicos = produtos;
     }

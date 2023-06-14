@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.helper.DTO.CartReturn;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReturn;
 import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
+import com.group05.abstractbusiness.helper.DTO.Business.Teste.ProductRes;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserLogin;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserPOST;
@@ -22,15 +24,16 @@ import com.group05.abstractbusiness.helper.DTO.person.user.UserReturn;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.User;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
-import com.group05.abstractbusiness.modules.repository.Business.ProdutoFisicoRepository;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 import com.group05.abstractbusiness.modules.service.CartService;
-import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoService;
 import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
 import com.group05.abstractbusiness.modules.service.Transaction.TransactionOutService;
+import com.group05.abstractbusiness.utils.Enums.TipoProduto;
 
 @Service
 public class UserService {
@@ -39,7 +42,7 @@ public class UserService {
     private UserRepository repository;
 
     @Autowired
-    private ProdutoFisicoService productService;
+    private ProdutoService productService;
 
     @Autowired
     private StockFisicoService stockService;
@@ -105,19 +108,12 @@ public class UserService {
         }
     }
 
-    public boolean createProduct(ProdutoFisicoDTO produto, UUID idSuplier){
-        boolean result = false;
-        try {
-            ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
-            ProdutoFisico aux2 = productService.create(aux, idSuplier);
-            if(aux2 == null)
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Produto não criado");
-            else
-                result = true;
-        } catch (ResponseStatusException e) {
-            return false;
-        }
-        return result;
+    public ProductRes createProduct(TipoProduto tipoProduto, ProdutoFactory produto, String emailSuplier){
+        return productService.createProduct(tipoProduto, produto, emailSuplier);
+    }
+
+    public List<ProductRes> findAll(TipoProduto tipoProduto){
+        return productService.findAll(tipoProduto);
     }
 
     public StockFisico createStock(StockFisico stock){
@@ -139,25 +135,25 @@ public class UserService {
         }
     }
 
-    public CartReturn addProduct(UUID idCart, String productName){
-        try {
-            ProdutoFisico aux = model.map(productService.findByName(productName), ProdutoFisico.class);
-            return cartService.addProduct(idCart, aux.getID());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    // public CartReturn addProduct(UUID idCart, String productName){
+    //     try {
+    //         ProdutoFisico aux = model.map(productService.findByName(productName), ProdutoFisico.class);
+    //         return cartService.addProduct(idCart, aux.getID());
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return null;
+    //     }
+    // }
 
 
-    public StockFisico addProductStock(String stockName, String productName){
-        try {
-            return stockService.adicionarProduto(stockName, productName);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+    // public StockFisico addProductStock(String stockName, String productName){
+    //     try {
+    //         return stockService.adicionarProduto(stockName, productName);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         return null;
+    //     }
+    // }
 
     public TransactionOutReturn createTransaction(UUID idCart, TransactionOutDTO transaction){
         try {

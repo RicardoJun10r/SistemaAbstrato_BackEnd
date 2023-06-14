@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.modules.model.Business;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -35,20 +34,17 @@ public class ProdutoDigital extends Produto {
     private Integer downloadCount;
 
     @Column(name = "expiry_date")
-    private LocalDateTime expiryDate;
-
-    @Column(name = "tipo")
-    private final String TIPO = "DIGI";
+    private LocalDate expiryDate;
 
     @JsonBackReference
     @ManyToOne
     private StockDigital stock;
 
-    public ProdutoDigital(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoDigital(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
-            Integer downloadCount, LocalDateTime expiryDate) {
-        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+            Integer downloadCount, LocalDate expiryDate) {
+        super(iD, codigo, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.fileUrl = fileUrl;
         this.fileType = fileType;
@@ -58,7 +54,7 @@ public class ProdutoDigital extends Produto {
     }
 
     public ProdutoDigital(String fileUrl, String fileType, Double fileSize, Integer downloadCount,
-            LocalDateTime expiryDate) {
+            LocalDate expiryDate) {
         this.fileUrl = fileUrl;
         this.fileType = fileType;
         this.fileSize = fileSize;

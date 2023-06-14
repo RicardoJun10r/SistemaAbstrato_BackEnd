@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import com.group05.abstractbusiness.modules.model.Cart;
+import com.group05.abstractbusiness.utils.Enums.TipoTransacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -24,7 +25,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -56,9 +56,12 @@ public abstract class Transaction{
 	@Column(name = "discount")
 	private int discount;
 
-	protected Transaction() {}
+	@Column(name = "tipo_transacao")
+	private TipoTransacao transactionType;
 
-	protected Transaction(Double value, int discount, Cart cart) {
+	protected Transaction(){}
+
+	protected Transaction(Double value, int discount, Cart cart){
 		this.value = value;
 		this.discount = discount;
 		this.cart = cart;

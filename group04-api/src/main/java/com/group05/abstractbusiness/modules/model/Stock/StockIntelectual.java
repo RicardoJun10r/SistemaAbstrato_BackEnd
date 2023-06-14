@@ -25,15 +25,15 @@ public class StockIntelectual extends StockProducts {
     private List<ProdutoIntelectual> produtosIntelectuais;
 
     public StockIntelectual(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated,
-            List<ProdutoIntelectual> produtos) {
+            List<ProdutoIntelectual> produtos){
         super(id, nome, localizacao, quantidade, lastUpdated);
         this.produtosIntelectuais = produtos;
     }
 
-    public StockIntelectual(List<ProdutoIntelectual> produtos) {
+    public StockIntelectual(List<ProdutoIntelectual> produtos){
         this.produtosIntelectuais = produtos;
     }
 
-    public StockIntelectual() {}
+    public StockIntelectual(){}
 
 }

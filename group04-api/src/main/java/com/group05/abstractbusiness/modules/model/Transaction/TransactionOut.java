@@ -1,13 +1,10 @@
 package com.group05.abstractbusiness.modules.model.Transaction;
 
 import com.group05.abstractbusiness.modules.model.Cart;
-import com.group05.abstractbusiness.modules.model.Person.Customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -35,7 +35,7 @@ import com.group05.abstractbusiness.utils.Enums.TipoProduto;
 public class ProdutoController {
     
     @Autowired
-    private ProdutosService produtosService;
+    private ProdutoService produtosService;
 
     @Autowired
     private ProdutoDigitalService produtoDigitalService;
@@ -44,8 +44,8 @@ public class ProdutoController {
     private ProdutoIntelectualService produtoIntelectualService;
 
     @PostMapping("/{tipo}/{email}")
-    public ResponseEntity<ProductReturn> criarProduto(@PathVariable TipoProduto tipo, @PathVariable String email, @RequestBody ProdutoFactory produtoFactory){
-        return new ResponseEntity<ProductReturn>(this.produtosService.createProduct(tipo, produtoFactory, email), HttpStatus.CREATED);
+    public ResponseEntity<ProductRes> criarProduto(@PathVariable TipoProduto tipo, @PathVariable String email, @RequestBody ProdutoFactory produtoFactory){
+        return new ResponseEntity<ProductRes>(this.produtosService.createProduct(tipo, produtoFactory, email), HttpStatus.CREATED);
     }
 
     @GetMapping("/{tipo}")

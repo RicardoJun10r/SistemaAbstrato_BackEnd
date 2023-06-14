@@ -1,16 +1,14 @@
 package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ProdutoFisicoDTOReturn {
+
     private String nome;
     
     private String descricao;

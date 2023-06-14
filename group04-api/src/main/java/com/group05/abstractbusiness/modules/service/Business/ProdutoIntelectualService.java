@@ -32,4 +32,5 @@ public class ProdutoIntelectualService {
         produtoIntelectualRepository.deleteById(id);
         return "Produto Intelectual: [ " + id + " ] deletado";
     }
+    
 }

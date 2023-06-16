@@ -21,27 +21,27 @@ public class StockComponent {
 
     private Integer quantidade;
 
+    private LocalDate createdAt;
+
     private LocalDate lastUpdated;
 
     public StockComponent(){}
 
-    public StockComponent(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated){
+    public StockComponent(UUID id, String nome, String localizacao, Integer quantidade, LocalDate createdAt, LocalDate lastUpdated){
         this.id = id;
         this.nome = nome;
         this.location = localizacao;
         this.quantidade = quantidade;
+        this.createdAt = createdAt;
         this.lastUpdated = lastUpdated;
     }
 
     public StockProducts criarFisico(){
-        return new StockFisico(id, nome, location, quantidade, lastUpdated, null);
+        return new StockFisico(id, nome, quantidade, createdAt, lastUpdated, location, null);
     }
 
     public StockProducts criarDigital(){
-        return new StockDigital(id, nome, location, quantidade, lastUpdated, null);
+        return new StockDigital(id, nome, quantidade, createdAt, lastUpdated, null, null);
     }
 
-    public StockProducts criarIntelectual(){
-        return new StockIntelectual(id, nome, location, quantidade, lastUpdated, null);
-    }
 }

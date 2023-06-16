@@ -8,12 +8,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @MappedSuperclass
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class StockProducts {
 
     @Id
@@ -24,23 +29,18 @@ public abstract class StockProducts {
     @Column(name = "nome")
     private String name;
 
-    @Column(name = "localizacao")
-    private String location;
-
     @Column(name = "quantidade")
     private Integer quantity;
 
+    @Column(name = "created_date")
+    private LocalDate createdAt;
+
     @Column(name = "lastUpdated")
-    private LocalDate lastUpdated;
+    private LocalDate updatedAt;
 
-    public StockProducts(){}
-
-    public StockProducts(UUID id, String nome, String localizacao, Integer quantidade, LocalDate lastUpdated){
-        this.id = id;
-        this.name = nome;
-        this.location = localizacao;
-        this.quantity = quantidade;
-        this.lastUpdated = lastUpdated;
+    @PrePersist
+    private void onCreate(){
+        this.createdAt = LocalDate.now();
     }
     
 }

@@ -16,6 +16,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Valid
+@NoArgsConstructor
 public class ProdutoFisico extends Produto {
 
     @Column(name = "weight")
@@ -46,25 +48,17 @@ public class ProdutoFisico extends Produto {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    public ProdutoFisico(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
-            String brand, String category, String subCategory, String image, LocalDate createdAt,
-            LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width, Integer quantidade, Supplier supplier) {
-        super(iD, codigo, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+    public ProdutoFisico(UUID ID, String name, String description, Boolean status, Double cost, Double price,
+            String brand, String category, String subCategory, String image, LocalDate createdAt, LocalDate updatedAt,
+            LocalDate deletedAt, Float weight, Float height, Float width, Integer quantity,
+            Supplier supplier){
+        super(ID, name, description, status, cost, price, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.weight = weight;
         this.height = height;
         this.width = width;
-        this.quantity = quantidade;
+        this.quantity = quantity;
         this.supplier = supplier;
     }
-
-    public ProdutoFisico(Float weight, Float height, Float width, Integer quantidade) {
-        this.weight = weight;
-        this.height = height;
-        this.width = width;
-        this.quantity = quantidade;
-    }
-
-    public ProdutoFisico(){}
     
 }

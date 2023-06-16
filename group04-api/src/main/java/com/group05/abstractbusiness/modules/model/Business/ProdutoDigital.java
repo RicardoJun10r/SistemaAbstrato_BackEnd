@@ -11,13 +11,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
 @Valid
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Table(name = "digitalPd_tb")
 public class ProdutoDigital extends Produto {
 
@@ -40,11 +44,11 @@ public class ProdutoDigital extends Produto {
     @ManyToOne
     private StockDigital stock;
 
-    public ProdutoDigital(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoDigital(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
             Integer downloadCount, LocalDate expiryDate) {
-        super(iD, codigo, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
+        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
                 deletedAt);
         this.fileUrl = fileUrl;
         this.fileType = fileType;
@@ -52,16 +56,5 @@ public class ProdutoDigital extends Produto {
         this.downloadCount = downloadCount;
         this.expiryDate = expiryDate;
     }
-
-    public ProdutoDigital(String fileUrl, String fileType, Double fileSize, Integer downloadCount,
-            LocalDate expiryDate) {
-        this.fileUrl = fileUrl;
-        this.fileType = fileType;
-        this.fileSize = fileSize;
-        this.downloadCount = downloadCount;
-        this.expiryDate = expiryDate;
-    }
-    
-    public ProdutoDigital(){}
 
 }

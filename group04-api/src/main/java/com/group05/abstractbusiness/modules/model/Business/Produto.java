@@ -10,22 +10,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @MappedSuperclass
 @Getter
 @Setter
 @Valid
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true)
     private UUID ID;
-
-    @Column(name = "codigo", unique = true, nullable = false)
-    private Long code;
     
     @Column(name = "nome")
     private String name;
@@ -62,27 +63,6 @@ public abstract class Produto {
         
     @Column(name = "deletado_em")
     private LocalDate deletedAt;
-
-    public Produto(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco, String brand,
-            String category, String subCategory, String image, LocalDate createdAt, LocalDate updatedAt,
-            LocalDate deletedAt) {
-        this.ID = iD;
-        this.code = codigo;
-        this.name = nome;
-        this.description = descricao;
-        this.status = status;
-        this.cost = custo;
-        this.price = preco;
-        this.brand = brand;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.image = image;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
-    }
-
-    public Produto(){}
 
     @PrePersist
     public void onCreate(){

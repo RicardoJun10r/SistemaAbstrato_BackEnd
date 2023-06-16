@@ -21,8 +21,6 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private UUID ID;
 
-    private Long code;
-    
     private String name;
     
     private String description;
@@ -73,16 +71,15 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     private String isbn;
 
-    private int pages;
+    private Integer pages;
 
-    private int edition;
+    private Integer edition;
 
-    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
-            LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, int pages,
-            int edition) {
+            LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, Integer pages,
+            Integer edition) {
         this.ID = iD;
-        this.code = codigo;
         this.name = nome;
         this.description = descricao;
         this.status = status;
@@ -102,12 +99,11 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.edition = edition;
     }
 
-    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, Float weight, Float height, Float width,
             Integer quantidade, Supplier supplier) {
         this.ID = iD;
-        this.code = codigo;
         this.name = nome;
         this.description = descricao;
         this.status = status;
@@ -127,12 +123,11 @@ public class ProdutoFactory implements AbstractFactoryProduto {
         this.supplier = supplier;
     }
 
-    public ProdutoFactory(UUID iD, Long codigo, String nome, String descricao, Boolean status, Double custo, Double preco,
+    public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
             Integer downloadCount, LocalDate expiryDate) {
         this.ID = iD;
-        this.code = codigo;
         this.name = nome;
         this.description = descricao;
         this.status = status;
@@ -156,19 +151,19 @@ public class ProdutoFactory implements AbstractFactoryProduto {
 
     @Override
     public Produto criarFisco() {
-        return new ProdutoFisico(ID, code, name, description, status, cost, price, brand, category, subCategory, 
+        return new ProdutoFisico(ID, name, description, status, cost, price, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, weight, height, width, quantity, supplier);
     }
 
     @Override
     public Produto criarDigital() {
-        return new ProdutoDigital(ID, code, name, description, status, cost, price, brand, category, subCategory, image, 
+        return new ProdutoDigital(ID, name, description, status, cost, price, brand, category, subCategory, image, 
         createdAt, updatedAt, deletedAt, fileUrl, fileType, fileSize, downloadCount, expiryDate);
     }
 
     @Override
     public Produto criarIntelectual() {
-        return new ProdutoIntelectual(ID, code, name, description, status, cost, price, brand, category, subCategory, 
+        return new ProdutoIntelectual(ID, name, description, status, cost, price, brand, category, subCategory, 
         image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
     }
 }

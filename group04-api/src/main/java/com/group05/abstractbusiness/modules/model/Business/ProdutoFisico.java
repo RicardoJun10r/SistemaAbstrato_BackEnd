@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "fisicoPd_tb")
+@Table(name = "produto_fisi_tb")
 @Getter
 @Setter
 @Valid
@@ -42,7 +42,7 @@ public class ProdutoFisico extends Produto {
 
     @JsonBackReference
     @ManyToOne
-    private StockFisico stock;
+    private StockFisico stockFisico;
 
     @OneToOne
     @JoinColumn(name = "supplier_id")
@@ -50,15 +50,15 @@ public class ProdutoFisico extends Produto {
 
     public ProdutoFisico(UUID ID, String name, String description, Boolean status, Double cost, Double price,
             String brand, String category, String subCategory, String image, LocalDate createdAt, LocalDate updatedAt,
-            LocalDate deletedAt, Float weight, Float height, Float width, Integer quantity,
+            LocalDate deletedAt, Float weight, Float height, Float width, Integer quantity, StockFisico stockFisico,
             Supplier supplier){
-        super(ID, name, description, status, cost, price, brand, category, subCategory, image, createdAt, updatedAt,
-                deletedAt);
+        super(ID, name, description, status, cost, price, brand, category, subCategory, image, createdAt, updatedAt, deletedAt);
         this.weight = weight;
         this.height = height;
         this.width = width;
         this.quantity = quantity;
         this.supplier = supplier;
+        this.stockFisico = stockFisico;
     }
     
 }

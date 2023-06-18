@@ -1,6 +1,7 @@
-package com.group05.abstractbusiness.helper.DTO.Business.Teste;
+package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
@@ -10,6 +11,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 @Data
 public abstract class ProductRes {
+
+    UUID id;
 
     String name;
     

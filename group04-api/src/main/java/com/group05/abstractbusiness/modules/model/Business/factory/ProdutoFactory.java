@@ -10,6 +10,9 @@ import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
 import com.group05.abstractbusiness.modules.model.Person.Supplier;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -74,6 +77,12 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     private Integer pages;
 
     private Integer edition;
+
+    private StockFisico stockFisico;
+
+    private StockDigital stockDigital;
+
+    private StockIntelectual stockIntelectual;
 
     public ProdutoFactory(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
@@ -150,20 +159,20 @@ public class ProdutoFactory implements AbstractFactoryProduto {
     public ProdutoFactory(){}
 
     @Override
-    public Produto criarFisco() {
+    public Produto criarFisico() {
         return new ProdutoFisico(ID, name, description, status, cost, price, brand, category, subCategory, 
-        image, createdAt, updatedAt, deletedAt, weight, height, width, quantity, supplier);
+        image, createdAt, updatedAt, deletedAt, weight, height, width, quantity, stockFisico, supplier);
     }
 
     @Override
     public Produto criarDigital() {
         return new ProdutoDigital(ID, name, description, status, cost, price, brand, category, subCategory, image, 
-        createdAt, updatedAt, deletedAt, fileUrl, fileType, fileSize, downloadCount, expiryDate);
+        createdAt, updatedAt, deletedAt, fileUrl, fileType, fileSize, downloadCount, expiryDate, stockDigital);
     }
 
     @Override
     public Produto criarIntelectual() {
         return new ProdutoIntelectual(ID, name, description, status, cost, price, brand, category, subCategory, 
-        image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition);
+        image, createdAt, updatedAt, deletedAt, author, publisher, isbn, pages, edition, stockIntelectual);
     }
 }

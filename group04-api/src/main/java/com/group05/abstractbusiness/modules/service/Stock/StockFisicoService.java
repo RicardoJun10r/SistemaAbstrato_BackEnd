@@ -1,64 +1,64 @@
-package com.group05.abstractbusiness.modules.service.Stock;
+// package com.group05.abstractbusiness.modules.service.Stock;
 
-import java.util.UUID;
-import java.util.List;
+// import java.util.UUID;
+// import java.util.List;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+// import org.modelmapper.ModelMapper;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.HttpStatus;
+// import org.springframework.stereotype.Service;
+// import org.springframework.web.server.ResponseStatusException;
 
-import com.group05.abstractbusiness.helper.DTO.Business.ProdutoFisicoDTO;
-import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
-import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
-import com.group05.abstractbusiness.modules.repository.Stock.StockFisicoRepository;
-import com.group05.abstractbusiness.modules.service.Business.ProdutoService;
+// import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
+// import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
+// import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+// import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
+// import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+// import com.group05.abstractbusiness.modules.repository.Stock.StockFisicoRepository;
+// import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 
-@Service
-public class StockFisicoService {
+// @Service
+// public class StockFisicoService {
     
-    @Autowired
-    private StockFisicoRepository stockRepository;
+//     @Autowired
+//     private StockFisicoRepository stockFisicoRepository;
 
-    @Autowired
-    private ProdutoService produtoService;
+//     @Autowired
+//     private ProdutoFisicoService produtoFisicoService;
 
-    ModelMapper model = new ModelMapper();
+//     private ModelMapper mapper = new ModelMapper();
     
-    public StockFisico adicionar(StockFisico stockService){
-        return stockRepository.save(stockService);
-    }
+//     public StockRes createStock(StockRes stockService){
+//         return mapper.map(stockFisicoRepository.save(mapper.map( stockService, StockFisico.class )), StockRes.class);
+//     }
 
-    // public StockFisico adicionarProduto(String stockName, String produtoName){
-    //     try {
-    //         StockFisico stock = stockRepository.findByName(stockName);
-    //         ProdutoFisicoDTO produto = produtoService.findByName(produtoName);
-    //         ProdutoFisico aux = model.map(produto, ProdutoFisico.class);
-            
-    //         stock.getProdutosFisicos().add(aux);
-    //         stock.setQuantity(stock.getQuantity() + 1);
-    //         aux.setStock(stock);
-    //         return adicionar(stock);
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-    // }
+//     public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory, String email){
 
-    public StockFisico buscar(UUID id){
-        return stockRepository.findById(id).orElseThrow(
-            ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não retornar resultado"));
-    }
+//         StockFisico stockFisico = findById(stockId);
+
+//         produtoFactory.setStockFisico(stockFisico);
+
+//         ProductRes productRes = this.produtoFisicoService.createProduct(produtoFactory, email);
+
+//         stockFisico.getProdutosFisicos().add(mapper.map(productRes, ProdutoFisico.class));
+
+//         return mapper.map(stockFisicoRepository.save(stockFisico), StockRes.class);
+
+//     }
+
+//     public StockFisico findById(UUID id){
+//         return stockFisicoRepository.findById(id).orElseThrow(
+//             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não retornar resultado"));
+//     }
 
 
-    public List<StockFisico> listar(){
-        return stockRepository.findAll();
-    }
+//     public List<StockFisico> findAll(){
+//         return stockFisicoRepository.findAll();
+//     }
 
-    public String deletar(UUID id){
-        stockRepository.deleteById(id);
-        return "Produto Fisico: [ " + id + " ] deletado";
-    }
+//     public String delete(UUID id){
+//         stockFisicoRepository.deleteById(id);
+//         return "Produto Fisico: [ " + id + " ] deletado";
+//     }
 
-}
+// }

@@ -1,56 +1,33 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "customer")
-public class Customer extends Person {    
-    @Column(name = "address")
-    private String address;
-    
-    @Column(name = "email")
-    private String email;
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "customer_tb")
+public class Customer extends IsupplierCustomer {   
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "customer_type", nullable = false)
+    private Boolean customerType;
 
-    public Customer(String name, String address, String email, String phone) {
-        super(name);
-        this.address = address;
-        this.email = email;
-        this.phone = phone;
-    }
+    @Column(name = "cpf_or_cnpj", unique = true, nullable = false)
+    private String cpf_cnpj;
 
-    public Customer() {
-        super();
-    }
+    @JsonBackReference
+    @ManyToOne
+    private User user_customer;
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-    
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

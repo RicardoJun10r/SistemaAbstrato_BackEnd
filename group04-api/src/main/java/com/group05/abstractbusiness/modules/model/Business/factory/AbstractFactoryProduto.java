@@ -7,7 +7,7 @@ import com.group05.abstractbusiness.modules.model.Business.Produto;
 @Component
 public interface AbstractFactoryProduto{
 
-    public Produto criarFisco();
+    public Produto criarFisico();
 
     public Produto criarDigital();
     

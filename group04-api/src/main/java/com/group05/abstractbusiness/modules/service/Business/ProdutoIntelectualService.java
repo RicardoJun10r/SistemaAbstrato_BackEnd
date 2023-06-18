@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.group05.abstractbusiness.error.Exception.ResourceNotAcceptable;
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
-import com.group05.abstractbusiness.helper.DTO.Business.Teste.ProductIntRes;
-import com.group05.abstractbusiness.helper.DTO.Business.Teste.ProductRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductIntRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
 import com.group05.abstractbusiness.modules.model.Business.Produto;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
 import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
@@ -33,7 +33,7 @@ public class ProdutoIntelectualService {
         
         verifyProduct(produtoFactory.getName());
 
-        ProdutoIntelectual produtoDigital = produtoIntelectualRepository.save(mapper.map(produtoFactory.criarFisco(), ProdutoIntelectual.class));
+        ProdutoIntelectual produtoDigital = produtoIntelectualRepository.save(mapper.map(produtoFactory.criarIntelectual(), ProdutoIntelectual.class));
 
         return mapper.map(produtoDigital, ProductIntRes.class);
 
@@ -41,7 +41,7 @@ public class ProdutoIntelectualService {
 
     private void verifyProduct(String nome){
         Optional<ProdutoIntelectual> p = produtoIntelectualRepository.findByName(nome);
-        if(!p.isPresent()) throw new ResourceNotAcceptable("Produto já existe");
+        if(p.isPresent()) throw new ResourceNotAcceptable("Produto já existe");
     }
 
     public List<ProductRes> findAll(){

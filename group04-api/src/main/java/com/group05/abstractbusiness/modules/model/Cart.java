@@ -36,6 +36,7 @@ public class Cart {
     @MapKeyJoinColumn(name = "product_id")
 	@Column(name = "quantity")
 	private Map<UUID, Integer> products;                           //Map para guardar produto e quantidade de produto no carrinho
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;

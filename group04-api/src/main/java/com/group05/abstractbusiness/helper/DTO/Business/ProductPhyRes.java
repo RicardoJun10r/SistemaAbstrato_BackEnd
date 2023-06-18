@@ -1,6 +1,6 @@
-package com.group05.abstractbusiness.helper.DTO.Business.Teste;
+package com.group05.abstractbusiness.helper.DTO.Business;
 
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierRes;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +17,6 @@ public class ProductPhyRes extends ProductRes {
 
     Integer quantity;
 
-    Supplier supplier;
+    SupplierRes supplier;
 
 }

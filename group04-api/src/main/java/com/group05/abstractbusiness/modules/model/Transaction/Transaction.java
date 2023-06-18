@@ -54,14 +54,14 @@ public abstract class Transaction{
 	private Double value;
 
 	@Column(name = "discount")
-	private int discount;
+	private Integer discount;
 
 	@Column(name = "tipo_transacao")
 	private TipoTransacao transactionType;
 
 	protected Transaction(){}
 
-	protected Transaction(Double value, int discount, Cart cart){
+	protected Transaction(Double value, Integer discount, Cart cart){
 		this.value = value;
 		this.discount = discount;
 		this.cart = cart;

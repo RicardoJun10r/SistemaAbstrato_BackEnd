@@ -1,76 +1,64 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
+import com.group05.abstractbusiness.utils.Validator.ValidPassword;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "user_system")
-public class User extends Person{
+@Table(name = "user_tb")
+@NoArgsConstructor
+public class User extends IPerson{
 
-    //login
-    @Column(name = "login",nullable = false, unique = true)                 // Garantido que o atributo não pode ser null
-    @NotEmpty
-    @Size(min = 2, max = 30)
-    private String login;
-
-
-    //Password
-    @Column(name = "password",nullable = false, unique = false)              // Garantido que o atributo não pode ser null
-    @NotEmpty
-    @Size(min = 4, max = 30)
+    @Column(name = "password", nullable = false)              
+    @ValidPassword
     private String password;
 
-    //Permission
-    @Column(name = "permission", nullable = false)
-    @NotNull
-    private int permission;
+    @JsonManagedReference
+    @OneToMany(targetEntity = StockFisico.class, mappedBy = "user_SF", cascade = CascadeType.ALL)
+    private List<StockFisico> stockFisicos;
 
-    public User(String name ,String login, String password, int permission) {
-        super(name);
-        this.login = login;
+    @JsonManagedReference
+    @OneToMany(targetEntity = StockDigital.class, mappedBy = "user_SD", cascade = CascadeType.ALL)
+    private List<StockDigital> stockDigitais;
+
+    @JsonManagedReference
+    @OneToMany(targetEntity = StockIntelectual.class, mappedBy = "user_SI", cascade = CascadeType.ALL)
+    private List<StockIntelectual> stockIntelectuais;
+
+    @JsonManagedReference
+    @OneToMany(targetEntity = Supplier.class, mappedBy = "user_supplier", cascade = CascadeType.ALL)
+    private List<Supplier> suppliers;
+
+    @JsonManagedReference
+    @OneToMany(targetEntity = Customer.class, mappedBy = "user_customer", cascade = CascadeType.ALL)
+    private List<Customer> customers;
+
+    public User(UUID id, String name, String email, LocalDate registerDate, String password,
+            List<StockFisico> stockFisicos, List<StockDigital> stockDigitais, List<StockIntelectual> stockIntelectuais,
+            List<Supplier> suppliers) {
+        super(id, name, email, registerDate);
         this.password = password;
-        this.permission = permission;
-    }
-
-    public User(){}
-
-    @Override
-    public UUID getId(){
-        return super.getId();
-    }
-
-    public String getLogin() {
-        return this.login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Integer getPermission() {
-        return this.permission;
-    }
-
-    public void setPermission(Integer permission) {
-        this.permission = permission;
+        this.stockFisicos = stockFisicos;
+        this.stockDigitais = stockDigitais;
+        this.stockIntelectuais = stockIntelectuais;
+        this.suppliers = suppliers;
     }
 
 }

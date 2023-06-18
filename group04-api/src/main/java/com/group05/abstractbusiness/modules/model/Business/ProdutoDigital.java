@@ -22,7 +22,7 @@ import lombok.Setter;
 @Valid
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Table(name = "digitalPd_tb")
+@Table(name = "produto_digi_tb")
 public class ProdutoDigital extends Produto {
 
     @Column(name = "file_url")
@@ -42,19 +42,19 @@ public class ProdutoDigital extends Produto {
 
     @JsonBackReference
     @ManyToOne
-    private StockDigital stock;
+    private StockDigital stockDigital;
 
     public ProdutoDigital(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String fileUrl, String fileType, Double fileSize,
-            Integer downloadCount, LocalDate expiryDate) {
-        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
-                deletedAt);
+            Integer downloadCount, LocalDate expiryDate, StockDigital stockDigital) {
+        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt, deletedAt);
         this.fileUrl = fileUrl;
         this.fileType = fileType;
         this.fileSize = fileSize;
         this.downloadCount = downloadCount;
         this.expiryDate = expiryDate;
+        this.stockDigital = stockDigital;
     }
 
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class StockProducts {
@@ -26,16 +28,16 @@ public abstract class StockProducts {
     @Column(name = "id", unique = true)
     private UUID id;
 
-    @Column(name = "nome")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "quantidade")
+    @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "created_date")
     private LocalDate createdAt;
 
-    @Column(name = "lastUpdated")
+    @Column(name = "updated_date")
     private LocalDate updatedAt;
 
     @PrePersist

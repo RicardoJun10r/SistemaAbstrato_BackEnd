@@ -1,4 +1,4 @@
-package com.group05.abstractbusiness.helper.DTO.Business.Teste;
+package com.group05.abstractbusiness.helper.DTO.Business;
 
 import java.time.LocalDate;
 

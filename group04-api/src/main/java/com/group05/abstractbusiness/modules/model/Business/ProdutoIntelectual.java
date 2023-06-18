@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "intelectual_pd_tb")
+@Table(name = "produto_inte_tb")
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @Setter
@@ -42,19 +42,19 @@ public class ProdutoIntelectual extends Produto {
 
     @JsonBackReference
     @ManyToOne
-    private StockDigital stock;
+    private StockIntelectual stockIntelectual;
 
     public ProdutoIntelectual(UUID iD, String nome, String descricao, Boolean status, Double custo, Double preco,
             String brand, String category, String subCategory, String image, LocalDate createdAt,
             LocalDate updatedAt, LocalDate deletedAt, String author, String publisher, String isbn, Integer pages,
-            Integer edition) {
-        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt,
-                deletedAt);
+            Integer edition, StockIntelectual stockIntelectual) {
+        super(iD, nome, descricao, status, custo, preco, brand, category, subCategory, image, createdAt, updatedAt, deletedAt);
         this.author = author;
         this.publisher = publisher;
         this.isbn = isbn;
         this.pages = pages;
         this.edition = edition;
+        this.stockIntelectual = stockIntelectual;
     }
 
 }

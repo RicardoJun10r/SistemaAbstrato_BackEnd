@@ -9,7 +9,7 @@ import com.group05.abstractbusiness.modules.model.Business.Produto;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
+import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
 import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
 import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
 import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;

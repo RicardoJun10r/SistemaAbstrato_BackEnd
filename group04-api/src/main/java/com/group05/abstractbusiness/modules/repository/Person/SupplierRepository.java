@@ -1,14 +1,14 @@
 package com.group05.abstractbusiness.modules.repository.Person;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
+import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
+
+import java.util.Optional;
+
 
 public interface SupplierRepository extends JpaRepository<Supplier, UUID>{
-    List<Supplier> findByNameContainingIgnoreCase(String name);
-    List<Supplier> findByEmail(String email);
-    List<Supplier> findByPhone(String phone);
+    Optional<Supplier> findByEmail(String email);
 }

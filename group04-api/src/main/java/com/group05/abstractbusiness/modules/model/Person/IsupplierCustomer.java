@@ -1,5 +1,8 @@
 package com.group05.abstractbusiness.modules.model.Person;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -19,5 +22,11 @@ public abstract class IsupplierCustomer extends IPerson {
 
     @Column(name = "phone")
     private String phone;
+
+    public IsupplierCustomer(UUID id, String name, String email, LocalDate registerDate, String address, String phone) {
+        super(id, name, email, registerDate);
+        this.address = address;
+        this.phone = phone;
+    }
 
 }

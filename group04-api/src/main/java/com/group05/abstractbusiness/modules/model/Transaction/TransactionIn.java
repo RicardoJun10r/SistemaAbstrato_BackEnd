@@ -2,7 +2,7 @@ package com.group05.abstractbusiness.modules.model.Transaction;
 
 
 import com.group05.abstractbusiness.modules.model.Cart;
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
+import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

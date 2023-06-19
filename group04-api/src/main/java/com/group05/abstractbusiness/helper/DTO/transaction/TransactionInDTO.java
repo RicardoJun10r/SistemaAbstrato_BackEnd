@@ -1,8 +1,8 @@
 package com.group05.abstractbusiness.helper.DTO.transaction;
 
-import com.group05.abstractbusiness.modules.model.Person.Supplier;
 import lombok.Data;
 import com.group05.abstractbusiness.modules.model.Cart;
+import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
 
 @Data
 public class TransactionInDTO {

@@ -13,11 +13,10 @@ import org.springframework.web.server.ResponseStatusException;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
 import com.group05.abstractbusiness.modules.model.Cart;
-import com.group05.abstractbusiness.modules.model.Person.Customer;
-import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
 import com.group05.abstractbusiness.modules.model.Transaction.TransactionOut;
 import com.group05.abstractbusiness.modules.repository.CartRepository;
-import com.group05.abstractbusiness.modules.repository.Person.CustomerRepository;
+import com.group05.abstractbusiness.modules.repository.Person.CustomerPJRepository;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 import com.group05.abstractbusiness.modules.repository.Transaction.TransactionFisico.TransactionOutFRepository;
 

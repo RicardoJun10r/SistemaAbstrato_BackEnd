@@ -3,7 +3,7 @@ package com.group05.abstractbusiness.modules.model;
 import java.util.Map;
 import java.util.UUID;
 
-import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;

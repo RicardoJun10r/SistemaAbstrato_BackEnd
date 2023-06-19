@@ -2,6 +2,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Group04ApiApplication",
+            "request": "launch",
+            "mainClass": "com.group05.abstractbusiness.Group04ApiApplication"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-Group04ApiApplication<group04-api>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

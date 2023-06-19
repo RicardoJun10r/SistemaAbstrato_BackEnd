@@ -12,10 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerRes;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
+import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierRes;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReq;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserRes;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserUpdate;
+import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerFactory;
 import com.group05.abstractbusiness.modules.service.Person.UserService;
+import com.group05.abstractbusiness.utils.Enums.TipoCostumer;
     
 @RestController
 @RequestMapping("/user")
@@ -47,6 +52,16 @@ public class UserController {
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteUser(@RequestBody UserReq userReq){
         return new ResponseEntity<String>(userService.deleteUser(userReq), HttpStatus.OK);
+    }
+
+    @PostMapping("/supplier/{email}")
+    public ResponseEntity<SupplierRes> createSupplier(@PathVariable String email, @RequestBody SupplierDTO supplierDTO){
+        return new ResponseEntity<SupplierRes>(userService.createSupplier(email, supplierDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/customer/{tipo}/{email}")
+    public ResponseEntity<CustomerRes> createCustomer(@PathVariable TipoCostumer tipo, @PathVariable String email, @RequestBody CustomerFactory customerFactory){
+        return new ResponseEntity<CustomerRes>(userService.createCustomer(email, tipo, customerFactory), HttpStatus.CREATED);
     }
 
 }

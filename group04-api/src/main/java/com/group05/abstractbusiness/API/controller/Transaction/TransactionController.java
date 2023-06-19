@@ -1,7 +1,6 @@
 package com.group05.abstractbusiness.API.controller.Transaction;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutDTO;
 import com.group05.abstractbusiness.helper.DTO.transaction.TransactionOutReturn;
-import com.group05.abstractbusiness.modules.model.Transaction.TransactionOut;
 import com.group05.abstractbusiness.modules.service.Transaction.TransactionOutService;
 
 

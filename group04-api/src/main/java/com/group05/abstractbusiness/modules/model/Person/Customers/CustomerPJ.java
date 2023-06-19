@@ -3,8 +3,6 @@ package com.group05.abstractbusiness.modules.model.Person.Customers;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.hibernate.validator.constraints.br.CNPJ;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.group05.abstractbusiness.modules.model.Person.IsupplierCustomer;
 import com.group05.abstractbusiness.modules.model.Person.Users.User;

@@ -7,7 +7,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
-import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ public class StockIntelectual extends StockProducts {
 
     @JsonBackReference
     @ManyToOne
-    private User user_SI;
+    private User user;
     
     @JsonManagedReference
     @OneToMany(targetEntity = ProdutoIntelectual.class, mappedBy = "stockIntelectual", cascade = CascadeType.ALL)

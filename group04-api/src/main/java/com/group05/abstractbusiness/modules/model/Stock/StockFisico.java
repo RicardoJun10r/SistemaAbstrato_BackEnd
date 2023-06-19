@@ -3,7 +3,7 @@ package com.group05.abstractbusiness.modules.model.Stock;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
-import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,7 +30,7 @@ public class StockFisico extends StockProducts {
 
     @JsonBackReference
     @ManyToOne
-    private User user_SF;
+    private User user;
 
     @Column(name = "localizacao")
     private String address;

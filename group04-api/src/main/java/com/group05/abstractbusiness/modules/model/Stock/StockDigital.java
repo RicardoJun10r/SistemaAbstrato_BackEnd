@@ -3,7 +3,7 @@ package com.group05.abstractbusiness.modules.model.Stock;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
-import com.group05.abstractbusiness.modules.model.Person.User;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,7 +29,7 @@ public class StockDigital extends StockProducts {
 
     @JsonBackReference
     @ManyToOne
-    private User user_SD;
+    private User user;
     
     @JsonManagedReference
     @OneToMany(targetEntity = ProdutoDigital.class, mappedBy = "stockDigital", cascade = CascadeType.ALL)

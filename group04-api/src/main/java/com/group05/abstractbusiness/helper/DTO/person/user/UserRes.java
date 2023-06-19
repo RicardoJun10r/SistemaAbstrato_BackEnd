@@ -3,11 +3,12 @@ package com.group05.abstractbusiness.helper.DTO.person.user;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.group05.abstractbusiness.helper.DTO.Business.ProductDigRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductIntRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPFDTO;
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPJDTO;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierRes;
-import com.group05.abstractbusiness.modules.model.Person.Customer;
-import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
-import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
-import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
 
 import lombok.Data;
 
@@ -20,14 +21,16 @@ public class UserRes {
 
     LocalDate registerDate;
 
-    List<StockFisico> stockFisicos;
+    List<ProductPhyRes> stockFisicos;
 
-    List<StockDigital> stockDigitais;
+    List<ProductDigRes> stockDigitais;
 
-    List<StockIntelectual> stockIntelectuais;
+    List<ProductIntRes> stockIntelectuais;
 
     List<SupplierRes> suppliers;
 
-    List<Customer> customers;
+    List<CustomerPFDTO> customerspf;
+    
+    List<CustomerPJDTO> customerspj;
 
 }

@@ -55,12 +55,17 @@ public class UserController {
     }
 
     @PostMapping("/supplier/{email}")
-    public ResponseEntity<SupplierRes> createSupplier(@PathVariable String email, @RequestBody SupplierDTO supplierDTO){
+    public ResponseEntity<SupplierRes> createSupplier(
+        @PathVariable String email,
+        @RequestBody SupplierDTO supplierDTO){
         return new ResponseEntity<SupplierRes>(userService.createSupplier(email, supplierDTO), HttpStatus.CREATED);
     }
 
     @PostMapping("/customer/{tipo}/{email}")
-    public ResponseEntity<CustomerRes> createCustomer(@PathVariable TipoCostumer tipo, @PathVariable String email, @RequestBody CustomerFactory customerFactory){
+    public ResponseEntity<CustomerRes> createCustomer(
+        @PathVariable TipoCostumer tipo,
+        @PathVariable String email,
+        @RequestBody CustomerFactory customerFactory){
         return new ResponseEntity<CustomerRes>(userService.createCustomer(email, tipo, customerFactory), HttpStatus.CREATED);
     }
 

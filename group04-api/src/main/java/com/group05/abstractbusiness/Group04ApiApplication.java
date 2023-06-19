@@ -15,10 +15,10 @@ public class Group04ApiApplication {
 	}
 	
 	@Configuration
-	public class CorsConfig {
+	class CorsConfig {
 
         @Bean
-        public WebMvcConfigurer corsConfigurer() {
+        WebMvcConfigurer corsConfigurer() {
             return new WebMvcConfigurer() {
                 @Override
                 public void addCorsMappings(CorsRegistry registry) {

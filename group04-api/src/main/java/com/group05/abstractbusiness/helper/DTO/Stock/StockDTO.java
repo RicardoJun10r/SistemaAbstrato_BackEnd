@@ -2,23 +2,19 @@ package com.group05.abstractbusiness.helper.DTO.Stock;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
-import jakarta.persistence.MappedSuperclass;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
+import com.group05.abstractbusiness.modules.model.Person.Users.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@MappedSuperclass
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public abstract class StockRes {
-
-    UUID id;
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class StockDTO {
+    
     String name;
     
     Integer quantity;
@@ -27,4 +23,10 @@ public abstract class StockRes {
     
     LocalDate updatedAt;
 
+    String address;
+
+    List<ProductRes> produtosFisicos;
+
+    User user;
+    
 }

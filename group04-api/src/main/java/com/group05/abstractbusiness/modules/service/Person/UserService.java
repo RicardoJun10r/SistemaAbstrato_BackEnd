@@ -1,6 +1,10 @@
 package com.group05.abstractbusiness.modules.service.Person;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +15,30 @@ import com.group05.abstractbusiness.error.Exception.ResourceBadRequest;
 import com.group05.abstractbusiness.error.Exception.ResourceConditionFailed;
 import com.group05.abstractbusiness.error.Exception.ResourceNotAcceptable;
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO;
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPFDTO;
+import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPJDTO;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerRes;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierDTO;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierRes;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserReq;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserRes;
 import com.group05.abstractbusiness.helper.DTO.person.user.UserUpdate;
+import com.group05.abstractbusiness.modules.model.Person.IPerson;
 import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerFactory;
 import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerPF;
 import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerPJ;
+import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.Users.User;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
+import com.group05.abstractbusiness.modules.service.Stock.StockDigitalService;
+import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
+import com.group05.abstractbusiness.modules.service.Stock.StockIntelectualService;
 import com.group05.abstractbusiness.utils.Enums.TipoCostumer;
+import com.group05.abstractbusiness.utils.Enums.TipoProduto;
 import com.group05.abstractbusiness.utils.Validator.EmailAndPasswordValidator;
 
 @Service
@@ -34,8 +50,14 @@ public class UserService {
     // @Autowired
     // private ProdutoService productService;
 
-    // @Autowired
-    // private StockFisicoService stockService;
+    @Autowired
+    private StockFisicoService stockFisicoService;
+
+    @Autowired
+    private StockDigitalService stockDigitalService;
+
+    @Autowired
+    private StockIntelectualService stockIntelectualService;
 
     // @Autowired
     // private CartService cartService;
@@ -47,7 +69,7 @@ public class UserService {
     private SupplierService supplierService;
 
     @Autowired
-    private CustomerService customerService; 
+    private CustomerService customerService;
 
     private ModelMapper mapper = new ModelMapper();
 
@@ -164,6 +186,36 @@ public class UserService {
 
     }
 
+    public List<SupplierRes> findAllSupplier(String email){
+
+        if(EmailAndPasswordValidator.verifyEmail(email)){
+            
+            User user = this.findUser(email).get();
+
+            List<SupplierRes> suppliers = user.getSuppliers().stream().map(
+                supplier -> mapper.map(supplier, SupplierRes.class)
+            ).collect(Collectors.toList());
+    
+            return suppliers;
+            
+        }
+
+        throw new ResourceBadRequest("Cheque e-mail ou senha!");
+    }
+
+    public SupplierRes findSupplier(String supplierEmail){
+
+        if(EmailAndPasswordValidator.verifyEmail(supplierEmail)){
+            
+            Supplier supplier = supplierService.findSupplierByEmail(supplierEmail).get();
+
+            return mapper.map(supplier, SupplierRes.class);
+
+        }
+
+        throw new ResourceBadRequest("Cheque e-mail ou senha!");
+    }
+
     @Transactional
     public CustomerRes createCustomer(String email, TipoCostumer tipo, CustomerFactory customerFactory){
 
@@ -188,6 +240,124 @@ public class UserService {
         }
 
         throw new ResourceBadRequest("Cheque e-mail ou senha!");
+
+    }
+
+    public List<CustomerDTO> findAllCustomer(TipoCostumer tipo, String email){
+
+        if(EmailAndPasswordValidator.verifyEmail(email)){
+            
+            User user = this.findUser(email).get();
+
+            if(tipo == TipoCostumer.PJ){
+                
+                return user.getCustomersPJ().stream().map(
+                    cutomer -> mapper.map(cutomer, CustomerPJDTO.class)
+                ).collect(Collectors.toList());
+
+            } else {
+                return user.getCustomersPF().stream().map(
+                    cutomer -> mapper.map(cutomer, CustomerPFDTO.class)
+                ).collect(Collectors.toList());
+            }
+
+            
+        }
+
+        throw new ResourceBadRequest("Cheque e-mail ou senha!");
+    }
+
+    public IPerson findCustomer(TipoCostumer tipo, String customerEmail){
+        return customerService.findCustomerByEmail(tipo, customerEmail);
+    }
+
+    public StockRes createStock(String email, TipoProduto tipoProduto, StockReq stockDTO){
+
+        User user = findUser(email).get();
+
+        stockDTO.setUser(user);
+
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    StockRes stockRes = stockFisicoService.createStock(stockDTO);
+                    user.getStockFisicos().add(stockFisicoService.findById(stockRes.getId()));
+                    return stockRes;
+                }
+            case DIGITAL:
+                {
+                    StockRes stockRes = stockDigitalService.createStock(stockDTO);
+                    user.getStockDigitais().add(stockDigitalService.findById(stockRes.getId()));
+                    return stockRes;
+                }
+            case INTELECTUAL:
+                {
+                    StockRes stockRes = stockDigitalService.createStock(stockDTO);
+                    user.getStockIntelectuais().add(stockIntelectualService.findById(stockRes.getId()));
+                    return stockRes;
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> StockRes findStock(List<?> sList, UUID stock){
+        Iterator<?> iterator = sList.iterator();
+        while(iterator.hasNext()){
+            T stockRes = (T) iterator.next();
+            if(((StockRes) stockRes).getId().equals(stock)) return mapper.map(stockRes, StockRes.class);
+        }
+        throw new ResourceNotFoundException("Stock não encontrado!");
+    }
+
+    public StockRes findStock(String email, TipoProduto tipoProduto, UUID idStock){
+
+        User user = findUser(email).get();
+
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    return findStock(user.getStockFisicos(), idStock);
+                }
+            case DIGITAL:
+                {
+                    return findStock(user.getStockDigitais(), idStock);
+                }
+            case INTELECTUAL:
+                {
+                    return findStock(user.getStockIntelectuais(), idStock);
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
+
+    }
+
+    public List<StockRes> findAllStock(String email, TipoProduto tipoProduto){
+
+        User user = findUser(email).get();
+
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    return user.getStockFisicos().stream().map(
+                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                }
+            case DIGITAL:
+                {
+                    return user.getStockDigitais().stream().map(
+                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                }
+            case INTELECTUAL:
+                {
+                    return user.getStockIntelectuais().stream().map(
+                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
 
     }
 

@@ -3,9 +3,9 @@ package com.group05.abstractbusiness.helper.DTO.person.user;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.group05.abstractbusiness.helper.DTO.Business.ProductDigRes;
-import com.group05.abstractbusiness.helper.DTO.Business.ProductIntRes;
-import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDigRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockIntRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockPhyRes;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPFDTO;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerPJDTO;
 import com.group05.abstractbusiness.helper.DTO.person.supplier.SupplierRes;
@@ -21,11 +21,11 @@ public class UserRes {
 
     LocalDate registerDate;
 
-    List<ProductPhyRes> stockFisicos;
+    List<StockPhyRes> stockFisicos;
 
-    List<ProductDigRes> stockDigitais;
+    List<StockDigRes> stockDigitais;
 
-    List<ProductIntRes> stockIntelectuais;
+    List<StockIntRes> stockIntelectuais;
 
     List<SupplierRes> suppliers;
 

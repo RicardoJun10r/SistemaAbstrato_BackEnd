@@ -43,6 +43,7 @@ public abstract class StockProducts {
     @PrePersist
     private void onCreate(){
         this.createdAt = LocalDate.now();
+        this.quantity = 0;
     }
     
 }

@@ -1,64 +1,73 @@
-// package com.group05.abstractbusiness.modules.service.Stock;
+package com.group05.abstractbusiness.modules.service.Stock;
 
-// import java.util.UUID;
-// import java.util.List;
+import java.util.UUID;
+import java.util.List;
+import java.util.Optional;
 
-// import org.modelmapper.ModelMapper;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.HttpStatus;
-// import org.springframework.stereotype.Service;
-// import org.springframework.web.server.ResponseStatusException;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-// import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
-// import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
-// import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
-// import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
-// import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
-// import com.group05.abstractbusiness.modules.repository.Stock.StockFisicoRepository;
-// import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
+import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
+import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
+import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+import com.group05.abstractbusiness.modules.repository.Stock.StockFisicoRepository;
+import com.group05.abstractbusiness.modules.service.Business.ProdutoFisicoService;
 
-// @Service
-// public class StockFisicoService {
+@Service
+public class StockFisicoService {
     
-//     @Autowired
-//     private StockFisicoRepository stockFisicoRepository;
+    @Autowired
+    private StockFisicoRepository stockFisicoRepository;
 
-//     @Autowired
-//     private ProdutoFisicoService produtoFisicoService;
+    @Autowired
+    private ProdutoFisicoService produtoFisicoService;
 
-//     private ModelMapper mapper = new ModelMapper();
+    private ModelMapper mapper = new ModelMapper();
     
-//     public StockRes createStock(StockRes stockService){
-//         return mapper.map(stockFisicoRepository.save(mapper.map( stockService, StockFisico.class )), StockRes.class);
-//     }
+    public StockRes createStock(StockReq stockDTO){
+        return mapper.map(stockFisicoRepository.save(mapper.map( stockDTO, StockFisico.class )), StockRes.class);
+    }
 
-//     public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory, String email){
+    public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory, String email){
 
-//         StockFisico stockFisico = findById(stockId);
+        StockFisico stockFisico = findById(stockId);
 
-//         produtoFactory.setStockFisico(stockFisico);
+        produtoFactory.setStockFisico(stockFisico);
 
-//         ProductRes productRes = this.produtoFisicoService.createProduct(produtoFactory, email);
+        ProductRes productRes = this.produtoFisicoService.createProduct(produtoFactory, email);
 
-//         stockFisico.getProdutosFisicos().add(mapper.map(productRes, ProdutoFisico.class));
+        stockFisico.getProdutosFisicos().add(mapper.map(productRes, ProdutoFisico.class));
 
-//         return mapper.map(stockFisicoRepository.save(stockFisico), StockRes.class);
+        return mapper.map(stockFisicoRepository.save(stockFisico), StockRes.class);
 
-//     }
+    }
 
-//     public StockFisico findById(UUID id){
-//         return stockFisicoRepository.findById(id).orElseThrow(
-//             ()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "id não retornar resultado"));
-//     }
+    public StockFisico findById(UUID id){
+
+        Optional<StockFisico> sOptional = stockFisicoRepository.findById(id);
+
+        if(sOptional.isPresent()) return sOptional.get();
+
+        throw new ResourceNotFoundException("Stock não encontrado!");
+
+    }
 
 
-//     public List<StockFisico> findAll(){
-//         return stockFisicoRepository.findAll();
-//     }
+    public List<StockFisico> findAll(){
+        return stockFisicoRepository.findAll();
+    }
 
-//     public String delete(UUID id){
-//         stockFisicoRepository.deleteById(id);
-//         return "Produto Fisico: [ " + id + " ] deletado";
-//     }
+    public String delete(UUID id){
+        stockFisicoRepository.deleteById(id);
+        return "Produto Fisico: [ " + id + " ] deletado";
+    }
 
-// }
+}

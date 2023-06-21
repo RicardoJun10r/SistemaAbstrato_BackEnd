@@ -1,18 +1,22 @@
-// package com.group05.abstractbusiness.helper.DTO.Stock;
+package com.group05.abstractbusiness.helper.DTO.Stock;
 
-// import java.util.List;
+import java.util.List;
 
-// import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
 
-// import lombok.Data;
-// import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-// @Data
-// @EqualsAndHashCode(callSuper=true)
-// public class StockPhyRes extends StockRes {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper=true)
+public class StockPhyRes extends StockRes {
     
-//     String address;
+    String address;
 
-//     List<ProductPhyRes> produtosFisicos;
+    List<ProductPhyRes> produtosFisicos;
 
-// }
+}

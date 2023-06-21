@@ -2,12 +2,16 @@ package com.group05.abstractbusiness.modules.service.Stock;
 
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
 import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
@@ -26,8 +30,8 @@ public class StockDigitalService {
 
     private ModelMapper mapper = new ModelMapper();
 
-    public StockRes createStock(StockRes stockService){
-        return mapper.map(stockDigitalRepository.save(mapper.map( stockService, StockDigital.class )), StockRes.class);
+    public StockRes createStock(StockReq stockDTO){
+        return mapper.map(stockDigitalRepository.save(mapper.map( stockDTO, StockDigital.class )), StockRes.class);
     }
 
     public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory){
@@ -45,7 +49,9 @@ public class StockDigitalService {
     }
 
     public StockDigital findById(UUID id){
-        return stockDigitalRepository.findById(id).get();
+        Optional<StockDigital> sOptional = stockDigitalRepository.findById(id);
+        if(sOptional.isPresent()) return sOptional.get();
+        throw new ResourceNotFoundException("Stock não encontrado!");
     }
 
     public List<StockDigital> listar(){

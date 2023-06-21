@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductDigRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
-import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDigRes;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
@@ -30,21 +32,23 @@ public class StockDigitalService {
 
     private ModelMapper mapper = new ModelMapper();
 
-    public StockRes createStock(StockReq stockDTO){
-        return mapper.map(stockDigitalRepository.save(mapper.map( stockDTO, StockDigital.class )), StockRes.class);
+    public StockRes createStock(StockReq stockReq){
+        return mapper.map(stockDigitalRepository.save(mapper.map( stockReq, StockDigital.class )), StockDigRes.class);
     }
 
-    public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory){
+    public ProductRes addProduct(UUID stockId, ProductReq productReq){
 
         StockDigital stockDigital = findById(stockId);
 
-        produtoFactory.setStockDigital(stockDigital);
+        productReq.setStockDigital(stockDigital);
 
-        ProductRes productRes = this.produtoDigitalService.createProduct(produtoFactory);
+        ProductRes productRes = this.produtoDigitalService.createProduct(productReq);
 
         stockDigital.getProdutosDigitais().add(mapper.map(productRes, ProdutoDigital.class));
 
-        return mapper.map(stockDigitalRepository.save(stockDigital), StockRes.class);
+        stockDigitalRepository.save(stockDigital);
+
+        return mapper.map(productRes, ProductDigRes.class);
         
     }
 

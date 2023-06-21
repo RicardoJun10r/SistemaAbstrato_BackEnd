@@ -6,13 +6,13 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
-import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockPhyRes;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
@@ -32,21 +32,23 @@ public class StockFisicoService {
 
     private ModelMapper mapper = new ModelMapper();
     
-    public StockRes createStock(StockReq stockDTO){
-        return mapper.map(stockFisicoRepository.save(mapper.map( stockDTO, StockFisico.class )), StockRes.class);
+    public StockRes createStock(StockReq stockReq){
+        return mapper.map(stockFisicoRepository.save(mapper.map( stockReq, StockFisico.class )), StockPhyRes.class);
     }
 
-    public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory, String email){
+    public ProductRes addProduct(UUID stockId, ProductReq productReq, String supplier){
 
         StockFisico stockFisico = findById(stockId);
 
-        produtoFactory.setStockFisico(stockFisico);
+        productReq.setStockFisico(stockFisico);
 
-        ProductRes productRes = this.produtoFisicoService.createProduct(produtoFactory, email);
+        ProductRes productRes = this.produtoFisicoService.createProduct(productReq, supplier);
 
         stockFisico.getProdutosFisicos().add(mapper.map(productRes, ProdutoFisico.class));
 
-        return mapper.map(stockFisicoRepository.save(stockFisico), StockRes.class);
+        stockFisicoRepository.save(stockFisico);
+
+        return mapper.map(productRes, ProductPhyRes.class);
 
     }
 

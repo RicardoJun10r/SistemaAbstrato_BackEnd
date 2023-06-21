@@ -1,6 +1,7 @@
 package com.group05.abstractbusiness.API.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO;
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<UserRes> findByUsername(@PathVariable String email){
+    public ResponseEntity<UserRes> findUser(@PathVariable String email){
         return new ResponseEntity<UserRes>(userService.findUserByEmail(email), HttpStatus.OK);
     }
 
@@ -110,6 +110,21 @@ public class UserController {
         @PathVariable String userEmail,
         @RequestBody StockReq stockRes){
         return new ResponseEntity<StockRes>(userService.createStock(userEmail, tipo, stockRes), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/stock/{tipo}/{userEmail}")
+    public ResponseEntity<List<StockRes>> findAllStock(
+        @PathVariable TipoProduto tipo,
+        @PathVariable String userEmail){
+        return new ResponseEntity<List<StockRes>>(userService.findAllStock(userEmail, tipo), HttpStatus.OK);
+    }
+
+    @GetMapping("/stock/{tipo}/{userEmail}/{id}")
+    public ResponseEntity<StockRes> findStock(
+        @PathVariable TipoProduto tipo,
+        @PathVariable String userEmail,
+        @PathVariable UUID id){
+        return new ResponseEntity<StockRes>(userService.findStock(userEmail, tipo, id), HttpStatus.OK);
     }
 
 }

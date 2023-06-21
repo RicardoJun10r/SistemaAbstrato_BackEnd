@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.group05.abstractbusiness.error.Exception.ResourceNotAcceptable;
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductPhyRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
 import com.group05.abstractbusiness.modules.model.Business.Produto;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoFisico;
@@ -33,13 +34,13 @@ public class ProdutoFisicoService {
     private ModelMapper mapper = new ModelMapper();
 
     @Transactional
-    public ProductRes createProduct(ProdutoFactory produtoFactory, String emailSupplier){
+    public ProductRes createProduct(ProductReq productReq, String supplier){
         
-        verifyProduct(produtoFactory.getName());
+        verifyProduct(productReq.getName());
         
-        produtoFactory.setSupplier(this.supplierService.findSupplierByEmail(emailSupplier).get());
+        productReq.setSupplier(this.supplierService.findSupplierByEmail(supplier).get());
         
-        ProdutoFisico produtoFisico = produtoFisicoRepository.save(mapper.map(produtoFactory.criarFisico(), ProdutoFisico.class));
+        ProdutoFisico produtoFisico = produtoFisicoRepository.save(mapper.map(productReq, ProdutoFisico.class));
         
         return mapper.map(produtoFisico, ProductPhyRes.class);
 

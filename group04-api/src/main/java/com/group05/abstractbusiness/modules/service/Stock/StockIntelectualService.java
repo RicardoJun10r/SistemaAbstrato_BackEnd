@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductIntRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
-import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockIntRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoIntelectual;
 import com.group05.abstractbusiness.modules.model.Business.factory.ProdutoFactory;
@@ -28,21 +31,23 @@ public class StockIntelectualService {
 
     private ModelMapper mapper = new ModelMapper();
 
-    public StockRes createStock(StockDTO stockDTO){
-        return mapper.map(stockIntelectualRepository.save(mapper.map( stockDTO, StockIntelectual.class )), StockRes.class);
+    public StockRes createStock(StockReq stockReq){
+        return mapper.map(stockIntelectualRepository.save(mapper.map( stockReq, StockIntelectual.class )), StockIntRes.class);
     }
 
-    public StockRes addProduct(UUID stockId, ProdutoFactory produtoFactory){
+    public ProductRes addProduct(UUID stockId, ProductReq productReq){
 
         StockIntelectual stockIntelectual = findById(stockId);
 
-        produtoFactory.setStockIntelectual(stockIntelectual);
+        productReq.setStockIntelectual(stockIntelectual);
 
-        ProductRes productRes = this.produtoIntelectualService.createProduct(produtoFactory);
+        ProductRes productRes = this.produtoIntelectualService.createProduct(productReq);
 
         stockIntelectual.getProdutoIntelectuais().add(mapper.map(productRes, ProdutoIntelectual.class));
 
-        return mapper.map(stockIntelectualRepository.save(stockIntelectual), StockRes.class);
+        stockIntelectualRepository.save(stockIntelectual);
+
+        return mapper.map(productRes, ProductIntRes.class);
         
     }
 

@@ -15,7 +15,12 @@ import com.group05.abstractbusiness.error.Exception.ResourceBadRequest;
 import com.group05.abstractbusiness.error.Exception.ResourceConditionFailed;
 import com.group05.abstractbusiness.error.Exception.ResourceNotAcceptable;
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockDTO;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockDigRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockIntRes;
+import com.group05.abstractbusiness.helper.DTO.Stock.StockPhyRes;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockReq;
 import com.group05.abstractbusiness.helper.DTO.Stock.StockRes;
 import com.group05.abstractbusiness.helper.DTO.person.customer.CustomerDTO;
@@ -33,6 +38,10 @@ import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerPF;
 import com.group05.abstractbusiness.modules.model.Person.Customers.CustomerPJ;
 import com.group05.abstractbusiness.modules.model.Person.Suppliers.Supplier;
 import com.group05.abstractbusiness.modules.model.Person.Users.User;
+import com.group05.abstractbusiness.modules.model.Stock.StockDigital;
+import com.group05.abstractbusiness.modules.model.Stock.StockFisico;
+import com.group05.abstractbusiness.modules.model.Stock.StockIntelectual;
+import com.group05.abstractbusiness.modules.model.Stock.StockProducts;
 import com.group05.abstractbusiness.modules.repository.Person.UserRepository;
 import com.group05.abstractbusiness.modules.service.Stock.StockDigitalService;
 import com.group05.abstractbusiness.modules.service.Stock.StockFisicoService;
@@ -271,63 +280,30 @@ public class UserService {
         return customerService.findCustomerByEmail(tipo, customerEmail);
     }
 
-    public StockRes createStock(String email, TipoProduto tipoProduto, StockReq stockDTO){
+    public StockRes createStock(String email, TipoProduto tipoProduto, StockReq stockReq){
 
         User user = findUser(email).get();
 
-        stockDTO.setUser(user);
+        stockReq.setUser(user);
 
         switch (tipoProduto) {
             case FISICO:
                 {
-                    StockRes stockRes = stockFisicoService.createStock(stockDTO);
+                    StockRes stockRes = stockFisicoService.createStock(stockReq);
                     user.getStockFisicos().add(stockFisicoService.findById(stockRes.getId()));
                     return stockRes;
                 }
             case DIGITAL:
                 {
-                    StockRes stockRes = stockDigitalService.createStock(stockDTO);
+                    StockRes stockRes = stockDigitalService.createStock(stockReq);
                     user.getStockDigitais().add(stockDigitalService.findById(stockRes.getId()));
                     return stockRes;
                 }
             case INTELECTUAL:
                 {
-                    StockRes stockRes = stockDigitalService.createStock(stockDTO);
+                    StockRes stockRes = stockIntelectualService.createStock(stockReq);
                     user.getStockIntelectuais().add(stockIntelectualService.findById(stockRes.getId()));
                     return stockRes;
-                }
-            default:
-                throw new ResourceBadRequest("Cheque o tipo do estoque!");
-        }
-
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> StockRes findStock(List<?> sList, UUID stock){
-        Iterator<?> iterator = sList.iterator();
-        while(iterator.hasNext()){
-            T stockRes = (T) iterator.next();
-            if(((StockRes) stockRes).getId().equals(stock)) return mapper.map(stockRes, StockRes.class);
-        }
-        throw new ResourceNotFoundException("Stock não encontrado!");
-    }
-
-    public StockRes findStock(String email, TipoProduto tipoProduto, UUID idStock){
-
-        User user = findUser(email).get();
-
-        switch (tipoProduto) {
-            case FISICO:
-                {
-                    return findStock(user.getStockFisicos(), idStock);
-                }
-            case DIGITAL:
-                {
-                    return findStock(user.getStockDigitais(), idStock);
-                }
-            case INTELECTUAL:
-                {
-                    return findStock(user.getStockIntelectuais(), idStock);
                 }
             default:
                 throw new ResourceBadRequest("Cheque o tipo do estoque!");
@@ -343,17 +319,91 @@ public class UserService {
             case FISICO:
                 {
                     return user.getStockFisicos().stream().map(
-                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                        stock -> mapper.map(stock, StockPhyRes.class)).collect(Collectors.toList());
                 }
             case DIGITAL:
                 {
                     return user.getStockDigitais().stream().map(
-                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                        stock -> mapper.map(stock, StockDigRes.class)).collect(Collectors.toList());
                 }
             case INTELECTUAL:
                 {
                     return user.getStockIntelectuais().stream().map(
-                        stock -> mapper.map(stock, StockRes.class)).collect(Collectors.toList());
+                        stock -> mapper.map(stock, StockIntRes.class)).collect(Collectors.toList());
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
+
+    }
+
+    public StockRes findStock(String email, TipoProduto tipoProduto, UUID id){
+
+        User user = findUser(email).get();
+
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    StockFisico stockFisico = stockFisicoService.findById(id);
+                    if(stockFisico.getUser().equals(user)) return mapper.map(stockFisico, StockPhyRes.class);
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            case DIGITAL:
+                {
+                    StockDigital stockDigital = stockDigitalService.findById(id);
+                    if(stockDigital.getUser().equals(user)) return mapper.map(stockDigital, StockDigRes.class);
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            case INTELECTUAL:
+                {
+                    StockIntelectual stockIntelectual = stockIntelectualService.findById(id);
+                    if(stockIntelectual.getUser().equals(user)) return mapper.map(stockIntelectual, StockIntRes.class);
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
+
+    }
+
+    private Boolean verifyStock(TipoProduto tipoProduto, User user, StockProducts stockProducts){
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    if(((StockFisico) stockProducts).getUser().equals(user)) return true;
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            case DIGITAL:
+                {
+                    if(((StockDigital) stockProducts).getUser().equals(user)) return true;
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            case INTELECTUAL:
+                {
+                    if(((StockIntelectual) stockProducts).getUser().equals(user)) return true;
+                    else throw new ResourceNotAcceptable("Vocẽ não tem esse estoque!");
+                }
+            default:
+                throw new ResourceBadRequest("Cheque o tipo do estoque!");
+        }
+    }
+
+    public ProductRes createProduct(String email, TipoProduto tipoProduto, UUID idStock, ProductReq productReq, String supplier){
+
+        User user = findUser(email).get();
+
+        switch (tipoProduto) {
+            case FISICO:
+                {
+                    return stockFisicoService.addProduct(idStock, productReq, supplier);
+                }
+            case DIGITAL:
+                {
+                    return stockDigitalService.addProduct(idStock, productReq);
+                }
+            case INTELECTUAL:
+                {
+                    return stockIntelectualService.addProduct(idStock, productReq);
                 }
             default:
                 throw new ResourceBadRequest("Cheque o tipo do estoque!");

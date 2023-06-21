@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.group05.abstractbusiness.error.Exception.ResourceNotAcceptable;
 import com.group05.abstractbusiness.error.Exception.ResourceNotFoundException;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductDigRes;
+import com.group05.abstractbusiness.helper.DTO.Business.ProductReq;
 import com.group05.abstractbusiness.helper.DTO.Business.ProductRes;
 import com.group05.abstractbusiness.modules.model.Business.Produto;
 import com.group05.abstractbusiness.modules.model.Business.ProdutoDigital;
@@ -29,11 +30,11 @@ public class ProdutoDigitalService {
     private ModelMapper mapper = new ModelMapper();
 
     @Transactional
-    public ProductRes createProduct(ProdutoFactory produtoFactory){
+    public ProductRes createProduct(ProductReq productReq){
         
-        verifyProduct(produtoFactory.getName());
+        verifyProduct(productReq.getName());
         
-        ProdutoDigital produtoDigital = produtoDigitalRepository.save(mapper.map(produtoFactory.criarDigital(), ProdutoDigital.class));
+        ProdutoDigital produtoDigital = produtoDigitalRepository.save(mapper.map(productReq, ProdutoDigital.class));
         
         return mapper.map(produtoDigital, ProductDigRes.class);
 
